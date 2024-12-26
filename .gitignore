@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ArrowEye_ClientPortal_Automation/.vs
+/ArrowEye_AutomationSuit/.vs

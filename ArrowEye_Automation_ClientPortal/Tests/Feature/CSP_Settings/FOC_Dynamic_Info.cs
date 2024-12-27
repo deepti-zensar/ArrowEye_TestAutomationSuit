@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArrowEye_Automation_ClientPortal.Tests.Feature.Products
+namespace ArrowEye_Automation_ClientPortal.Tests.Feature.CSP_Settings
 {
-    internal class PlasticCards
+    internal class FOC_Dynamic_Info
     {
     }
 }

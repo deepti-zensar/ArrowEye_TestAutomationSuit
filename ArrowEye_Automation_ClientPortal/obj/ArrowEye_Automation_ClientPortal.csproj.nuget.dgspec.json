@@ -145,6 +145,10 @@
               "target": "Package",
               "version": "[3.12.0, )"
             },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.6.0, )"
+            },
             "NUnitTestAdapter": {
               "target": "Package",
               "version": "[2.3.0, )"
@@ -197,6 +201,10 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
             "System.Diagnostics.DiagnosticSource": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -222,6 +230,10 @@
               "version": "[9.0.0, )"
             },
             "System.Text.Json": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "System.Threading.Channels": {
               "target": "Package",
               "version": "[9.0.0, )"
             },

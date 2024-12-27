@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArrowEye_Automation_ClientPortal.Tests.Regression
+namespace ArrowEye_Automation_ClientPortal.Tests.Feature.Products
 {
-    internal class ClientInformation
+    internal class Letter_Carriers
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ArrowEye_Automation_ClientPortal.Tests.Feature
+namespace ArrowEye_Automation_ClientPortal.Tests.Regression
 {
-    internal class CardProfiles
+    internal class Client_Information
     {
     }
 }

@@ -28,6 +28,7 @@
     <PackageReference Include="NUnit.Extension.TeamCityEventListener" Version="1.0.9" />
     <PackageReference Include="NUnit.Extension.VSProjectLoader" Version="3.9.0" />
     <PackageReference Include="NUnit.Runners" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
     <PackageReference Include="NUnitTestAdapter" Version="2.3.0" />
     <PackageReference Include="RestSharp" Version="106.15.0" />
     <PackageReference Include="RestSharp.Authenticators" Version="1.1.1" />
@@ -41,6 +42,7 @@
     <PackageReference Include="Selenium.WebDriverBackedSelenium" Version="4.1.0" />
     <PackageReference Include="System.Buffers" Version="4.6.0" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="9.0.0" />
     <PackageReference Include="System.IO.Pipelines" Version="9.0.0" />
     <PackageReference Include="System.Memory" Version="4.6.0" />
@@ -48,6 +50,7 @@
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.1.0" />
     <PackageReference Include="System.Text.Encodings.Web" Version="9.0.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="System.Threading.Channels" Version="9.0.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.0" />
   </ItemGroup>
 

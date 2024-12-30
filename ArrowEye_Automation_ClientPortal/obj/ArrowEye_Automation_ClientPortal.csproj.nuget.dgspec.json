@@ -1,14 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj": {}
+    "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj": {}
   },
   "projects": {
-    "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj": {
+    "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj": {
       "restore": {
-        "projectUniqueName": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj",
+        "projectUniqueName": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj",
         "projectName": "ArrowEye_Automation_Framework",
-        "projectPath": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj",
+        "projectPath": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj",
+        "UsingMicrosoftNETSdk": false,
         "frameworks": {
           "net48": {
             "projectReferences": {}
@@ -19,17 +20,21 @@
         "net48": {}
       }
     },
-    "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj": {
+    "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj",
+        "projectUniqueName": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj",
         "projectName": "ArrowEye_Automation_ClientPortal",
-        "projectPath": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj",
-        "packagesPath": "C:\\Users\\dk43090\\.nuget\\packages\\",
-        "outputPath": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_Automation_ClientPortal\\obj\\",
+        "projectPath": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj",
+        "packagesPath": "C:\\Users\\sh63656\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\dk43090\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sh63656\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -37,15 +42,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj": {
-                "projectPath": "D:\\ArrowEye\\Automation\\ArrowEye_ClientPortal\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj"
+              "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj": {
+                "projectPath": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_AutomationSuit\\ArrowEye_Automation_Framework.csproj"
               }
             }
           }
@@ -58,8 +62,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -258,7 +263,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

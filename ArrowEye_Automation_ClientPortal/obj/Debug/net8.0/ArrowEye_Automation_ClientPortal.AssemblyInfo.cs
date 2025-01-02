@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArrowEye_Automation_ClientPortal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e653b37eced67dbb31b92a84bb8c6be92d7335d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd4e4313238cee828c3906cda102201a490fe32f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArrowEye_Automation_ClientPortal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArrowEye_Automation_ClientPortal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -20,13 +20,14 @@ using System.Security;
 using SeleniumExtras.WaitHelpers;
 
 namespace ArrowEye_Automation_Framework.Common
-{   
+{
     public class DriverUtilities
     {
-        static public string browser = ConfigurationManager.AppSettings["browser"].ToLower();
+        //static public string browser = ConfigurationManager.AppSettings["browser"].ToLower();
+        static public string browser = "chrome";
         static private bool acceptNextAlert = true;
         static public IWebDriver driver;
-        
+
         //static public string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH. mm.ss");
         /// <summary>
         /// This method returns the current dateTimeStamp
@@ -65,7 +66,7 @@ namespace ArrowEye_Automation_Framework.Common
 
                 case "chrome":
                     driver = new ChromeDriver();
-                 //   Logger.Log.Info("Launched Chrome without any user");
+                    //   Logger.Log.Info("Launched Chrome without any user");
                     driver.Manage().Window.Maximize();
                     driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
 
@@ -132,7 +133,7 @@ namespace ArrowEye_Automation_Framework.Common
                     //serviceChrome.StartupDomain = domainName;
                     //serviceChrome.StartupUserName = userName;
                     //serviceChrome.StartupPassword = paswd;
-                    
+
 
                     var options = new ChromeOptions();
                     //Added following line to ignore Adminstrator policy pop-up
@@ -140,13 +141,13 @@ namespace ArrowEye_Automation_Framework.Common
                     options.AddArgument("--no-sandbox");
                     options.AddArgument("--start-maximized");
 
-                   // Logger.Log.Info("Initiated Options for launching chrome");
+                    // Logger.Log.Info("Initiated Options for launching chrome");
                     driver = new ChromeDriver(serviceChrome, options);
 
-                  //  Logger.Log.Info("Launched Chrome with user "+userName);
+                    //  Logger.Log.Info("Launched Chrome with user "+userName);
 
 
-                    driver.Manage().Timeouts().ImplicitWait= TimeSpan.FromSeconds(2);
+                    driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
                     break;
 
                 case "firefox":
@@ -199,10 +200,10 @@ namespace ArrowEye_Automation_Framework.Common
             //Assert.AreEqual("", verificationErrors.ToString());
         }
 
-/// <summary>
-/// Used to Kill Chrome sessions after TearDown as sometime driver get closed but chrome session remains typically On Windows 10
-/// </summary>
-       static  public void KillChromeSessions()
+        /// <summary>
+        /// Used to Kill Chrome sessions after TearDown as sometime driver get closed but chrome session remains typically On Windows 10
+        /// </summary>
+        static public void KillChromeSessions()
         {
 
             try
@@ -213,16 +214,16 @@ namespace ArrowEye_Automation_Framework.Common
                 {
 
 
-                 //   Logger.Log.Info("Killing process..... " + proc.ProcessName + " which started at  " + proc.StartTime);
+                    //   Logger.Log.Info("Killing process..... " + proc.ProcessName + " which started at  " + proc.StartTime);
 
                     proc.Kill();
                     Thread.Sleep(2000);
-                 //   Logger.Log.Info("Killed process " + proc.ProcessName + " with process id " + proc.Id);
+                    //   Logger.Log.Info("Killed process " + proc.ProcessName + " with process id " + proc.Id);
                 }
             }
             catch (Exception ex)
             {
-              //  Logger.Log.Error("Could not kill all chrome process \r\n" + ex);
+                //  Logger.Log.Error("Could not kill all chrome process \r\n" + ex);
                 // Assert.Fail("Could not kill all chrome process");
             }
 
@@ -429,7 +430,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// driver when gets stopped/Not-Responding due to some unexpected issues
         /// </summary>
         /// <param name="exp"></param>
-        static public void ManageFailure(Exception exp, string screenshotpath=@"C:\")
+        static public void ManageFailure(Exception exp, string screenshotpath = @"C:\")
         {
             Console.WriteLine(exp.HResult);
             Console.WriteLine("The message is  " + exp.Message);
@@ -443,11 +444,11 @@ namespace ArrowEye_Automation_Framework.Common
 
 
             {
-                HandleNotNullInnerException(exp,screenshotpath);
+                HandleNotNullInnerException(exp, screenshotpath);
             }
             else
             {
-                HandleNullInnerException(exp,screenshotpath);
+                HandleNullInnerException(exp, screenshotpath);
 
             }
 
@@ -482,7 +483,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// </summary>
         /// <param name="exp"></param>
 
-        static public void HandleNullInnerException(Exception exp,string screenshotPath)
+        static public void HandleNullInnerException(Exception exp, string screenshotPath)
         {
             string expectedExpMsg = "Unable to connect to the remote server";
 
@@ -678,7 +679,7 @@ namespace ArrowEye_Automation_Framework.Common
         static public void ImplicitWait(int seconds = 10)
         {
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);            
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(seconds);
             //loma
 
         }
@@ -757,13 +758,13 @@ namespace ArrowEye_Automation_Framework.Common
         {
 
             //Folder Name for saving screenshots
-            string screenshotFolderName = "Screenshots " + DateTime.Now.ToString("yyyy_MM_dd");
+            string screenshotFolderName = "Screenshots " + DateTime.Now.ToString("yyyy/MM/dd");
 
             //Directory path for saving screenshots
             //TEmporarily commenting path to make C:\ drive path default
             //string directoryPath = @"..\..\..\" + screenshotFolderName;
 
-           
+
 
             string directoryPath = screenshotBaseLocation + screenshotFolderName;
 
@@ -816,7 +817,7 @@ namespace ArrowEye_Automation_Framework.Common
             return converted;
             #endregion
         }
-        
+
 
         #region CollectionRelatedMethods
         static public List<IWebElement> GetCollection(By locator)
@@ -1207,7 +1208,7 @@ namespace ArrowEye_Automation_Framework.Common
 
             table.FindElement(By.XPath("//tbody/tr[" + rowIndex + "]/td[" + colIndex + "]")).Click();
 
-           
+
             //loma
         }
         /// <summary>
@@ -1235,7 +1236,7 @@ namespace ArrowEye_Automation_Framework.Common
 
         }
 
-      
+
 
         /// <summary>
         /// Used to switch to SharePoint dlg
@@ -1449,6 +1450,7 @@ namespace ArrowEye_Automation_Framework.Common
             jse.ExecuteScript("arguments[0].scrollIntoView(true);", element);
 
         }
+        
     }
 
 

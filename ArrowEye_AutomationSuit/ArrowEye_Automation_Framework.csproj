@@ -88,6 +88,9 @@
     <Reference Include="nunit.framework.legacy, Version=4.4.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.4.3.1\lib\net462\nunit.framework.legacy.dll</HintPath>
     </Reference>
+    <Reference Include="RandomString4Net, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RandomString4Net.1.9.0\lib\net48\RandomString4Net.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=106.15.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>packages\RestSharp.106.15.0\lib\net452\RestSharp.dll</HintPath>
     </Reference>

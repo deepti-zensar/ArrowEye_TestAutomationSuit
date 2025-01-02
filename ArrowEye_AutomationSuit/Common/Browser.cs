@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using System.Configuration;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
+using System.Security.Policy;
 
 namespace ArrowEye_Automation_Framework.Common
 {
     public class Browser
     {
+       
 
         public IWebDriver WebDriver { get; set; }
         public string environmentURL { get; set; }
@@ -27,7 +29,11 @@ namespace ArrowEye_Automation_Framework.Common
 
         public static void Initialize()
         {
-            Goto("");
+            //webDriver.Url = AppNameHelper.appBaseURL;
+            webDriver.Url = "https://portal-dev.arroweye.com/";
+            Thread.Sleep(5000);
+            webDriver.Manage().Window.Maximize();
+
         }
 
         public static string Title
@@ -50,15 +56,15 @@ namespace ArrowEye_Automation_Framework.Common
             get { return webDriver; }
         }
 
-        public static void Goto(string url)
-        {
-            webDriver.Url = AppNameHelper.appBaseURL;
+        //public static void Goto(string url)
+        //{
+        //    webDriver.Url = AppNameHelper.appBaseURL;
 
-        }
+        //}
 
         public static void Click(IWebElement element)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             element.Click();
         }
 
@@ -67,10 +73,5 @@ namespace ArrowEye_Automation_Framework.Common
             webDriver.Close();
             webDriver.Quit();
         }
-        
-
-
-
-
     }
 }

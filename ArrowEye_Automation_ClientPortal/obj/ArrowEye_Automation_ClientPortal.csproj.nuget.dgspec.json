@@ -158,6 +158,10 @@
               "target": "Package",
               "version": "[2.3.0, )"
             },
+            "RandomString4Net": {
+              "target": "Package",
+              "version": "[1.9.0, )"
+            },
             "RestSharp": {
               "target": "Package",
               "version": "[106.15.0, )"

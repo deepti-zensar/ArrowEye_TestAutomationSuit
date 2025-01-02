@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "shMl//XmchE=",
+  "dgSpecHash": "bmp4jZVI5KQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\sh63656\\source\\repos\\ArrowEye_UIAPIAutomation\\ArrowEye_Automation_ClientPortal\\ArrowEye_Automation_ClientPortal.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "C:\\Users\\sh63656\\.nuget\\packages\\nunit.runners\\3.12.0\\nunit.runners.3.12.0.nupkg.sha512",
     "C:\\Users\\sh63656\\.nuget\\packages\\nunit3testadapter\\4.6.0\\nunit3testadapter.4.6.0.nupkg.sha512",
     "C:\\Users\\sh63656\\.nuget\\packages\\nunittestadapter\\2.3.0\\nunittestadapter.2.3.0.nupkg.sha512",
+    "C:\\Users\\sh63656\\.nuget\\packages\\randomstring4net\\1.9.0\\randomstring4net.1.9.0.nupkg.sha512",
     "C:\\Users\\sh63656\\.nuget\\packages\\restsharp\\106.15.0\\restsharp.106.15.0.nupkg.sha512",
     "C:\\Users\\sh63656\\.nuget\\packages\\restsharp.authenticators\\1.1.1\\restsharp.authenticators.1.1.1.nupkg.sha512",
     "C:\\Users\\sh63656\\.nuget\\packages\\restsharp.serializers.newtonsoftjson\\106.15.0\\restsharp.serializers.newtonsoftjson.106.15.0.nupkg.sha512",

@@ -98,7 +98,22 @@ namespace ArrowEye_ClientPortal_Automation.PageRepository
         private IWebElement BOCDynamicInfo_AddNew_button;
 
         [FindsBy(How = How.XPath, Using = "(//button[@data-testid='DeleteButton'])[position()=1]")]
+
         private IWebElement BOCDynamicInfo_Detete_Icon_button;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
+
+        private IWebElement BOCDynamicInfo_Detete_popup_Cancelbutton;
+
+        [FindsBy(How = How.XPath, Using = "//h2[@class='MuiTypography-root MuiTypography-h6 MuiDialogTitle-root jss24 css-ohyacs' and contains(text(),'Delete')]")]
+
+        private IWebElement BOCDynamicInfo_Detete_popup_HeaderText;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss25 css-q3n577']")]
+
+        private IWebElement BOCDynamicInfo_Detete_popup_warningmessage;
+
+
 
         [FindsBy(How = How.XPath, Using = "(//button[@data-testid='editIcon'])[position()=1]")]
         private IWebElement BOCDynamicInfo_Edit_Icon_button;
@@ -115,6 +130,20 @@ namespace ArrowEye_ClientPortal_Automation.PageRepository
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelCSP']")]
         private IWebElement NewBocDynamicInfoPopup_Cancelbtn;
 
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
+        private IWebElement DeleteBocDynamicInfoPopup_Cancelbtn;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']//p[contains(text(),'Delete')]")]
+        private IWebElement DeleteBocDynamicInfoPopup_Deletebtn;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
+        private IWebElement DeleteBocDynamicInfoPopup_deletedrecorddetails;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
+        private IWebElement Search_View_InvalidRecordDetails;
+
+        
+
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
         private IWebElement NewBocDynamicInfoPopup_Savebtn;
 
@@ -127,14 +156,25 @@ namespace ArrowEye_ClientPortal_Automation.PageRepository
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='2'])[position()=1]")]
         private IWebElement BocDynamicInfo_Updated;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'added successfully')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'BOC Dynamic Info added successfully')]")]
         private IWebElement BocDynamicInfo_recordAdd_sucessmessage;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'updated successfully')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'BOC Dynamic Info updated successfully')]")]
         private IWebElement BocDynamicInfo_recordUpdate_sucessmessage;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'deleted successfully')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar' and contains(text(),'BOC Dynamic Info deleted successfully')]")]
         private IWebElement BocDynamicInfo_recordDelete_sucessmessage;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
+        private IWebElement BocDynamicInfo_Delete_popup_closebutton;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
+        private IWebElement BocDynamicInfo_Delete_popup_Deletebutton;
+
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Update BOC Dynamic Info')]")]
+        private IWebElement Update_BOCInfo_popup_HeaderText;
+
+
 
         public void ValidatePageTitle()
         {
@@ -148,40 +188,146 @@ namespace ArrowEye_ClientPortal_Automation.PageRepository
 
         public void AddNewBOCDynamicInfo(string BOCDynamicText)
         {
+            //create new dynamic info record verify the add new popup details
             Browser.Click(BOCDynamicInfo_AddNew_button);
+            var PopupHeaderText = NewBocDynamicInfoPopup_HeaderText.Text;
+            var PopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
+            var PopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
             Browser.Click(NewBocDynamicInfoPopup_Cancelbtn);
-            Thread.Sleep(2000);
             Browser.Click(BOCDynamicInfo_AddNew_button);
             Browser.Click(NewBocDynamicInfoPopup_Closebtn);
-            Thread.Sleep(2000);
             Browser.Click(BOCDynamicInfo_AddNew_button);
             NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText.ToString());
-            Thread.Sleep(5000);
-            var AddnewBOCInfoExpectedInputData = NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
+            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
             Browser.Click(NewBocDynamicInfoPopup_Savebtn);
-            Thread.Sleep(5000);
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText.ToString());
+            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+
+            //Search with newly created record
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
             Thread.Sleep(3000);
-            var CreatedNewBOCInfoActualData = BocDynamicInfo_created.Text;
-            Assert.That(CreatedNewBOCInfoActualData, Is.EqualTo(AddnewBOCInfoExpectedInputData));
+            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+
+            //Validations
+            Assert.That(PopupHeaderText, Is.EqualTo("New BOC Dynamic Info"));
+            Assert.That(NewBocDynamicInfoPopup_Cancelbtn, Is.EqualTo("Cancel"));
+            Assert.That(PopupsavebuttonText,Is.EqualTo("Save"));
+            Assert.That(Add_BocDynamicInfo_SuccessMessage,Does.Contain("BOC Dynamic Info added successfully')]"));
+            Assert.That(Created_BOCInfo_record_details, Does.Contain(BOCDynamicText_InputData));
+
         }
 
-        public void UpdateBOCDynamicInfo(string BOCDynamicText)
+        public void UpdateBOCDynamicInfo(string UpdateBOCDynamicText)
         {
+            //create new dynamic info record
             Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText.ToString());
-            Thread.Sleep(5000);
+            NewBocDynamicInfoPopup_Textbox.SendKeys(UpdateBOCDynamicText.ToString());
+            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
             Browser.Click(NewBocDynamicInfoPopup_Savebtn);
-            Thread.Sleep(7000);
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText.ToString());
+            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            Thread.Sleep(5000);
+
+            //search with newly added record
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
             Thread.Sleep(3000);
+
+            //click on Edit icon and verify the popup details and go for Edit
             Browser.Click(BOCDynamicInfo_Edit_Icon_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys("_Updated");
+            Thread.Sleep(2000);
+            var EditPopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
+            var EditPopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
+            var UpdateBOCInfo_popup_HeaderText = Update_BOCInfo_popup_HeaderText.Text;
+            NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData + "_Updated");
             var updateBOCInfoExpectedUserData= NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
             Browser.Click(NewBocDynamicInfoPopup_Savebtn);
-            Thread.Sleep(7000);
+            Thread.Sleep(5000);
+            var ActualBocDynmaicInfoUpdatesuccessmessage = BocDynamicInfo_recordUpdate_sucessmessage.Text;
+
+            //after updated record search with same record details
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(updateBOCInfoExpectedUserData.ToString());
+            Thread.Sleep(3000);
             var UpdatedBocInfoActualData = BocDynamicInfo_Updated.Text;
+
+            //validations
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info added successfully')]"));
+            Assert.That(ActualBocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("BOC Dynamic Info updated successfully')]"));
             Assert.That(UpdatedBocInfoActualData, Is.EqualTo(updateBOCInfoExpectedUserData));
+        }
+
+
+        public void DeleteBOCDynamicInfo(string DeleteBOCDynamicText)
+        {
+            //create new dynamic info record
+            Browser.Click(BOCDynamicInfo_AddNew_button);
+            NewBocDynamicInfoPopup_Textbox.SendKeys(DeleteBOCDynamicText.ToString());
+            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
+            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            Thread.Sleep(5000);
+
+            //search with newly added record
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            Thread.Sleep(3000);
+
+            //click on delete icon and verify the popup details and go for delete
+            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
+            var Deletepopup_headertext=BOCDynamicInfo_Detete_popup_HeaderText.Text;
+            var DeletePopupCancelbuttonText = DeleteBocDynamicInfoPopup_Cancelbtn.Text;
+            var DeletePopupDeletebuttonText = DeleteBocDynamicInfoPopup_Deletebtn.Text;
+            var Deletewarningmessage = BOCDynamicInfo_Detete_popup_warningmessage.Text;
+            Browser.Click(BocDynamicInfo_Delete_popup_closebutton);
+            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
+            Browser.Click(BOCDynamicInfo_Detete_popup_Cancelbutton);
+            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
+            Browser.Click(DeleteBocDynamicInfoPopup_Deletebtn);
+            Thread.Sleep(3000);
+            var Actualdeletedrecordsuccessmessage = BocDynamicInfo_recordDelete_sucessmessage.Text;
+
+            //after deleted record search with same record details
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            var afterdeletedrecorddetails = DeleteBocDynamicInfoPopup_deletedrecorddetails.Text;
+
+            //validations
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info added successfully')]"));
+            Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
+            Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("Cancel"));
+            Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("Delete"));
+            Assert.That(Deletewarningmessage, Does.Contain("Are you sure you want to delete the \"BOC Dynamic Info \"?"));
+            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("BOC Dynamic Info deleted successfully')]"));
+        }
+
+
+        public void ViewandSearchBOCDynamicInfo(string ViewSearchBOCDynamicText)
+        {
+            //create new dynamic info record
+            Browser.Click(BOCDynamicInfo_AddNew_button);
+            NewBocDynamicInfoPopup_Textbox.SendKeys(ViewSearchBOCDynamicText.ToString());
+            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetAttribute("value");
+            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            Thread.Sleep(5000);
+
+            //search and view with Invalid  record details
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString()+"InvalidRecords_Search");
+            var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
+            Thread.Sleep(3000);
+
+            //search and view with newly created record details
+            BOCDynamicInfo_AutoSearch_textbox.Clear();
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            Thread.Sleep(3000);
+            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+
+
+            //validations
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info added successfully')]"));
+            Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
+            Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
         }
 
     }

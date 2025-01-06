@@ -19,7 +19,7 @@ namespace ArrowEye_Automation_ClientPortal.Tests.Feature.CSP_Settings
         string randomString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE,10);
        
         [Test]
-        [Description("BOC_Dynamic_Info_Creation")]
+        [Description("BOC_Dynamic_Info_AddNew")]
         [Category("Smoke")]
         [TestCase("Automation_Addnew_BocDynamic_Info_")]
         public void Create_New_BOC_Dynamic_Info_Test(string CreateBOCDynamicText)
@@ -31,14 +31,14 @@ namespace ArrowEye_Automation_ClientPortal.Tests.Feature.CSP_Settings
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings();
             CP_Pages.BOCDynamicInfoPage.AddNewBOCDynamicInfo(CreateBOCDynamicText+ randomString);
-            DriverUtilities.TakeScreenshot(@"C:\");
+          DriverUtilities.TakeScreenshot(@"C:\");
 
         }
 
         [Test]
-        [Description("BOC_Dynamic_Info_Updation")]
+        [Description("BOC_Dynamic_Info_Update")]
         [Category("Smoke")]
-        [TestCase("Automation_BocDynamic_Info_")]
+        [TestCase("Automation_Edit_Info_")]
         public void Update_BOC_Dynamic_Info_Test(string UpdateBOCDynamicText)
         {
 
@@ -46,7 +46,38 @@ namespace ArrowEye_Automation_ClientPortal.Tests.Feature.CSP_Settings
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings();
             CP_Pages.BOCDynamicInfoPage.UpdateBOCDynamicInfo(UpdateBOCDynamicText + randomString);
-            DriverUtilities.TakeScreenshot(@"C:\");
+           DriverUtilities.TakeScreenshot(@"C:\");
+
+        }
+
+
+        [Test]
+        [Description("BOC_Dynamic_Info_Delete")]
+        [Category("Smoke")]
+        [TestCase("Automation_Delete_Info_")]
+        public void Delete_BOC_Dynamic_Info_Test(string DeleteBOCDynamicText)
+        {
+
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Home.ValidateHomePageTitle();
+            CP_Pages.Home.NavigateToCSPSettings();
+            CP_Pages.BOCDynamicInfoPage.DeleteBOCDynamicInfo(DeleteBOCDynamicText + randomString);
+           DriverUtilities.TakeScreenshot(@"C:\");
+
+        }
+
+        [Test]
+        [Description("BOC_Dynamic_Info_View_Search")]
+        [Category("Smoke")]
+        [TestCase("Automation_Search_View_BOCDynamicInfo_")]
+        public void View_Search_BOC_Dynamic_Info_Test(string ViewSearchBOCDynamicText)
+        {
+
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Home.ValidateHomePageTitle();
+            CP_Pages.Home.NavigateToCSPSettings();
+            CP_Pages.BOCDynamicInfoPage.ViewandSearchBOCDynamicInfo(ViewSearchBOCDynamicText + randomString);
+           DriverUtilities.TakeScreenshot(@"C:\");
 
         }
 

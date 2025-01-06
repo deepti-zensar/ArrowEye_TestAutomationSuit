@@ -68,6 +68,12 @@ namespace ArrowEye_Automation_Framework.Common
             element.Click();
         }
 
+        public static void GetText(IWebElement element, string text )
+        {
+            Thread.Sleep(3000);
+            text = element.Text;
+        }
+
         public static void Close()
         {
             webDriver.Close();

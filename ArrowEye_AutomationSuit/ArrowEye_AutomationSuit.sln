@@ -5,7 +5,10 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrowEye_Automation_Framework", "ArrowEye_Automation_Framework.csproj", "{BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArrowEye_Automation_ClientPortal", "..\ArrowEye_Automation_ClientPortal\ArrowEye_Automation_ClientPortal.csproj", "{0A7A61C4-1AA3-4753-BA93-F197A364D274}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrowEye_Automation_Portal", "..\ArrowEye_Automation_Portal\ArrowEye_Automation_Portal.csproj", "{0B3573A6-7613-4E5B-9B9D-BD03B58BCBB5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E} = {BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +20,10 @@ Global
 		{BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAC5D64A-5CC3-42FE-B10E-3A7E3BCAC87E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A7A61C4-1AA3-4753-BA93-F197A364D274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A7A61C4-1AA3-4753-BA93-F197A364D274}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A7A61C4-1AA3-4753-BA93-F197A364D274}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A7A61C4-1AA3-4753-BA93-F197A364D274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3573A6-7613-4E5B-9B9D-BD03B58BCBB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3573A6-7613-4E5B-9B9D-BD03B58BCBB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3573A6-7613-4E5B-9B9D-BD03B58BCBB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3573A6-7613-4E5B-9B9D-BD03B58BCBB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,8 +14,6 @@ namespace ArrowEye_Automation_Framework.Common
 {
     public class Browser
     {
-       
-
         public IWebDriver WebDriver { get; set; }
         public string environmentURL { get; set; }
 
@@ -29,8 +27,9 @@ namespace ArrowEye_Automation_Framework.Common
 
         public static void Initialize()
         {
-            //webDriver.Url = AppNameHelper.appBaseURL;
-            webDriver.Url = "https://portal-dev.arroweye.com/";
+            //webDriver.Url = ConfigurationManager.AppSettings["Environment"];
+            webDriver.Url = AppNameHelper.appBaseURL;
+            //webDriver.Url = "https://portal-dev.arroweye.com/";
             Thread.Sleep(5000);
             webDriver.Manage().Window.Maximize();
 

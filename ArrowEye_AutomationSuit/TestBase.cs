@@ -1,14 +1,7 @@
 ﻿using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using RandomString4Net;
 
 namespace ArrowEye_Automation_Framework
 {

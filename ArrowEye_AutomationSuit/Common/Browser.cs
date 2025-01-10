@@ -27,12 +27,9 @@ namespace ArrowEye_Automation_Framework.Common
 
         public static void Initialize()
         {
-            //webDriver.Url = ConfigurationManager.AppSettings["Environment"];
             webDriver.Url = AppNameHelper.appBaseURL;
-            //webDriver.Url = "https://portal-dev.arroweye.com/";
             Thread.Sleep(5000);
             webDriver.Manage().Window.Maximize();
-
         }
 
         public static string Title
@@ -54,12 +51,6 @@ namespace ArrowEye_Automation_Framework.Common
         {
             get { return webDriver; }
         }
-
-        //public static void Goto(string url)
-        //{
-        //    webDriver.Url = AppNameHelper.appBaseURL;
-
-        //}
 
         public static void Click(IWebElement element)
         {

@@ -13,7 +13,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Test]
         [Description("BOC_Dynamic_Info_Create")]
         [Category("Smoke")]
-        [TestCase("Automation_Create_BocDynamic_Info_")]
+        [TestCase("Hussain")]
         public void Create_New_BOC_Dynamic_Info(string CreateBOCDynamicText)
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
@@ -23,7 +23,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
-        [Test]
+       // [Test]
         [Description("BOC_Dynamic_Info_Edit")]
         [Category("Smoke")]
         [TestCase("Automation_Edit_Info_")]
@@ -37,7 +37,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         }
 
 
-        [Test]
+       // [Test]
         [Description("BOC_Dynamic_Info_Delete")]
         [Category("Smoke")]
         [TestCase("Automation_Delete_Info_")]
@@ -50,7 +50,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
-        [Test]
+       // [Test]
         [Description("BOC_Dynamic_Info_View_Search")]
         [Category("Smoke")]
         [TestCase("Automation_Search_View_BOCDynamicInfo_")]

@@ -6,24 +6,24 @@ using RandomString4Net;
 namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
 {
     [TestFixture]
-    public class BOC_Dynamic_Info :TestBase
+    public class BOC_Dynamic_Info : TestBase
     {
-        string randomString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE,10);
-       
+        string randomString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10);
+
         [Test]
         [Description("BOC_Dynamic_Info_Create")]
         [Category("Smoke")]
-        [TestCase("Hussain")]
+        [TestCase("Automation_Create_Info")]
         public void Create_New_BOC_Dynamic_Info(string CreateBOCDynamicText)
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
-            CP_Pages.BOCDynamicInfoPage.AddNewBOCDynamicInfo(CreateBOCDynamicText+ randomString);
+            CP_Pages.BOCDynamicInfoPage.AddNewBOCDynamicInfo(CreateBOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
-       // [Test]
+        [Test]
         [Description("BOC_Dynamic_Info_Edit")]
         [Category("Smoke")]
         [TestCase("Automation_Edit_Info_")]
@@ -33,11 +33,11 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.EditBOCDynamicInfo(UpdateBOCDynamicText + randomString);
-            //DriverUtilities.TakeScreenshot(@"C:\");
+            DriverUtilities.TakeScreenshot(@"C:\");
         }
 
 
-       // [Test]
+        [Test]
         [Description("BOC_Dynamic_Info_Delete")]
         [Category("Smoke")]
         [TestCase("Automation_Delete_Info_")]
@@ -50,7 +50,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
-       // [Test]
+        [Test]
         [Description("BOC_Dynamic_Info_View_Search")]
         [Category("Smoke")]
         [TestCase("Automation_Search_View_BOCDynamicInfo_")]

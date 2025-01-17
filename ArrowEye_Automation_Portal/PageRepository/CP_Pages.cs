@@ -45,11 +45,16 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_CSPSettings_FOCDynamicInfoPage>(); }
         }
 
+        public static CP_CSPSettings_EMVProfilePage EMVProfilePage
+        {
+            get { return GetPage<CP_CSPSettings_EMVProfilePage>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 
             IWebDriver _dr = Browser._Driver;
-            WebDriverWait wait = new WebDriverWait(_dr, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(_dr, TimeSpan.FromSeconds(4));
             try
             {
                 var abc = wait.Until(ExpectedConditions.TextToBePresentInElementLocated(By.Id("notistack-snackbar"), "Dynamic Info Successfully."));

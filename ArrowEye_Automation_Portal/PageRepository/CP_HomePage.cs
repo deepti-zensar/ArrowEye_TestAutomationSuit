@@ -85,14 +85,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-        //public void NavigateToCSPSettings()
-        //{
-        //    Browser.Click(SearchOrSelect);
-        //    Browser.Click(AmazonPCL);
-        //    Browser.Click(clientGallery);
-        //    Browser.Click(CSPSettings);
-        //    Browser.Click(FOCDynamicInfo);
-        //}
+       
 
     }
 }

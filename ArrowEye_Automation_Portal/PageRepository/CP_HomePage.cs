@@ -22,6 +22,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BOC Dynamic Info')]")]
         public IWebElement BOCDynamicInfo;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Card Holder Agreement')]")]
+        public IWebElement CardHolderAgreement;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Carrier Dynamic Info')]")]
+        public IWebElement CarrierDynamicInfo;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'EMV Profile')]")]
+        public IWebElement EMVProfile;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'FOC Dynamic Info')]")]
+        public IWebElement FOCDynamicInfo;
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3' and contains(text(),'Issuers')]")]
         public IWebElement issuers;
 
@@ -47,14 +59,40 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(issuers);
         }
 
-        public void NavigateToCSPSettings()
+        public void NavigateToCSPSettings(string CSPSetting_SubMenuName)
         {
             Browser.Click(SearchOrSelect);
             Browser.Click(AmazonPCL);
             Browser.Click(clientGallery);
             Browser.Click(CSPSettings);
-            Browser.Click(BOCDynamicInfo);
+            switch (CSPSetting_SubMenuName)
+            {
+                case "BOCDynamicInfo":
+                    Browser.Click(BOCDynamicInfo);
+                    break;
+                case "FOCDynamicInfo":
+                    Browser.Click(FOCDynamicInfo);
+                    break;
+                case "CardHolderAgreement":
+                    Browser.Click(CardHolderAgreement);
+                    break;
+                case "EMVProfile":
+                    Browser.Click(EMVProfile);
+                    break;
+                case "CarrierDynamicInfo":
+                    Browser.Click(CarrierDynamicInfo);
+                    break;
+            }
         }
+
+        //public void NavigateToCSPSettings()
+        //{
+        //    Browser.Click(SearchOrSelect);
+        //    Browser.Click(AmazonPCL);
+        //    Browser.Click(clientGallery);
+        //    Browser.Click(CSPSettings);
+        //    Browser.Click(FOCDynamicInfo);
+        //}
 
     }
 }

@@ -188,6 +188,7 @@
   <ItemGroup>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
+    <Compile Include="PageRepository\CP_CSPSettings_FOCDynamicInfoPage.cs" />
     <Compile Include="PageRepository\CP_HomePage.cs" />
     <Compile Include="PageRepository\CP_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />

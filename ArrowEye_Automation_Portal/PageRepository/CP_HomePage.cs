@@ -28,8 +28,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
-        [FindsBy(How = How.XPath, Using = "//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg' and contains(text(),'8006: Frost State Bank [09120758]')]")]
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
         public IWebElement AmazonPCL;
+
 
         public void ValidateHomePageTitle()
         {
@@ -53,6 +54,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(clientGallery);
             Browser.Click(CSPSettings);
             Browser.Click(BOCDynamicInfo);
+        }
+
+        public void NavigateToEMV()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(emv);            
         }
 
     }

@@ -189,7 +189,7 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
     <Compile Include="PageRepository\CP_HomePage.cs" />
-    <Compile Include="PageRepository\CP_IssuersPage.cs" />
+    <Compile Include="PageRepository\CP_EMV_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

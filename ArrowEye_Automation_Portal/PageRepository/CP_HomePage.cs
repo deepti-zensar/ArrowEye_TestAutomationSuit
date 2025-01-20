@@ -106,14 +106,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
         {
-
+            Browser.Click(CSPSettings);
             if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
             {
                 CSPSetting_SubMenuName = true;
             }
             else
             {
-                CSPSetting_SubMenuName = false;
+                Browser.Close();
             }
         }
 

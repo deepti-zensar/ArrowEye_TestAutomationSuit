@@ -155,7 +155,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
         private IWebElement DeleteEMVProfilePopup_deletedrecorddetails;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
+        [FindsBy(How = How.XPath, Using = "//div[contains(text(),'No results found.')]")]
         private IWebElement Search_View_InvalidRecordDetails;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
@@ -257,7 +257,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(PopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(PopupsavebuttonText, Is.EqualTo("SAVE"));
             
-            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfileId + " added Successfully."));
             Assert.That(Created_EMVProfile_record_details, Does.Contain(EMVProfileText_InputData));
         }
 
@@ -298,13 +298,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var UpdatedEMVProfileActualData = EMVProfile_Updated.Text;
 
             //validations
-            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfileId + " added Successfully."));
             Assert.That(EditPopupTextboxfield, Is.EqualTo("Name"));
             Assert.That(EditPopupIdfield, Does.Contain("ID:"));
             Assert.That(EditPopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(EditPopupsavebuttonText, Is.EqualTo("SAVE"));
             Assert.That(UpdateEMVProfile_popup_HeaderText, Is.EqualTo("Update EMV Profile"));
-            Assert.That(ActualEMVProfileUpdatesuccessmessage, Is.EqualTo("EMV Profile " + EMVProfile_ID + " updated Successfully."));
+            Assert.That(ActualEMVProfileUpdatesuccessmessage, Is.EqualTo("EMV Profile " + EMVProfileId + " updated Successfully."));
             Assert.That(UpdatedEMVProfileActualData, Is.EqualTo(updateEMVProfileExpectedUserData));
 
 
@@ -349,12 +349,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
 
             //validations
-            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfileId + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
             Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
             Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
-            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("EMV Profile " + EMVProfile_ID + " deleted Successfully."));
+            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("EMV Profile " + EMVProfileId + " deleted Successfully."));
             
         }
 
@@ -385,6 +385,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //search and view with Invalid Text details
             EMVProfile_AutoSearch_textbox.Clear();
             EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData + "@#$%^&*(HG");
+            Thread.Sleep(6000);
             var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
 
             //search and view with Invalid Id details

@@ -2,11 +2,16 @@
 using ArrowEye_Automation_Framework.Common;
 using OpenQA.Selenium;
 using System.Threading;
+using System.Collections.Generic;
+using ArrowEye_Automation_Framework;
+using System;
+using OpenQA.Selenium.Interactions;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
-    public class CP_HomePage
+    public class CP_HomePage :TestBase
     {
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
 
@@ -49,6 +54,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var elemnetvisible = homePageTitle.Displayed;
         }
 
+        public void SubmenuItems_display(IWebElement element)
+        {
+            IWebDriver _dr = Browser._Driver;
+            element = _dr.FindElement(By.XPath("//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]"));
+            IWebElement listofsubmenuItems = _dr.FindElement(By.XPath("//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]"));
+            Actions abc= new Actions(_dr);
+            abc.MoveToElement(element);
+            abc.Click(listofsubmenuItems);
+            abc.Build().Perform();
+
+        }
+
         public void NavigateToIssuers()
         {
             Browser.Click(SearchOrSelect);
@@ -65,6 +82,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(AmazonPCL);
             Browser.Click(clientGallery);
             Browser.Click(CSPSettings);
+            CSPSettings_SubmenuItems(true);
             switch (CSPSetting_SubMenuName)
             {
                 case "BOCDynamicInfo":
@@ -85,7 +103,21 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-       
+
+        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+        {
+
+            if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
+            {
+                CSPSetting_SubMenuName = true;
+            }
+            else
+            {
+                CSPSetting_SubMenuName = false;
+            }
+        }
+
+
 
     }
 }

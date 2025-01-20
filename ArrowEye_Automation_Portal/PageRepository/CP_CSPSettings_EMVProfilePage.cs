@@ -8,9 +8,12 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
 using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.ClipRectangle;
+using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
+    
+
     public class CP_CSPSettings_EMVProfilePage : TestBase
     {
 
@@ -35,8 +38,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//p[@data-testid='secondNested' and contains(text(),'BOC Dynamic Info')]")]
         private IWebElement BOCDynamicInfo_menudropdowntext;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='jss13 MuiBox-root css-0']//p[contains(text(),'BOC Dynamic Info')]")]
-        private IWebElement BOCDynamicInfoPage_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//div[@class='jss13 MuiBox-root css-0']//p[contains(text(),'FOC Dynamic Info')]")]
+        private IWebElement FOCDynamicInfoPage_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitleContainerContent']//div[contains(text(),'BOC Info ID')]")]
         private IWebElement BOCInfoID_GridColoumn;
@@ -87,285 +90,349 @@ namespace ArrowEye_Automation_Portal.PageRepository
         private IWebElement BOCDynamicInfo_Print_button;
 
         [FindsBy(How = How.XPath, Using = "//input[@placeholder='Search…']")]
-        private IWebElement BOCDynamicInfo_AutoSearch_textbox;
+        private IWebElement EMVProfile_AutoSearch_textbox;
 
         [FindsBy(How = How.XPath, Using = "//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-irzi55']")]
         private IWebElement BOCDynamicInfo_AutoSearch_textboxclear;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='openModal']//p[contains(text(),'Add New')]")]
-        private IWebElement BOCDynamicInfo_AddNew_button;
+        private IWebElement EMVProfile_AddNew_button;
 
-        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='DeleteButton'])[position()=1]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'EMV Profile ID')]")]
+        private IWebElement EMVProfile_homepage_IDGridcol;
 
-        private IWebElement BOCDynamicInfo_Detete_Icon_button;
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Name')]")]
+        private IWebElement EMVProfile__homepage_Name;
+
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Actions')]")]
+        private IWebElement EMVProfile__homepage_Actioncol;
+
+        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='deleteCell'])[position()=1]")]
+
+        private IWebElement EMVProfile_Detete_Icon_button;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
 
-        private IWebElement BOCDynamicInfo_Detete_popup_Cancelbutton;
+        private IWebElement EMVProfile_Detete_popup_Cancelbutton;
 
-        [FindsBy(How = How.XPath, Using = "//h2[@class='MuiTypography-root MuiTypography-h6 MuiDialogTitle-root jss24 css-ohyacs' and contains(text(),'Delete')]")]
+        [FindsBy(How = How.XPath, Using = "//h2[contains(text(),'Delete')]")]
+        private IWebElement EMVProfile_Detete_popup_HeaderText;
 
-        private IWebElement BOCDynamicInfo_Detete_popup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiStack-root css-j7qwjs']")]
+        private IWebElement EMVProfile_Detete_popup_warningmessage;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss25 css-q3n577']")]
+        [FindsBy(How = How.XPath, Using = "(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall textPrimary css-1pydezi'])[2]")]
+        private IWebElement EMVProfile_Edit_Icon_button;
 
-        private IWebElement BOCDynamicInfo_Detete_popup_warningmessage;
-
-        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='editIcon'])[position()=1]")]
-        private IWebElement BOCDynamicInfo_Edit_Icon_button;
-
-        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'New BOC Dynamic Info')]")]
-        private IWebElement NewBocDynamicInfoPopup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'New EMV Profile')]")]
+        private IWebElement NewEMVProfilePopup_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeButton']")]
-        private IWebElement NewBocDynamicInfoPopup_Closebtn;
+        private IWebElement NewEMVProfilePopup_Closebtn;
 
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='nameInputField']")]
-        private IWebElement NewBocDynamicInfoPopup_Textbox;
+        private IWebElement NewEMVProfilePopup_Textbox;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelCSP']")]
-        private IWebElement NewBocDynamicInfoPopup_Cancelbtn;
+        private IWebElement NewEMVProfilePopup_Cancelbtn;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-qr1enj']")]
-        private IWebElement UpdateBocDynamicInfoPopup_IDField;
+        private IWebElement UpdateEMVProfilePopup_IDField;
 
-        [FindsBy(How = How.XPath, Using = "//label[contains(text(),'BOC Dynamic Text')]")]
-        private IWebElement UpdateBocDynamicInfoPopup_BOCDynamicTextField;
+        [FindsBy(How = How.XPath, Using = "//label[text()='Name']")]
+        private IWebElement UpdateEMVProfilePopup_NameTextField;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss129 css-9l3uo3' and contains(text(),'Update FOC Dynamic Info')]")]
+        private IWebElement UpdateFocDynamicInfoPopup_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
-        private IWebElement DeleteBocDynamicInfoPopup_Cancelbtn;
+        private IWebElement DeleteEMVProfilePopup_Cancelbtn;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']//p[contains(text(),'Delete')]")]
-        private IWebElement DeleteBocDynamicInfoPopup_Deletebtn;
+        private IWebElement DeleteEMVProfilePopup_Deletebtn;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1'][contains(text(),'No results found.')]")]
-        private IWebElement DeleteBocDynamicInfoPopup_deletedrecorddetails;
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
+        private IWebElement DeleteEMVProfilePopup_deletedrecorddetails;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
         private IWebElement Search_View_InvalidRecordDetails;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
-        private IWebElement NewBocDynamicInfoPopup_Savebtn;
+        private IWebElement NewEMVProfilePopup_Savebtn;
 
         [FindsBy(How = How.XPath, Using = "//p[@id=':rkm:-helper-text' and contains(text(),'BOC Dynamic Text is required.')]")]
         private IWebElement NewBocDynamicInfoPopup_validationmessage;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='2'])[position()=1]")]
-        private IWebElement BocDynamicInfo_created;
+        private IWebElement EMVProfile_newly_added_details;
+
+        [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='1'])[position()=1]")]
+        private IWebElement EMVProfile_created_ID;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='2'])[position()=1]")]
-        private IWebElement BocDynamicInfo_Updated;
+        private IWebElement EMVProfile_Updated;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordAdd_sucessmessage;
+        private IWebElement EMVProfile_recordAdd_sucessmessage;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-v7esy']")]
+        private IWebElement EMVProfile_Addwithouttext_Error;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-v7esy']")]
+        private IWebElement EMVProfile_Textinput_exceedcharlimit_error;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-error go167266335 go3651055292 go3162094071']//div[@id='notistack-snackbar']")]
+        private IWebElement EMVProfile_Textinput_dublicaterecord_Error;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textRight'])[position()=1]")]
-        private IWebElement BocDynamicInfo_ID;
+        private IWebElement EMVProfile_ID;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
         private IWebElement Toster_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordUpdate_sucessmessage;
+        private IWebElement EMVProfile_recordUpdate_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordDelete_sucessmessage;
+        private IWebElement EMVProfile_recordDelete_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
-        private IWebElement BocDynamicInfo_Delete_popup_closebutton;
+        private IWebElement EMVProfile_Delete_popup_closebutton;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
         private IWebElement BocDynamicInfo_Delete_popup_Deletebutton;
 
-        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Update BOC Dynamic Info')]")]
-        private IWebElement Update_BOCInfo_popup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Update EMV Profile')]")]
+        private IWebElement Update_EMVProfile_popup_HeaderText;
 
         public void ValidatePageTitle()
         {
-            DriverUtil.IsElementPresent(BOCDynamicInfoPage_HeaderText);
+            DriverUtil.IsElementPresent(FOCDynamicInfoPage_HeaderText);
         }
 
-        public void ValidateNewIssuerDialogBox()
+        public void ValidateNewFOCDynamicInfoDialogBox()
         {
-            DriverUtil.IsElementPresent(NewBocDynamicInfoPopup_HeaderText);
+            DriverUtil.IsElementPresent(NewEMVProfilePopup_HeaderText);
         }
 
-       
-
-        public void AddNewEMVProfile(string BOCDynamicText)
+        public void EMVProfile_HomePage_GridcolParameters(Boolean EMVProfile_homepage_gridcolmns)
         {
-            //create new dynamic info record verify the add new popup details
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            var PopupHeaderText = NewBocDynamicInfoPopup_HeaderText.Text;
-            var PopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
-            var PopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
-            Browser.Click(NewBocDynamicInfoPopup_Cancelbtn);
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            Browser.Click(NewBocDynamicInfoPopup_Closebtn);
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+
+            if (EMVProfile_homepage_IDGridcol.Displayed && EMVProfile__homepage_Name.Displayed && EMVProfile__homepage_Actioncol.Displayed)
+            {
+                EMVProfile_homepage_gridcolmns = true;
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
+        public void AddNewEMVProfile(string CreateEMVProfileText)
+        {
+            //create Emv prifile record verify the add new popup details
+            Browser.Click(EMVProfile_AddNew_button);
+            var PopupHeaderText = NewEMVProfilePopup_HeaderText.Text;
+            var PopupCancelbuttonText = NewEMVProfilePopup_Cancelbtn.Text;
+            var PopupsavebuttonText = NewEMVProfilePopup_Savebtn.Text;
+            var PopupFOCDynamicTextField = NewEMVProfilePopup_Textbox.Text;
+            Browser.Click(NewEMVProfilePopup_Cancelbtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            Browser.Click(NewEMVProfilePopup_Closebtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            NewEMVProfilePopup_Textbox.SendKeys(CreateEMVProfileText.ToString());
+            var EMVProfileText_InputData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-           //CP_Pages.TosterMessage_wait();
-           var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
-            var BOCDynamicInfo_Id = BocDynamicInfo_ID.Text;
+            var Add_NewEMVProfile_SuccessMessage = EMVProfile_recordAdd_sucessmessage.Text;
+            var EMVProfileId = EMVProfile_ID.Text;
+
             //Search with newly created record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData.ToString());
+            var Created_EMVProfile_record_details = EMVProfile_newly_added_details.Text;
 
             //Validations
-            Assert.That(PopupHeaderText, Is.EqualTo("New BOC Dynamic Info"));
+            Assert.That(PopupHeaderText, Is.EqualTo("New EMV Profile"));
             Assert.That(PopupCancelbuttonText, Is.EqualTo("CANCEL"));
-            Assert.That(PopupsavebuttonText,Is.EqualTo("SAVE"));
-            Assert.That(Add_BocDynamicInfo_SuccessMessage,Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
-            Assert.That(Created_BOCInfo_record_details, Does.Contain(BOCDynamicText_InputData));
+            Assert.That(PopupsavebuttonText, Is.EqualTo("SAVE"));
+            
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
+            Assert.That(Created_EMVProfile_record_details, Does.Contain(EMVProfileText_InputData));
         }
 
-        public void EditEMVProfile(string UpdateBOCDynamicText)
+        public void EditEMVProfile(string UpdateEMVProfileText)
         {
-           
+
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(UpdateBOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            NewEMVProfilePopup_Textbox.SendKeys(UpdateEMVProfileText.ToString());
+            var EMVProfileText_InputData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
-            var BOCDynamicInfo_Id = BocDynamicInfo_ID.Text;
-            //search with newly added record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-           
+            var Add_NewEMVProfile_SuccessMessage = EMVProfile_recordAdd_sucessmessage.Text;
+            var EMVProfileId = EMVProfile_ID.Text;
+
+            //Search with newly created record
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData.ToString());
+            var Created_EMVProfile_record_details = EMVProfile_newly_added_details.Text;
 
             //click on Edit icon and verify the popup details and go for Edit
-            Browser.Click(BOCDynamicInfo_Edit_Icon_button);
-            var EditPopupTextboxfield = UpdateBocDynamicInfoPopup_BOCDynamicTextField.Text;
-            var EditPopupIdfield = UpdateBocDynamicInfoPopup_IDField.Text;
-            var EditPopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
-            var EditPopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
-            var UpdateBOCInfo_popup_HeaderText = Update_BOCInfo_popup_HeaderText.Text;
-            NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData + "_Updated");
-            var updateBOCInfoExpectedUserData= NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            var updateBOCInfoIDfieldvalue= UpdateBocDynamicInfoPopup_IDField.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(EMVProfile_Edit_Icon_button);
+            var EditPopupTextboxfield = UpdateEMVProfilePopup_NameTextField.Text;
+            var EditPopupIdfield = UpdateEMVProfilePopup_IDField.Text;
+            var EditPopupCancelbuttonText = NewEMVProfilePopup_Cancelbtn.Text;
+            var EditPopupsavebuttonText = NewEMVProfilePopup_Savebtn.Text;
+            var UpdateEMVProfile_popup_HeaderText = Update_EMVProfile_popup_HeaderText.Text;
+            NewEMVProfilePopup_Textbox.SendKeys(EMVProfileText_InputData + "_Updated");
+            var updateEMVProfileExpectedUserData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            var updateEMVProfileIDfieldvalue = UpdateEMVProfilePopup_IDField.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-            var ActualBocDynmaicInfoUpdatesuccessmessage = BocDynamicInfo_recordUpdate_sucessmessage.Text;
+            var ActualEMVProfileUpdatesuccessmessage = EMVProfile_recordUpdate_sucessmessage.Text;
 
             //after updated record search with same record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(updateBOCInfoExpectedUserData.ToString());
-            var UpdatedBocInfoActualData = BocDynamicInfo_Updated.Text;
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(updateEMVProfileExpectedUserData.ToString());
+            var UpdatedEMVProfileActualData = EMVProfile_Updated.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " + BOCDynamicInfo_Id + " added Successfully."));
-            Assert.That(EditPopupTextboxfield, Is.EqualTo("BOC Dynamic Text"));
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
+            Assert.That(EditPopupTextboxfield, Is.EqualTo("Name"));
             Assert.That(EditPopupIdfield, Does.Contain("ID:"));
             Assert.That(EditPopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(EditPopupsavebuttonText, Is.EqualTo("SAVE"));
-            Assert.That(UpdateBOCInfo_popup_HeaderText, Is.EqualTo("Update BOC Dynamic Info"));
-            Assert.That(ActualBocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("BOC Dynamic Info " + BOCDynamicInfo_Id + " updated Successfully."));
-           Assert.That(UpdatedBocInfoActualData, Is.EqualTo(updateBOCInfoExpectedUserData));
+            Assert.That(UpdateEMVProfile_popup_HeaderText, Is.EqualTo("Update EMV Profile"));
+            Assert.That(ActualEMVProfileUpdatesuccessmessage, Is.EqualTo("EMV Profile " + EMVProfile_ID + " updated Successfully."));
+            Assert.That(UpdatedEMVProfileActualData, Is.EqualTo(updateEMVProfileExpectedUserData));
+
+
         }
 
 
-        public void DeleteEMVProfile(string DeleteBOCDynamicText)
+        public void DeleteEMVProfile(string DeleteEMVProfileText)
         {
-           
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(DeleteBOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            NewEMVProfilePopup_Textbox.SendKeys(DeleteEMVProfileText.ToString());
+            var EMVProfileText_InputData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
-            var BOCDynamicInfo_Id = BocDynamicInfo_ID.Text;
-            //search with newly added record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            var Add_NewEMVProfile_SuccessMessage = EMVProfile_recordAdd_sucessmessage.Text;
+            var EMVProfileId = EMVProfile_ID.Text;
+
+            //Search with newly created record
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData.ToString());
+            var Created_EMVProfile_record_details = EMVProfile_newly_added_details.Text;
 
             //click on delete icon and verify the popup details and go for delete
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            var Deletepopup_headertext=BOCDynamicInfo_Detete_popup_HeaderText.Text;
-            var DeletePopupCancelbuttonText = DeleteBocDynamicInfoPopup_Cancelbtn.Text;
-            var DeletePopupDeletebuttonText = DeleteBocDynamicInfoPopup_Deletebtn.Text;
-            var Deletewarningmessage = BOCDynamicInfo_Detete_popup_warningmessage.Text;
+            Browser.Click(EMVProfile_Detete_Icon_button);
+            var Deletepopup_headertext = EMVProfile_Detete_popup_HeaderText.Text;
+            var DeletePopupCancelbuttonText = DeleteEMVProfilePopup_Cancelbtn.Text;
+            var DeletePopupDeletebuttonText = DeleteEMVProfilePopup_Deletebtn.Text;
+            var Deletewarningmessage = EMVProfile_Detete_popup_warningmessage.Text;
             var deleteexpectedwarningmessage = Deletewarningmessage.ToString();
-            Browser.Click(BocDynamicInfo_Delete_popup_closebutton);
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            Browser.Click(BOCDynamicInfo_Detete_popup_Cancelbutton);
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            Browser.Click(DeleteBocDynamicInfoPopup_Deletebtn);
+            Browser.Click(EMVProfile_Delete_popup_closebutton);
+            Browser.Click(EMVProfile_Detete_Icon_button);
+            Browser.Click(EMVProfile_Detete_popup_Cancelbutton);
+            Browser.Click(EMVProfile_Detete_Icon_button);
+            Browser.Click(DeleteEMVProfilePopup_Deletebtn);
             Thread.Sleep(4000);
-            var Actualdeletedrecordsuccessmessage = BocDynamicInfo_recordDelete_sucessmessage.Text;
+            var Actualdeletedrecordsuccessmessage = EMVProfile_recordDelete_sucessmessage.Text;
 
             //after deleted record search with same record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var afterdeletedrecorddetails = DeleteBocDynamicInfoPopup_deletedrecorddetails.Text;
-           
-            
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileId.ToString());
+            var afterdeletedrecorddetails = DeleteEMVProfilePopup_deletedrecorddetails.Text;
+
+
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
+            Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfile_ID + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
             Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
-            Assert.That(Deletewarningmessage,Does.Contain(deleteexpectedwarningmessage));
-            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " deleted Successfully."));
+            Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
+            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("EMV Profile " + EMVProfile_ID + " deleted Successfully."));
+            
         }
 
-        public void ViewandSearchEMVProfile(string ViewSearchBOCDynamicText)
+        public void ViewandSearchEMVProfile(string ViewSearchFOCDynamicText)
         {
+            //verify the grid colomns displayed or not
+            EMVProfile_HomePage_GridcolParameters(true);
+
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(ViewSearchBOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            NewEMVProfilePopup_Textbox.SendKeys(ViewSearchFOCDynamicText.ToString());
+            var EMVProfileText_InputData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
-            var BOCDynamicInfo_Id = BocDynamicInfo_ID.Text;
+            var Add_NewEMVProfile_SuccessMessage = EMVProfile_recordAdd_sucessmessage.Text;
+            var EMVProfileId = EMVProfile_ID.Text;
 
-            //search and view with newly created record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(ViewSearchBOCDynamicText.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            //Search with newly created record valid text
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData.ToString());
+            var Search_withvalid_Text = EMVProfile_newly_added_details.Text;
 
-            //search and view with Invalid  record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString()+"InvalidRecords_Search");
-            var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
+            //search and view with newly created record details with Valid ID
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileId.ToString());
+            var Search_Valid_Id = EMVProfile_created_ID.Text;
+
+            //search and view with Invalid Text details
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData + "@#$%^&*(HG");
+            var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
+
+            //search and view with Invalid Id details
+            EMVProfile_AutoSearch_textbox.Clear();
+            EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileId + "1234");
+            var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
-            Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
-            Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
+            Assert.That(EMVProfileText_InputData, Does.Contain(Search_withvalid_Text));
+            Assert.That(Search_Valid_Id, Is.EqualTo(EMVProfileId));
+            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
+            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
         }
 
-        public void ValidationsEMVProfile(string NegativeScenariosFOCDynamicText)
+
+        public void ValidationsEMVProfile(string NegativeScenariosEMVProfileText)
         {
+
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(EMVProfile_AddNew_button);
+            NewEMVProfilePopup_Textbox.SendKeys(NegativeScenariosEMVProfileText.ToString());
+            var EMVProfileText_InputData = NewEMVProfilePopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
 
-            //search and view with Invalid  record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString() + "InvalidRecords_Search");
-            var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
+            //Scenario1 : Without Name Input text data
+            Browser.Click(EMVProfile_AddNew_button);
+            Browser.Click(NewEMVProfilePopup_Savebtn);
+            Thread.Sleep(4000);
+            var AddEMVProfile_withoutText_ValidationMessage = EMVProfile_Addwithouttext_Error.Text;
 
-            //search and view with newly created record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            // //Scenario 2: Exceed Name TextBox input char limits
+            // NewEMVProfilePopup_Textbox.SendKeys(NegativeScenariosEMVProfileText + "morethan100characters");
+            // Browser.Click(NewEMVProfilePopup_Savebtn);
+            ////Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
+            //  var EMVProfile_TextInput_ExceedLimit_ValidationMessage = EMVProfile_Textinput_exceedcharlimit_error.Text;
+
+            //Scenario 3: Dublicate Record creates
+            NewEMVProfilePopup_Textbox.Clear();
+            NewEMVProfilePopup_Textbox.SendKeys(EMVProfileText_InputData);
+            Browser.Click(NewEMVProfilePopup_Savebtn);
+            Thread.Sleep(2000);
+            var EMVProfile_TextInput_dublicaterecord_ValidationMessage = EMVProfile_Textinput_dublicaterecord_Error.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
-            Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
-            Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
+            Assert.That(AddEMVProfile_withoutText_ValidationMessage, Does.Contain("Name is required."));
+            //Assert.That(AddFOC_TextInput_ExceedLimit_ValidationMessage, Does.Contain("FOC dynamic info field must not exceed 100 characters"));
+            Assert.That(EMVProfile_TextInput_dublicaterecord_ValidationMessage, Does.Contain("Sorry, Data validation failed.This EMV Profile already exists!"));
         }
     }
 }

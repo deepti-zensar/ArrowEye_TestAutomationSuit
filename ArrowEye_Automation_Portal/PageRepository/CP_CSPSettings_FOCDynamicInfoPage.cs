@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
+using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -36,8 +38,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//p[@data-testid='secondNested' and contains(text(),'BOC Dynamic Info')]")]
         private IWebElement BOCDynamicInfo_menudropdowntext;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='jss13 MuiBox-root css-0']//p[contains(text(),'BOC Dynamic Info')]")]
-        private IWebElement BOCDynamicInfoPage_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//div[@class='jss13 MuiBox-root css-0']//p[contains(text(),'FOC Dynamic Info')]")]
+        private IWebElement FOCDynamicInfoPage_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitleContainerContent']//div[contains(text(),'BOC Info ID')]")]
         private IWebElement BOCInfoID_GridColoumn;
@@ -88,279 +90,352 @@ namespace ArrowEye_Automation_Portal.PageRepository
         private IWebElement BOCDynamicInfo_Print_button;
 
         [FindsBy(How = How.XPath, Using = "//input[@placeholder='Search…']")]
-        private IWebElement BOCDynamicInfo_AutoSearch_textbox;
+        private IWebElement FOCDynamicInfo_AutoSearch_textbox;
 
         [FindsBy(How = How.XPath, Using = "//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-irzi55']")]
         private IWebElement BOCDynamicInfo_AutoSearch_textboxclear;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='openModal']//p[contains(text(),'Add New')]")]
-        private IWebElement BOCDynamicInfo_AddNew_button;
+        private IWebElement FOCDynamicInfo_AddNew_button;
 
-        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='DeleteButton'])[position()=1]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'FOC Info ID')]")]
+        private IWebElement FOC_homepage_IDGridcol;
 
-        private IWebElement BOCDynamicInfo_Detete_Icon_button;
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'FOC Dynamic Text')]")]
+        private IWebElement FOC_homepage_FOCDynamicTextcol;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Last Updated')]")]
+        private IWebElement FOC_homepage_LastUpdatedcol;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Actions')]")]
+        private IWebElement FOCD_homepage_Actioncol;
+
+        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='deleteFocd'])[position()=1]")]
+
+        private IWebElement FOCDynamicInfo_Detete_Icon_button;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
 
-        private IWebElement BOCDynamicInfo_Detete_popup_Cancelbutton;
+        private IWebElement FOCDynamicInfo_Detete_popup_Cancelbutton;
 
-        [FindsBy(How = How.XPath, Using = "//h2[@class='MuiTypography-root MuiTypography-h6 MuiDialogTitle-root jss24 css-ohyacs' and contains(text(),'Delete')]")]
+        [FindsBy(How = How.XPath, Using = "//h2[contains(text(),'Delete')]")]
+        private IWebElement FOCDynamicInfo_Detete_popup_HeaderText;
 
-        private IWebElement BOCDynamicInfo_Detete_popup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiStack-root css-j7qwjs']")]
+        private IWebElement FOCDynamicInfo_Detete_popup_warningmessage;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss25 css-q3n577']")]
+        [FindsBy(How = How.XPath, Using = "(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall textPrimary css-1pydezi'])[2]")]
+        private IWebElement FOCDynamicInfo_Edit_Icon_button;
 
-        private IWebElement BOCDynamicInfo_Detete_popup_warningmessage;
-
-        [FindsBy(How = How.XPath, Using = "(//button[@data-testid='editIcon'])[position()=1]")]
-        private IWebElement BOCDynamicInfo_Edit_Icon_button;
-
-        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'New BOC Dynamic Info')]")]
-        private IWebElement NewBocDynamicInfoPopup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'New FOC Dynamic Info')]")]
+        private IWebElement NewFocDynamicInfoPopup_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeButton']")]
         private IWebElement NewBocDynamicInfoPopup_Closebtn;
 
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='nameInputField']")]
-        private IWebElement NewBocDynamicInfoPopup_Textbox;
+        private IWebElement NewFocDynamicInfoPopup_Textbox;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelCSP']")]
-        private IWebElement NewBocDynamicInfoPopup_Cancelbtn;
+        private IWebElement NewFocDynamicInfoPopup_Cancelbtn;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-qr1enj']")]
-        private IWebElement UpdateBocDynamicInfoPopup_IDField;
+        private IWebElement UpdateFocDynamicInfoPopup_IDField;
 
-        [FindsBy(How = How.XPath, Using = "//label[contains(text(),'BOC Dynamic Text')]")]
-        private IWebElement UpdateBocDynamicInfoPopup_BOCDynamicTextField;
+        [FindsBy(How = How.XPath, Using = "//label[text()='FOC Dynamic Text']")]
+        private IWebElement UpdateFocDynamicInfoPopup_FOCDynamicTextField;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss129 css-9l3uo3' and contains(text(),'Update FOC Dynamic Info')]")]
+        private IWebElement UpdateFocDynamicInfoPopup_HeaderText;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
-        private IWebElement DeleteBocDynamicInfoPopup_Cancelbtn;
+        private IWebElement DeleteFocDynamicInfoPopup_Cancelbtn;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']//p[contains(text(),'Delete')]")]
-        private IWebElement DeleteBocDynamicInfoPopup_Deletebtn;
+        private IWebElement DeleteFocDynamicInfoPopup_Deletebtn;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
-        private IWebElement DeleteBocDynamicInfoPopup_deletedrecorddetails;
+        private IWebElement DeleteFocDynamicInfoPopup_deletedrecorddetails;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
         private IWebElement Search_View_InvalidRecordDetails;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
-        private IWebElement NewBocDynamicInfoPopup_Savebtn;
+        private IWebElement NewFocDynamicInfoPopup_Savebtn;
 
         [FindsBy(How = How.XPath, Using = "//p[@id=':rkm:-helper-text' and contains(text(),'BOC Dynamic Text is required.')]")]
         private IWebElement NewBocDynamicInfoPopup_validationmessage;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='2'])[position()=1]")]
-        private IWebElement BocDynamicInfo_created;
+        private IWebElement FocDynamicInfo_created;
+
+        [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='1'])[position()=1]")]
+        private IWebElement FocDynamicInfo_created_ID;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='2'])[position()=1]")]
-        private IWebElement BocDynamicInfo_Updated;
+        private IWebElement FocDynamicInfo_Updated;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordAdd_sucessmessage;
+        private IWebElement FocDynamicInfo_recordAdd_sucessmessage;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-v7esy']")]
+        private IWebElement FocDynamicInfo_Addwithouttext_Error;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-v7esy']")]
+        private IWebElement FocDynamicInfo_Textinput_exceedcharlimit_error;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-error go167266335 go3651055292 go3162094071']//div[@id='notistack-snackbar']")]
+        private IWebElement FocDynamicInfo_Textinput_dublicaterecord_Error;
+
+        [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textRight'])[position()=1]")]
+        private IWebElement FocDynamicInfo_ID;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
         private IWebElement Toster_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordUpdate_sucessmessage;
+        private IWebElement FocDynamicInfo_recordUpdate_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
-        private IWebElement BocDynamicInfo_recordDelete_sucessmessage;
+        private IWebElement FocDynamicInfo_recordDelete_sucessmessage;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
-        private IWebElement BocDynamicInfo_Delete_popup_closebutton;
+        private IWebElement FocDynamicInfo_Delete_popup_closebutton;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeDelete']")]
         private IWebElement BocDynamicInfo_Delete_popup_Deletebutton;
 
-        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Update BOC Dynamic Info')]")]
-        private IWebElement Update_BOCInfo_popup_HeaderText;
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Update FOC Dynamic Info')]")]
+        private IWebElement Update_FOCInfo_popup_HeaderText;
 
         public void ValidatePageTitle()
         {
-            DriverUtil.IsElementPresent(BOCDynamicInfoPage_HeaderText);
+            DriverUtil.IsElementPresent(FOCDynamicInfoPage_HeaderText);
         }
 
-        public void ValidateNewIssuerDialogBox()
+        public void ValidateNewFOCDynamicInfoDialogBox()
         {
-            DriverUtil.IsElementPresent(NewBocDynamicInfoPopup_HeaderText);
+            DriverUtil.IsElementPresent(NewFocDynamicInfoPopup_HeaderText);
         }
 
+        public void FOCDynamicInfo_HomePage_GridcolParameters(Boolean FOCInfo_homepage_gridcolmns)
+        {
+           
+            if (FOC_homepage_IDGridcol.Displayed && FOC_homepage_FOCDynamicTextcol.Displayed && FOC_homepage_LastUpdatedcol.Displayed && FOCD_homepage_Actioncol.Displayed)
+            {
+                FOCInfo_homepage_gridcolmns = true;
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
         public void AddNewFOCDynamicInfo(string FOCDynamicText)
         {
-            //create new dynamic info record verify the add new popup details
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            var PopupHeaderText = NewBocDynamicInfoPopup_HeaderText.Text;
-            var PopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
-            var PopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
-            var PopupFOCDynamicTextField = NewBocDynamicInfoPopup_Savebtn.Text;
-            Browser.Click(NewBocDynamicInfoPopup_Cancelbtn);
-            Browser.Click(BOCDynamicInfo_AddNew_button);
+            //create new FOC dynamic info record verify the add new popup details
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            var PopupHeaderText = NewFocDynamicInfoPopup_HeaderText.Text;
+            var PopupCancelbuttonText = NewFocDynamicInfoPopup_Cancelbtn.Text;
+            var PopupsavebuttonText = NewFocDynamicInfoPopup_Savebtn.Text;
+            var PopupFOCDynamicTextField = NewFocDynamicInfoPopup_Textbox.Text;
+            Browser.Click(NewFocDynamicInfoPopup_Cancelbtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
             Browser.Click(NewBocDynamicInfoPopup_Closebtn);
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(FOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            NewFocDynamicInfoPopup_Textbox.SendKeys(FOCDynamicText.ToString());
+            var FOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            //CP_Pages.TosterMessage_wait();
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            var Add_FocDynamicInfo_SuccessMessage = FocDynamicInfo_recordAdd_sucessmessage.Text;
+            var FOCDynamicInfo_Id = FocDynamicInfo_ID.Text;
 
             //Search with newly created record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
+            var Created_FOCInfo_record_details = FocDynamicInfo_created.Text;
 
             //Validations
-            Assert.That(PopupHeaderText, Is.EqualTo("New BOC Dynamic Info"));
+            Assert.That(PopupHeaderText, Is.EqualTo("New FOC Dynamic Info"));
             Assert.That(PopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(PopupsavebuttonText, Is.EqualTo("SAVE"));
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
-            Assert.That(Created_BOCInfo_record_details, Does.Contain(BOCDynamicText_InputData));
+            Assert.That(Add_FocDynamicInfo_SuccessMessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " added Successfully."));
+            Assert.That(Created_FOCInfo_record_details, Does.Contain(FOCDynamicText_InputData));
         }
 
         public void EditFOCDynamicInfo(string UpdateFOCDynamicText)
         {
-            // THE WHOLE OF THE BELOW LINES 4 to 5 OF CODE MUST BE RELACED BY A "CREATE" API CALL ONCE THE APIs ARE READY
+           
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(UpdateFOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            NewFocDynamicInfoPopup_Textbox.SendKeys(UpdateFOCDynamicText.ToString());
+            var FOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            var Add_FocDynamicInfo_SuccessMessage = FocDynamicInfo_recordAdd_sucessmessage.Text;
+            var FOCDynamicInfo_Id = FocDynamicInfo_ID.Text;
 
             //search with newly added record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
 
 
             //click on Edit icon and verify the popup details and go for Edit
-            Browser.Click(BOCDynamicInfo_Edit_Icon_button);
-            var EditPopupTextboxfield = UpdateBocDynamicInfoPopup_BOCDynamicTextField.Text;
-            var EditPopupIdfield = UpdateBocDynamicInfoPopup_IDField.Text;
-            var EditPopupCancelbuttonText = NewBocDynamicInfoPopup_Cancelbtn.Text;
-            var EditPopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
-            var UpdateBOCInfo_popup_HeaderText = Update_BOCInfo_popup_HeaderText.Text;
-            NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData + "_Updated");
-            var updateBOCInfoExpectedUserData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            var updateBOCInfoIDfieldvalue = UpdateBocDynamicInfoPopup_IDField.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_Edit_Icon_button);
+            var EditPopupTextboxfield = UpdateFocDynamicInfoPopup_FOCDynamicTextField.Text;
+            var EditPopupIdfield = UpdateFocDynamicInfoPopup_IDField.Text;
+            var EditPopupCancelbuttonText = NewFocDynamicInfoPopup_Cancelbtn.Text;
+            var EditPopupsavebuttonText = NewFocDynamicInfoPopup_Savebtn.Text;
+            var UpdateFOCInfo_popup_HeaderText = Update_FOCInfo_popup_HeaderText.Text;
+            NewFocDynamicInfoPopup_Textbox.SendKeys(FOCDynamicText_InputData + "_Updated");
+            var updateFOCInfoExpectedUserData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            var updateFOCInfoIDfieldvalue = UpdateFocDynamicInfoPopup_IDField.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            var ActualBocDynmaicInfoUpdatesuccessmessage = BocDynamicInfo_recordUpdate_sucessmessage.Text;
+            var ActualFocDynmaicInfoUpdatesuccessmessage = FocDynamicInfo_recordUpdate_sucessmessage.Text;
 
             //after updated record search with same record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(updateBOCInfoExpectedUserData.ToString());
-            var UpdatedBocInfoActualData = BocDynamicInfo_Updated.Text;
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(updateFOCInfoExpectedUserData.ToString());
+            var UpdatedFocInfoActualData = FocDynamicInfo_Updated.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
-            Assert.That(EditPopupTextboxfield, Is.EqualTo("BOC Dynamic Text"));
+            Assert.That(Add_FocDynamicInfo_SuccessMessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " added Successfully."));
+            Assert.That(EditPopupTextboxfield, Is.EqualTo("FOC Dynamic Text"));
             Assert.That(EditPopupIdfield, Does.Contain("ID:"));
             Assert.That(EditPopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(EditPopupsavebuttonText, Is.EqualTo("SAVE"));
-            Assert.That(UpdateBOCInfo_popup_HeaderText, Is.EqualTo("Update BOC Dynamic Info"));
-            Assert.That(ActualBocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("BOC Dynamic Info  updated Successfully."));
-            Assert.That(UpdatedBocInfoActualData, Is.EqualTo(updateBOCInfoExpectedUserData));
+            Assert.That(UpdateFOCInfo_popup_HeaderText, Is.EqualTo("Update FOC Dynamic Info"));
+            Assert.That(ActualFocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("FOC Dynamic Info " + FOCDynamicInfo_Id + " updated Successfully."));
+            Assert.That(UpdatedFocInfoActualData, Is.EqualTo(updateFOCInfoExpectedUserData));
+
+
         }
 
 
         public void DeleteFOCDynamicInfo(string DeleteFOCDynamicText)
         {
-            // THE WHOLE OF THE BELOW LINES 4 to 5 OF CODE MUST BE RELACED BY A "CREATE" API CALL ONCE THE APIs ARE READY
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(DeleteFOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            NewFocDynamicInfoPopup_Textbox.SendKeys(DeleteFOCDynamicText.ToString());
+            var FOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            var Add_FocDynamicInfo_SuccessMessage = FocDynamicInfo_recordAdd_sucessmessage.Text;
+            var FOCDynamicInfo_Id = FocDynamicInfo_ID.Text;
 
             //search with newly added record
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
 
             //click on delete icon and verify the popup details and go for delete
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            var Deletepopup_headertext = BOCDynamicInfo_Detete_popup_HeaderText.Text;
-            var DeletePopupCancelbuttonText = DeleteBocDynamicInfoPopup_Cancelbtn.Text;
-            var DeletePopupDeletebuttonText = DeleteBocDynamicInfoPopup_Deletebtn.Text;
-            var Deletewarningmessage = BOCDynamicInfo_Detete_popup_warningmessage.Text;
-            Browser.Click(BocDynamicInfo_Delete_popup_closebutton);
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            Browser.Click(BOCDynamicInfo_Detete_popup_Cancelbutton);
-            Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            Browser.Click(DeleteBocDynamicInfoPopup_Deletebtn);
+            Browser.Click(FOCDynamicInfo_Detete_Icon_button);
+            var Deletepopup_headertext = FOCDynamicInfo_Detete_popup_HeaderText.Text;
+            var DeletePopupCancelbuttonText = DeleteFocDynamicInfoPopup_Cancelbtn.Text;
+            var DeletePopupDeletebuttonText = DeleteFocDynamicInfoPopup_Deletebtn.Text;
+            var Deletewarningmessage = FOCDynamicInfo_Detete_popup_warningmessage.Text;
+            var deleteexpectedwarningmessage = Deletewarningmessage.ToString();
+            Browser.Click(FocDynamicInfo_Delete_popup_closebutton);
+            Browser.Click(FOCDynamicInfo_Detete_Icon_button);
+            Browser.Click(FOCDynamicInfo_Detete_popup_Cancelbutton);
+            Browser.Click(FOCDynamicInfo_Detete_Icon_button);
+            Browser.Click(DeleteFocDynamicInfoPopup_Deletebtn);
             Thread.Sleep(4000);
-            var Actualdeletedrecordsuccessmessage = BocDynamicInfo_recordDelete_sucessmessage.Text;
+            var Actualdeletedrecordsuccessmessage = FocDynamicInfo_recordDelete_sucessmessage.Text;
 
             //after deleted record search with same record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var afterdeletedrecorddetails = DeleteBocDynamicInfoPopup_deletedrecorddetails.Text;
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
+            var afterdeletedrecorddetails = DeleteFocDynamicInfoPopup_deletedrecorddetails.Text;
 
+            
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
+            Assert.That(Add_FocDynamicInfo_SuccessMessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
             Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
-            Assert.That(Deletewarningmessage, Does.Contain("Are you sure you want to delete the \"BOC Dynamic Info \"?"));
-            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("BOC Dynamic Info deleted Successfully."));
+            Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
+            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " deleted Successfully."));
         }
 
         public void ViewandSearchFOCDynamicInfo(string ViewSearchFOCDynamicText)
         {
+            //verify the grid colomns displayed or not
+            FOCDynamicInfo_HomePage_GridcolParameters(true);
+
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(ViewSearchFOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            NewFocDynamicInfoPopup_Textbox.SendKeys(ViewSearchFOCDynamicText.ToString());
+            var BOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            var Add_BocDynamicInfo_SuccessMessage = FocDynamicInfo_recordAdd_sucessmessage.Text;
+            var FOCDynamicInfo_Id = FocDynamicInfo_ID.Text;
 
-            //search and view with Invalid  record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString() + "InvalidRecords_Search");
-            var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
+            //search and view with newly created record details with valid Text
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
+            var Search_withvalid_Text = FocDynamicInfo_created.Text;
 
-            //search and view with newly created record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            //search and view with newly created record details with Valid ID
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(FocDynamicInfo_ID.ToString());
+            var Search_Valid_Id = FocDynamicInfo_created_ID.Text;
+
+            //search and view with Invalid Text details
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData+"@#$%^&*(HG");
+            var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
+
+            //search and view with Invalid Id details
+            FOCDynamicInfo_AutoSearch_textbox.Clear();
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData + "1234");
+            var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
+
+
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
-            Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
-            Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
+            Assert.That(BOCDynamicText_InputData, Does.Contain(Search_withvalid_Text));
+            Assert.That(Search_Valid_Id, Is.EqualTo(FOCDynamicInfo_Id));
+            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
+            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
         }
 
 
         public void ValidationsFOCDynamicInfo(string NegativeScenariosFOCDynamicText)
         {
+
             //create new dynamic info record
-            Browser.Click(BOCDynamicInfo_AddNew_button);
-            NewBocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText.ToString());
-            var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewBocDynamicInfoPopup_Savebtn);
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            NewFocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText.ToString());
+            var BOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+           
+            //Scenario1 : Without Input text data
+            Browser.Click(FOCDynamicInfo_AddNew_button);
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
+            Thread.Sleep(4000);
+            var AddFOC_withoutText_ValidationMessage = FocDynamicInfo_Addwithouttext_Error.Text;
 
-            //search and view with Invalid  record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString() + "InvalidRecords_Search");
-            var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
+            //Scenario 2: Exceed TextBox input char limits
+            
+            //NewFocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText+"morethan100characters");
+            //Browser.Click(NewFocDynamicInfoPopup_Savebtn);
 
-            //search and view with newly created record details
-            BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-            var Created_BOCInfo_record_details = BocDynamicInfo_created.Text;
+            //Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
+            // var AddFOC_TextInput_ExceedLimit_ValidationMessage = FocDynamicInfo_Textinput_exceedcharlimit_error.Text;
+
+            //Scenario 3: Dublicate Record creates
+            NewFocDynamicInfoPopup_Textbox.Clear();
+            NewFocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData);
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
+            Thread.Sleep(2000);
+            var AddFOC_TextInput_dublicaterecord_ValidationMessage = FocDynamicInfo_Textinput_dublicaterecord_Error.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info  added Successfully."));
-            Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
-            Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
+            Assert.That(AddFOC_withoutText_ValidationMessage, Does.Contain("FOC Dynamic Text is required."));
+            //Assert.That(AddFOC_TextInput_ExceedLimit_ValidationMessage, Does.Contain("FOC dynamic info field must not exceed 100 characters"));
+            Assert.That(AddFOC_TextInput_dublicaterecord_ValidationMessage, Does.Contain("Sorry, Data validation failed.This FOC Dynamic Info already exists!"));
         }
     }
 }

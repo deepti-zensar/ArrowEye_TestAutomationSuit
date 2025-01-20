@@ -19,12 +19,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("FOC_Dynamic_Info_Create")]
         [Category("Smoke")]
         [TestCase("Automation_Create_Info_")]
-        public void Create_New_FOC_Dynamic_Info(string CreateBOCDynamicText)
+        public void Create_New_FOC_Dynamic_Info(string CreateFOCDynamicText)
         {
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
-            CP_Pages.FOCDynamicInfoPage.AddNewFOCDynamicInfo(CreateBOCDynamicText + randomString);
+            CP_Pages.FOCDynamicInfoPage.AddNewFOCDynamicInfo(CreateFOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -32,12 +32,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("FOC_Dynamic_Info_Edit")]
         [Category("Smoke")]
         [TestCase("Automation_Edit_Info_")]
-        public void Edit_FOC_Dynamic_Info(string UpdateBOCDynamicText)
+        public void Edit_FOC_Dynamic_Info(string UpdateFOCDynamicText)
         {
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
-            CP_Pages.FOCDynamicInfoPage.EditFOCDynamicInfo(UpdateBOCDynamicText + randomString);
+            CP_Pages.FOCDynamicInfoPage.EditFOCDynamicInfo(UpdateFOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -48,7 +48,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Delete_Info_")]
         public void Delete_FOC_Dynamic_Info(string DeleteBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.DeleteFOCDynamicInfo(DeleteBOCDynamicText + randomString);
@@ -61,8 +61,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Search_View_BOCDynamicInfo_")]
         public void View_Search_FOC_Dynamic_Info(string ViewSearchBOCDynamicText)
         {
-           
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.ViewandSearchFOCDynamicInfo(ViewSearchBOCDynamicText + randomString);
@@ -75,10 +75,11 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Negative_Scenarios")]
         public void Negative_Validations_FOC_Dynamic_Info(string ViewSearchBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+            string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE,50);
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
-            CP_Pages.FOCDynamicInfoPage.ValidationsFOCDynamicInfo(ViewSearchBOCDynamicText + randomString);
+            CP_Pages.FOCDynamicInfoPage.ValidationsFOCDynamicInfo(ViewSearchBOCDynamicText + randomStrings);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
     }

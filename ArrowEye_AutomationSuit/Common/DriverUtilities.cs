@@ -30,6 +30,7 @@ namespace ArrowEye_Automation_Framework.Common
         static private bool acceptNextAlert = true;
         static public IWebDriver driver;
 
+
         //static public string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH. mm.ss");
         /// <summary>
         /// This method returns the current dateTimeStamp

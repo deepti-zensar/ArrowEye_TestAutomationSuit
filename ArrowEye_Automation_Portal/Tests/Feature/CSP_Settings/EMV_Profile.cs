@@ -32,12 +32,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("EMVProfile_Update")]
         [Category("Smoke")]
         [TestCase("Automation_Edit_EMVProfile")]
-        public void Edit_EMVProfile(string UpdateBOCDynamicText)
+        public void Edit_EMVProfile(string UpdateEMVProfileText)
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
-            CP_Pages.EMVProfilePage.EditEMVProfile(UpdateBOCDynamicText + randomString);
+            CP_Pages.EMVProfilePage.EditEMVProfile(UpdateEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -46,12 +46,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("EMVProfile_Delete")]
         [Category("Smoke")]
         [TestCase("Automation_Delete_EMVProfile")]
-        public void Delete_EMVProfile(string DeleteBOCDynamicText)
+        public void Delete_EMVProfile(string DeleteEMVProfileText)
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
-            CP_Pages.EMVProfilePage.DeleteEMVProfile(DeleteBOCDynamicText + randomString);
+            CP_Pages.EMVProfilePage.DeleteEMVProfile(DeleteEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -59,12 +59,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("EMVProfile_Create")]
         [Category("Smoke")]
         [TestCase("Automation_Create_EMVProfile")]
-        public void View_Search_EMVProfile(string ViewSearchBOCDynamicText)
+        public void View_Search_EMVProfile(string ViewSearchEMVProfileText)
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
-            CP_Pages.EMVProfilePage.ViewandSearchEMVProfile(ViewSearchBOCDynamicText + randomString);
+            CP_Pages.EMVProfilePage.ViewandSearchEMVProfile(ViewSearchEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -73,12 +73,13 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [Description("EMVProfile_Negative_Scenarios_Validations")]
         [Category("Smoke")]
         [TestCase("Automation_Negative_Scenarios")]
-        public void Negative_Validations_EMVProfile(string InvalidInputsText)
+        public void Negative_Validations_EMVProfile(string Invalid_EMVProfile_InputsText)
         {
-            CP_Pages.Login.LogIn("test1", "Test@12345");
+            string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE,10);
+            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
-            CP_Pages.EMVProfilePage.ValidationsEMVProfile(InvalidInputsText + randomString);
+            CP_Pages.EMVProfilePage.ValidationsEMVProfile(Invalid_EMVProfile_InputsText + randomStrings);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
     }

@@ -157,7 +157,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
         private IWebElement DeleteFocDynamicInfoPopup_deletedrecorddetails;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1' and contains(text(),'No results found.')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlayWrapperInner css-0']//div[ contains(text(),'No results found.')]")]
         private IWebElement Search_View_InvalidRecordDetails;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
@@ -429,7 +429,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             NewFocDynamicInfoPopup_Textbox.Clear();
             NewFocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData);
             Browser.Click(NewFocDynamicInfoPopup_Savebtn);
-            Thread.Sleep(2000);
+            Thread.Sleep(4000);
             var AddFOC_TextInput_dublicaterecord_ValidationMessage = FocDynamicInfo_Textinput_dublicaterecord_Error.Text;
 
             //validations

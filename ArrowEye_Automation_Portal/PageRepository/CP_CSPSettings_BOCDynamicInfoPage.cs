@@ -141,7 +141,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1'][contains(text(),'No results found.')]")]
         private IWebElement DeleteBocDynamicInfoPopup_deletedrecorddetails;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlay css-14349d1']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-overlayWrapperInner css-0']//div[contains(text(),'No results found.')]")]
         private IWebElement Search_View_InvalidRecordDetails;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveCSP']")]
@@ -333,7 +333,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
             //search and view with Invalid  record details
             BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString()+"InvalidRecords_Search");
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(ViewSearchBOCDynamicText.ToString()+"InvalidRecords_Search");
+            Thread.Sleep(4000);
             var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
 
             //validations

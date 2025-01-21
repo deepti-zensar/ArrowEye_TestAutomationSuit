@@ -385,7 +385,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //search and view with Invalid Text details
             EMVProfile_AutoSearch_textbox.Clear();
             EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileText_InputData + "@#$%^&*(HG");
-            Thread.Sleep(6000);
+            Thread.Sleep(4000);
             var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
 
             //search and view with Invalid Id details

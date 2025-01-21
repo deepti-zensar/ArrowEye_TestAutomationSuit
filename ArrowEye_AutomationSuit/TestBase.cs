@@ -21,6 +21,7 @@ namespace ArrowEye_Automation_Framework
         [TearDown]
         public void TestTearDown()
         {
+           
             Browser.Close();
         }
 

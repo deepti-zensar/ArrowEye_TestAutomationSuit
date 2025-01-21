@@ -10,6 +10,7 @@ using NUnit.Framework;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using System.Drawing.Imaging;
 using System.Drawing;
 using System.IO;
 using System.Diagnostics;
@@ -19,14 +20,16 @@ using System.Reflection;
 using System.Security;
 using SeleniumExtras.WaitHelpers;
 
+
 namespace ArrowEye_Automation_Framework.Common
 {
-    public class DriverUtilities
+    public class DriverUtilities :TestBase
     {
         //static public string browser = ConfigurationManager.AppSettings["browser"].ToLower();
         static public string browser = "chrome";
         static private bool acceptNextAlert = true;
         static public IWebDriver driver;
+
 
         //static public string dateTimeStamp = DateTime.Now.ToString("yyyy-MM-dd HH. mm.ss");
         /// <summary>
@@ -758,23 +761,14 @@ namespace ArrowEye_Automation_Framework.Common
         {
 
             //Folder Name for saving screenshots
+            IWebDriver _dr = Browser._Driver;
             string screenshotFolderName = "Screenshots " + DateTime.Now.ToString("yyyy/MM/dd");
-
-            //Directory path for saving screenshots
-            //TEmporarily commenting path to make C:\ drive path default
-            //string directoryPath = @"..\..\..\" + screenshotFolderName;
-
-
-
             string directoryPath = screenshotBaseLocation + screenshotFolderName;
-
-
             if (Directory.Exists(directoryPath) == false)
             {
                 DirectoryInfo di = Directory.CreateDirectory(directoryPath);
 
             }
-
             //Screenshot path for returning the complete screenshot URL with its name
             string screnshotPath = Path.Combine(Directory.GetCurrentDirectory(), directoryPath + @"\");
 
@@ -787,27 +781,19 @@ namespace ArrowEye_Automation_Framework.Common
                 tcName = tcName.Substring(0, 50) + "...";
             }
 
-
             //Take Screenshot and save it @ specified location
             #region TakeScreenshotAndSaveIt
 
-
-            ITakesScreenshot screenshotDriver = driver as ITakesScreenshot;
-
-            Screenshot screenshot = screenshotDriver.GetScreenshot();
+            ITakesScreenshot screenshotDriver = _dr as ITakesScreenshot;
+            Screenshot screenshot = ((ITakesScreenshot)_dr).GetScreenshot();
 
             String fp = screnshotPath + tcName + "Screenshot" + "_" + DateTime.Now.ToString("yyyy_MM_dd_hh_mm_ss_tt") + ".png";
 
-            //screenshot.SaveAsFile(fp, ImageFormat.Png);
-
-            //screenshot.SaveAsFile(fp, ScreenshotImageFormat.Png);
-
-
+           screenshot.SaveAsFile(fp);
 
             #endregion
 
             #region Return screenshot path
-
 
             string machineName = System.Environment.MachineName.ToString();
             string fpWithHostName = "\\\\" + machineName + "\\" + fp;

@@ -36,6 +36,11 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_CSPSettings_BOCDynamicInfoPage>(); }
         }
 
+        public static CP_EMV_CardProfilesPage EMVCardProfilesPage
+        {
+            get { return GetPage<CP_EMV_CardProfilesPage>(); }
+        }
+
 
     }
 }

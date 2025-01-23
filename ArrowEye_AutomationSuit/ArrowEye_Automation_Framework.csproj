@@ -206,6 +206,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="API\APICommonMethods.cs" />
+    <Compile Include="API\API_EMV_Authentication.cs" />
     <Compile Include="API\Sample.cs" />
     <Compile Include="API\APICommon.cs" />
     <Compile Include="Common\AppNameHelper.cs" />

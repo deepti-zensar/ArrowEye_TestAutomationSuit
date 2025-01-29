@@ -187,7 +187,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="PageRepository\CP_CSPSettings_EMVProfilePage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
+    <Compile Include="PageRepository\CP_CSPSettings_FOCDynamicInfoPage.cs" />
     <Compile Include="PageRepository\CP_HomePage.cs" />
     <Compile Include="PageRepository\CP_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />
@@ -226,6 +228,7 @@
   <ItemGroup>
     <Folder Include="bin\Release\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Tests\Feature\HomePage\" />
     <Folder Include="Tests\Regression\" />
   </ItemGroup>
   <ItemGroup>

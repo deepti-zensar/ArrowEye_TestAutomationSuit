@@ -2,11 +2,16 @@
 using ArrowEye_Automation_Framework.Common;
 using OpenQA.Selenium;
 using System.Threading;
+using System.Collections.Generic;
+using ArrowEye_Automation_Framework;
+using System;
+using OpenQA.Selenium.Interactions;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
-    public class CP_HomePage
+    public class CP_HomePage :TestBase
     {
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
 
@@ -21,6 +26,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BOC Dynamic Info')]")]
         public IWebElement BOCDynamicInfo;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Card Holder Agreement')]")]
+        public IWebElement CardHolderAgreement;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Carrier Dynamic Info')]")]
+        public IWebElement CarrierDynamicInfo;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'EMV Profile')]")]
+        public IWebElement EMVProfile;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'FOC Dynamic Info')]")]
+        public IWebElement FOCDynamicInfo;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3' and contains(text(),'Issuers')]")]
         public IWebElement issuers;
@@ -38,6 +55,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var elemnetvisible = homePageTitle.Displayed;
         }
 
+        public void SubmenuItems_display(IWebElement element)
+        {
+            IWebDriver _dr = Browser._Driver;
+            element = _dr.FindElement(By.XPath("//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]"));
+            IWebElement listofsubmenuItems = _dr.FindElement(By.XPath("//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]"));
+            Actions abc= new Actions(_dr);
+            abc.MoveToElement(element);
+            abc.Click(listofsubmenuItems);
+            abc.Build().Perform();
+
+        }
+
         public void NavigateToIssuers()
         {
             Browser.Click(SearchOrSelect);
@@ -47,13 +76,45 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(issuers);
         }
 
-        public void NavigateToCSPSettings()
+        public void NavigateToCSPSettings(string CSPSetting_SubMenuName)
         {
             Browser.Click(SearchOrSelect);
             Browser.Click(AmazonPCL);
             Browser.Click(clientGallery);
             Browser.Click(CSPSettings);
-            Browser.Click(BOCDynamicInfo);
+            CSPSettings_SubmenuItems(true);
+            switch (CSPSetting_SubMenuName)
+            {
+                case "BOCDynamicInfo":
+                    Browser.Click(BOCDynamicInfo);
+                    break;
+                case "FOCDynamicInfo":
+                    Browser.Click(FOCDynamicInfo);
+                    break;
+                case "CardHolderAgreement":
+                    Browser.Click(CardHolderAgreement);
+                    break;
+                case "EMVProfile":
+                    Browser.Click(EMVProfile);
+                    break;
+                case "CarrierDynamicInfo":
+                    Browser.Click(CarrierDynamicInfo);
+                    break;
+            }
+        }
+
+
+        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+        {
+            Browser.Click(CSPSettings);
+            if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
+            {
+                CSPSetting_SubMenuName = true;
+            }
+            else
+            {
+                Browser.Close();
+            }
         }
 
         public void NavigateToEMV()
@@ -63,6 +124,5 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(clientGallery);
             Browser.Click(emv);            
         }
-
     }
 }

@@ -17,17 +17,18 @@ namespace ArrowEye_Automation_Framework.Common
         public IWebDriver WebDriver { get; set; }
         public string environmentURL { get; set; }
 
-        private static IWebDriver webDriver = new ChromeDriver();
+        private static IWebDriver webDriver;
 
         public Browser(IWebDriver webDriver)
         {
-            environmentURL = AppNameHelper.appBaseURL;
+            //environmentURL = AppNameHelper.appBaseURL;
             WebDriver = webDriver;
         }
 
         public static void Initialize()
         {
-            webDriver.Url = AppNameHelper.appBaseURL;
+            webDriver = new ChromeDriver();
+           webDriver.Url = AppNameHelper.appBaseURL;
             Thread.Sleep(5000);
             webDriver.Manage().Window.Maximize();
         }
@@ -66,8 +67,9 @@ namespace ArrowEye_Automation_Framework.Common
 
         public static void Close()
         {
-            webDriver.Close();
-            webDriver.Quit();
+            
+             webDriver.Close();
+            //webDriver.Quit();
         }
     }
 }

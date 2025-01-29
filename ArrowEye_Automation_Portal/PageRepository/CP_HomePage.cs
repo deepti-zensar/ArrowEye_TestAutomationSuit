@@ -69,7 +69,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public void NavigateToIssuers()
         {
             Browser.Click(SearchOrSelect);
-
             Browser.Click(AmazonPCL);
             Browser.Click(clientGallery);
             Browser.Click(emv);

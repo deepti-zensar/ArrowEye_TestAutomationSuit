@@ -4,10 +4,6 @@ using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using ArrowEye_Automation_Framework;
 using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
-using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.ClipRectangle;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -190,8 +186,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             DriverUtil.IsElementPresent(NewBocDynamicInfoPopup_HeaderText);
         }
 
-       
-
         public void AddNewBOCDynamicInfo(string BOCDynamicText)
         {
             //create new dynamic info record verify the add new popup details
@@ -207,8 +201,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var BOCDynamicText_InputData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
             Browser.Click(NewBocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-           //CP_Pages.TosterMessage_wait();
-           var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
+            //CP_Pages.TosterMessage_wait();
+            var Add_BocDynamicInfo_SuccessMessage = BocDynamicInfo_recordAdd_sucessmessage.Text;
             var BOCDynamicInfo_Id = BocDynamicInfo_ID.Text;
             //Search with newly created record
             BOCDynamicInfo_AutoSearch_textbox.Clear();
@@ -218,14 +212,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //Validations
             Assert.That(PopupHeaderText, Is.EqualTo("New BOC Dynamic Info"));
             Assert.That(PopupCancelbuttonText, Is.EqualTo("CANCEL"));
-            Assert.That(PopupsavebuttonText,Is.EqualTo("SAVE"));
-            Assert.That(Add_BocDynamicInfo_SuccessMessage,Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
+            Assert.That(PopupsavebuttonText, Is.EqualTo("SAVE"));
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " + BOCDynamicInfo_Id + " added Successfully."));
             Assert.That(Created_BOCInfo_record_details, Does.Contain(BOCDynamicText_InputData));
         }
 
         public void EditBOCDynamicInfo(string UpdateBOCDynamicText)
         {
-           
             //create new dynamic info record
             Browser.Click(BOCDynamicInfo_AddNew_button);
             NewBocDynamicInfoPopup_Textbox.SendKeys(UpdateBOCDynamicText.ToString());
@@ -237,7 +230,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //search with newly added record
             BOCDynamicInfo_AutoSearch_textbox.Clear();
             BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
-           
 
             //click on Edit icon and verify the popup details and go for Edit
             Browser.Click(BOCDynamicInfo_Edit_Icon_button);
@@ -247,8 +239,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var EditPopupsavebuttonText = NewBocDynamicInfoPopup_Savebtn.Text;
             var UpdateBOCInfo_popup_HeaderText = Update_BOCInfo_popup_HeaderText.Text;
             NewBocDynamicInfoPopup_Textbox.SendKeys(BOCDynamicText_InputData + "_Updated");
-            var updateBOCInfoExpectedUserData= NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            var updateBOCInfoIDfieldvalue= UpdateBocDynamicInfoPopup_IDField.GetDomAttribute("value");
+            var updateBOCInfoExpectedUserData = NewBocDynamicInfoPopup_Textbox.GetDomAttribute("value");
+            var updateBOCInfoIDfieldvalue = UpdateBocDynamicInfoPopup_IDField.GetDomAttribute("value");
             Browser.Click(NewBocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
             var ActualBocDynmaicInfoUpdatesuccessmessage = BocDynamicInfo_recordUpdate_sucessmessage.Text;
@@ -266,13 +258,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(EditPopupsavebuttonText, Is.EqualTo("SAVE"));
             Assert.That(UpdateBOCInfo_popup_HeaderText, Is.EqualTo("Update BOC Dynamic Info"));
             Assert.That(ActualBocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("BOC Dynamic Info " + BOCDynamicInfo_Id + " updated Successfully."));
-           Assert.That(UpdatedBocInfoActualData, Is.EqualTo(updateBOCInfoExpectedUserData));
+            Assert.That(UpdatedBocInfoActualData, Is.EqualTo(updateBOCInfoExpectedUserData));
         }
-
 
         public void DeleteBOCDynamicInfo(string DeleteBOCDynamicText)
         {
-           
             //create new dynamic info record
             Browser.Click(BOCDynamicInfo_AddNew_button);
             NewBocDynamicInfoPopup_Textbox.SendKeys(DeleteBOCDynamicText.ToString());
@@ -287,7 +277,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
             //click on delete icon and verify the popup details and go for delete
             Browser.Click(BOCDynamicInfo_Detete_Icon_button);
-            var Deletepopup_headertext=BOCDynamicInfo_Detete_popup_HeaderText.Text;
+            var Deletepopup_headertext = BOCDynamicInfo_Detete_popup_HeaderText.Text;
             var DeletePopupCancelbuttonText = DeleteBocDynamicInfoPopup_Cancelbtn.Text;
             var DeletePopupDeletebuttonText = DeleteBocDynamicInfoPopup_Deletebtn.Text;
             var Deletewarningmessage = BOCDynamicInfo_Detete_popup_warningmessage.Text;
@@ -304,15 +294,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
             BOCDynamicInfo_AutoSearch_textbox.Clear();
             BOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData.ToString());
             var afterdeletedrecorddetails = DeleteBocDynamicInfoPopup_deletedrecorddetails.Text;
-           
-            
+
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " + BOCDynamicInfo_Id + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
             Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
-            Assert.That(Deletewarningmessage,Does.Contain(deleteexpectedwarningmessage));
-            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " deleted Successfully."));
+            Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
+            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("BOC Dynamic Info " + BOCDynamicInfo_Id + " deleted Successfully."));
         }
 
         public void ViewandSearchBOCDynamicInfo(string ViewSearchBOCDynamicText)
@@ -333,12 +322,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
             //search and view with Invalid  record details
             BOCDynamicInfo_AutoSearch_textbox.Clear();
-            BOCDynamicInfo_AutoSearch_textbox.SendKeys(ViewSearchBOCDynamicText.ToString()+"InvalidRecords_Search");
+            BOCDynamicInfo_AutoSearch_textbox.SendKeys(ViewSearchBOCDynamicText.ToString() + "InvalidRecords_Search");
             Thread.Sleep(4000);
             var invalidsearchresult = Search_View_InvalidRecordDetails.Text;
 
             //validations
-            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " +BOCDynamicInfo_Id+ " added Successfully."));
+            Assert.That(Add_BocDynamicInfo_SuccessMessage, Does.Contain("BOC Dynamic Info " + BOCDynamicInfo_Id + " added Successfully."));
             Assert.That(invalidsearchresult, Is.EqualTo("No results found."));
             Assert.That(BOCDynamicText_InputData, Does.Contain(Created_BOCInfo_record_details));
         }

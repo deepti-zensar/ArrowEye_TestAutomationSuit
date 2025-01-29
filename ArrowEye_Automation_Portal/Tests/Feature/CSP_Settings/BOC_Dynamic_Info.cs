@@ -36,7 +36,6 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
-
         [Test]
         [Description("BOC_Dynamic_Info_Delete")]
         [Category("Smoke")]

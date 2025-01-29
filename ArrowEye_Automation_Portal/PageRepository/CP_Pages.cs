@@ -30,9 +30,9 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_HomePage>(); }
         }
 
-        public static CP_IssuersPage IssuersPage
+        public static CP_EMV_IssuersPage EMVIssuersPage
         {
-            get { return GetPage<CP_IssuersPage>(); }
+            get { return GetPage<CP_EMV_IssuersPage>(); }
         }
 
         public static CP_CSPSettings_BOCDynamicInfoPage BOCDynamicInfoPage

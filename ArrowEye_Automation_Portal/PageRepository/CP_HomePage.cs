@@ -48,6 +48,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
         public IWebElement AmazonPCL;
 
+
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
@@ -116,7 +117,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-
-
+        public void NavigateToEMV()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(emv);            
+        }
     }
 }

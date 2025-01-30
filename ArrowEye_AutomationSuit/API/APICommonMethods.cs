@@ -4,14 +4,14 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using ArrowEye_Automation_Framework.Common;
 using RestSharp;
 using RestSharp.Authenticators;
 namespace ArrowEye_Automation_Framework.API
 {
     public class APICommonMethods
     {
-        public static string APItoken= "eyJraWQiOiJaTGJkVTczTk9YZEZCU29CZE13eWtyOTZaT2xSSWFHRWJlZGN4XC8yb2p0Zz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4MTA3YWRhOS04YTRjLTQ1NTYtOTM3Yy1lMjI2ZGRiMDhkZjMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tXC91cy13ZXN0LTJfM3p4Zk1GempvIiwiY29nbml0bzp1c2VybmFtZSI6InNiYWJ1IiwiYXVkIjoiMWZmNDFnaDVhaWp2OTA0amJubzMxNzU5MzEiLCJldmVudF9pZCI6ImYzOTJhNDlmLTUyOTQtNGM3Yy05Zjg3LWFjZjg4NzMzZTBkZSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzM3NjEzOTA5LCJuYW1lIjoiIFN1ZGFyc2hhbiBCYWJ1IFNlZ2dhcmkiLCJleHAiOjE3Mzc3MDAzMDksImlhdCI6MTczNzYxMzkwOSwiZW1haWwiOiJzLnN1ZGFyc2hhbkB6ZW5zYXIuY29tIn0.JlH7gAYBk7JbHIrQcHFYRXf7g_3dhbo3unaM01K6XWQkDFWxOAfA7xTE6hDF43ojMsq1OTQ0LsOHxD5_NCjQWFlxrz5t4CLVbhztGjbLDj_T5zbcxlamb0VhHHaswWk4pgtcJtjniQyiiLGasvdB7bGmKkLoRaJmn7w48Pgyx7VxdxTN5775gk4xPuQueYaDE2xL4IjoBTRf82JvdYK9bhcx1kUHF996Q8dzwv1udBKkIeOhcl0tIefZ_oaO1hlChUOXeC0IE-IS8sBcjUFjgOun0Y2Z4zYsg_zZugp0vA-coYtO3sWIBor-jypeYuDnVXtAcTWwNjPMTaDG5MJ89A";
-        
+        //public static string APItoken= "eyJraWQiOiJaTGJkVTczTk9YZEZCU29CZE13eWtyOTZaT2xSSWFHRWJlZGN4XC8yb2p0Zz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI4MTA3YWRhOS04YTRjLTQ1NTYtOTM3Yy1lMjI2ZGRiMDhkZjMiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLXdlc3QtMi5hbWF6b25hd3MuY29tXC91cy13ZXN0LTJfM3p4Zk1GempvIiwiY29nbml0bzp1c2VybmFtZSI6InNiYWJ1IiwiYXVkIjoiMWZmNDFnaDVhaWp2OTA0amJubzMxNzU5MzEiLCJldmVudF9pZCI6IjgwMWY5NGVhLTFjMWItNDRlZS05YWZmLTMzMGI4YzAwYTdlYiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNzM3NzA1MDI3LCJuYW1lIjoiIFN1ZGFyc2hhbiBCYWJ1IFNlZ2dhcmkiLCJleHAiOjE3Mzc3OTE0MjcsImlhdCI6MTczNzcwNTAyNywiZW1haWwiOiJzLnN1ZGFyc2hhbkB6ZW5zYXIuY29tIn0.UGAKY-dj9OEd3-O4MRlvhVo5B9dH8Za97xiDUYy23Hx8WPn5qaBf1wK0Oi3lmHc1_w8vMSgSJbkqEyVYw_IJbSs2ZF8q12dXzY7aFwv5Lv98S2hm33swkbNMzEVLXTlSbhY4LlVOpLi6bpCSUHnUhs1EJwAPoO7V7b9qmzsc_h6mDY18Z0oRNUZBK8O5nHqNmwgMracxI7far5calqwzc7JOdZefVtCrPXNgbvp_udsk4xmtRkOddncw0ITUI1n4pOuSxeFWCwcf5PzfsmXtfX-7-0Xkx1PjcGF4c_WtMUbhslH92MR1STLW5QzMIanYoxWAEO82t4WGjW1DYJOT7A";        
         //Get
         static public IRestResponse ResponseFromGETrequest(string baseURL,string resourceAndQuery)
         {
@@ -25,7 +25,7 @@ namespace ArrowEye_Automation_Framework.API
             var request = new RestRequest(Method.GET);
             request.Resource = resourceAndQuery;
             //APItoken = APIConstants.APItoken;
-            request.AddHeader("Authorization", "Bearer "+APItoken);
+            request.AddHeader("Authorization", "Bearer "+ AppNameHelper.apiToken);
             request.AddHeader("content-type", "application/json");
             return request;
         }
@@ -38,8 +38,7 @@ namespace ArrowEye_Automation_Framework.API
             return client;
         }
 
-        //Post 
-        
+        //Post      
         static public IRestResponse ResponseFromPostRequest(string baseURL, string resourceAndQuery, string json)
         {
 
@@ -53,7 +52,7 @@ namespace ArrowEye_Automation_Framework.API
 
             var request = new RestRequest(Method.POST);
             request.Resource = resourceAndQuery;
-            request.AddHeader("Authorization","Bearer "+APItoken);
+            request.AddHeader("Authorization","Bearer "+AppNameHelper.apiToken);
             request.AddHeader("content-type", "application/json");
             request.AddParameter("application/json", json, ParameterType.RequestBody);
             return request;
@@ -72,7 +71,7 @@ namespace ArrowEye_Automation_Framework.API
             var request = new RestRequest(Method.PUT);
             request.Resource = resource;
             request.AddHeader("content-type", "application/json");
-            request.AddHeader("Authorization", "Bearer " + APItoken);
+            request.AddHeader("Authorization", "Bearer " + AppNameHelper.apiToken);
             request.AddParameter("application/json", jsonString, ParameterType.RequestBody);           
             return request;
         }
@@ -90,7 +89,7 @@ namespace ArrowEye_Automation_Framework.API
         {
             var request = new RestRequest(Method.DELETE);
             request.Resource = resource;
-            request.AddHeader("Authorization", "Bearer " + APItoken);
+            request.AddHeader("Authorization", "Bearer " + AppNameHelper.apiToken);
             request.AddHeader("content-type", "application/json");
             request.AddParameter("application/json", jsonString, ParameterType.RequestBody);
             return request;

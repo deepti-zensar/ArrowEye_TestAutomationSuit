@@ -9,6 +9,7 @@ using RandomString4Net;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Extensions = ArrowEye_Automation_Framework.Common.Extensions;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -296,26 +297,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(emvCardProfilesExport);
             Browser.Click(downloadCSV);
             Thread.Sleep(4000);
-            bool fileStatus = IsFileDownloaded(fileName);
+            bool fileStatus = Extensions.IsFileDownloaded(fileName);            
             Assert.That(fileStatus, Is.True);
         }
 
-        //To check is File downloaded
-        public bool IsFileDownloaded(string fileName)
-        {
-            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathDownload = Path.Combine(pathUser, "Downloads");
-            DirectoryInfo downloadDir = new DirectoryInfo(pathDownload);
-            var dirContents = downloadDir.GetFiles();
-            foreach (var file in dirContents)
-            {
-                if (file.Name.Equals(fileName))
-                {
-                    file.Delete();
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

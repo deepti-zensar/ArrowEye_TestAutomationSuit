@@ -11,7 +11,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
 {
     public class Card_Profiles : TestBase
     {
-        string randomString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5);
+        public string getRandomString()
+        {
+            return RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5); ;
+        }
 
         [Test]
         [Description("EMV_CardProfiles_Create")]
@@ -24,7 +27,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToEMVSubmenu("Card Profiles");
-            CP_Pages.EMVCardProfilesPage.AddNewCardProfiles(name + randomString,issuer, date);
+            CP_Pages.EMVCardProfilesPage.AddNewCardProfiles(name + getRandomString(), issuer, date);
             //DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -37,7 +40,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToEMVSubmenu("Card Profiles");
-            CP_Pages.EMVCardProfilesPage.ValidateCalendarDropdown(name + randomString);
+            CP_Pages.EMVCardProfilesPage.ValidateCalendarDropdown(name + getRandomString());
             //DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -50,7 +53,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToEMVSubmenu("Card Profiles");
-            CP_Pages.EMVCardProfilesPage.EditCardProfiles(name + randomString, issuer, date, newIssuer);
+            CP_Pages.EMVCardProfilesPage.EditCardProfiles(name + getRandomString(), issuer, date, newIssuer);
             //DriverUtilities.TakeScreenshot(@"C:\");
         }
 

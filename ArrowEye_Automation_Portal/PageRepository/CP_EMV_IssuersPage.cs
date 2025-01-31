@@ -9,6 +9,7 @@ using RandomString4Net;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Extensions = ArrowEye_Automation_Framework.Common.Extensions;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -157,11 +158,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(addNewIssuer);
             ValidateNewIssuerDialogBox();
             Browser.Click(cancelButton);
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             Browser.Click(addNewIssuer);
             FillEMVIssuerDetails(name, cpv, appPath, notes);
             Browser.Click(saveButton);
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
 
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
@@ -287,6 +288,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         {
             List<string> expectedListOfOptions = new List<string>(listOfOptions);
             List<string> actualListOfOptions= new List<string>();
+            Thread.Sleep(2000);
             foreach (IWebElement actualOption in emvOptions)
             {
                 actualListOfOptions.Add(actualOption.Text);
@@ -312,26 +314,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(emvIssuerExport);
             Browser.Click(downloadCSV);
             Thread.Sleep(4000);
-            bool fileStatus=IsFileDownloaded(fileName);
+            bool fileStatus = Extensions.IsFileDownloaded(fileName);
             Assert.That(fileStatus,Is.True);
-        }
-
-        //To check is File downloaded
-        public bool IsFileDownloaded(string fileName)
-        {
-            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathDownload = Path.Combine(pathUser, "Downloads");
-            DirectoryInfo downloadDir = new DirectoryInfo(pathDownload);
-            var dirContents = downloadDir.GetFiles();
-            foreach (var file in dirContents)
-            {
-                if (file.Name.Equals(fileName))
-                {
-                    file.Delete();
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

@@ -41,6 +41,15 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_EMV_CardProfilesPage>(); }
         }
 
+        public static CP_EMV_ModulesPage EMVModulesPage
+        {
+            get { return GetPage<CP_EMV_ModulesPage>(); }
+        }
+
+        public static CP_EMV_ConfigurationsPage EMVConfigurationsPage
+        {
+            get { return GetPage<CP_EMV_ConfigurationsPage>(); }
+        }
 
     }
 }

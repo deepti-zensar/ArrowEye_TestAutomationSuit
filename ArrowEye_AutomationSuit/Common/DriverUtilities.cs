@@ -553,6 +553,12 @@ namespace ArrowEye_Automation_Framework.Common
 
         }
 
+        public static void Click(IWebElement element)
+        {
+            Thread.Sleep(3000);
+            element.Click();
+        }
+
         static public IWebElement FindElement(By locator)
         {
             IWebElement element = driver.FindElement(locator);
@@ -1450,8 +1456,11 @@ namespace ArrowEye_Automation_Framework.Common
             jse.ExecuteScript("arguments[0].scrollIntoView(true);", element);
 
         }
-        
+
+        public static void clearText(IWebElement element)
+        {
+            element.SendKeys(OpenQA.Selenium.Keys.Control + "a");  // Select all text
+            element.SendKeys(OpenQA.Selenium.Keys.Backspace);
+        }
     }
-
-
 }

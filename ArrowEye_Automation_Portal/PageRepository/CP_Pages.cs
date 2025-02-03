@@ -29,12 +29,7 @@ namespace ArrowEye_Automation_Portal
         {
             get { return GetPage<CP_HomePage>(); }
         }
-
-        public static CP_IssuersPage IssuersPage
-        {
-            get { return GetPage<CP_IssuersPage>(); }
-        }
-
+        
         public static CP_CSPSettings_BOCDynamicInfoPage BOCDynamicInfoPage
         {
             get { return GetPage<CP_CSPSettings_BOCDynamicInfoPage>(); }
@@ -48,6 +43,26 @@ namespace ArrowEye_Automation_Portal
         public static CP_CSPSettings_EMVProfilePage EMVProfilePage
         {
             get { return GetPage<CP_CSPSettings_EMVProfilePage>(); }
+        }
+
+        public static CP_EMV_IssuersPage EMVIssuersPage
+        {
+            get { return GetPage<CP_EMV_IssuersPage>(); }
+        }
+
+        public static CP_EMV_CardProfilesPage EMVCardProfilesPage
+        {
+            get { return GetPage<CP_EMV_CardProfilesPage>(); }
+        }
+
+        public static CP_EMV_ModulesPage EMVModulesPage
+        {
+            get { return GetPage<CP_EMV_ModulesPage>(); }
+        }
+
+        public static CP_EMV_ConfigurationsPage EMVConfigurationsPage
+        {
+            get { return GetPage<CP_EMV_ConfigurationsPage>(); }
         }
 
         public static void TosterMessage_wait()

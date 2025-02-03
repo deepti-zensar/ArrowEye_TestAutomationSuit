@@ -48,6 +48,24 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
         public IWebElement AmazonPCL;
 
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Issuers')]")]
+        public IWebElement emvIssuers;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Authentications')]")]
+        public IWebElement emvAuthentications;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Card Profiles')]")]
+        public IWebElement emvCardProfiles;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Configurations')]")]
+        public IWebElement emvConfigurations;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Scripts')]")]
+        public IWebElement emvScripts;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Modules')]")]
+        public IWebElement emvModules;
+
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
@@ -116,7 +134,39 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
+        public void NavigateToEMV()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(emv);
+        }
 
+        public void NavigateToEMVSubmenu(string emvSubmenu)
+        {
+            NavigateToEMV();
+            switch (emvSubmenu)
+            {
+                case "Authentications":
+                    Browser.Click(emvAuthentications);
+                    break;
+                case "Card Profiles":
+                    Browser.Click(emvCardProfiles);
+                    break;
+                case "Configurations":
+                    Browser.Click(emvConfigurations);
+                    break;
+                case "Issuers":
+                    Browser.Click(emvIssuers);
+                    break;
+                case "Scripts":
+                    Browser.Click(emvScripts);
+                    break;
+                case "Modules":
+                    Browser.Click(emvModules);
+                    break;
+            }
+        }
 
     }
 }

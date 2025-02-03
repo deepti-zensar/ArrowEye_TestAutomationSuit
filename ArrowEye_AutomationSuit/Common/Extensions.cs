@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
 using NLog;
+using System.IO;
 
 namespace ArrowEye_Automation_Framework.Common
 {
@@ -362,8 +363,24 @@ namespace ArrowEye_Automation_Framework.Common
 
         }
 
+        //To check file is downloaded and then delete it
+        public static bool IsFileDownloaded(string fileName)
+        {
+            string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string pathDownload = Path.Combine(pathUser, "Downloads");
+            DirectoryInfo downloadDir = new DirectoryInfo(pathDownload);
+            var dirContents = downloadDir.GetFiles();
+            foreach (var file in dirContents)
+            {
+                if (file.Name.Equals(fileName))
+                {
+                    file.Delete();
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        
 
 
     }

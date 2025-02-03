@@ -190,8 +190,11 @@
     <Compile Include="PageRepository\CP_CSPSettings_EMVProfilePage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_FOCDynamicInfoPage.cs" />
+    <Compile Include="PageRepository\CP_EMV_CardProfilesPage.cs" />
+    <Compile Include="PageRepository\CP_EMV_ConfigurationsPage.cs" />
+    <Compile Include="PageRepository\CP_EMV_IssuersPage.cs" />
+    <Compile Include="PageRepository\CP_EMV_ModulesPage.cs" />
     <Compile Include="PageRepository\CP_HomePage.cs" />
-    <Compile Include="PageRepository\CP_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

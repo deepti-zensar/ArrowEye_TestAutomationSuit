@@ -4,19 +4,12 @@ using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using ArrowEye_Automation_Framework;
 using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System;
-using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.ClipRectangle;
-using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
-    
-
     public class CP_CSPSettings_EMVProfilePage : TestBase
     {
-
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]")]
         public IWebElement CSVSettings_menu;
 
@@ -103,7 +96,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Name')]")]
         private IWebElement EMVProfile__homepage_Name;
-
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap' and contains(text(),'Actions')]")]
         private IWebElement EMVProfile__homepage_Actioncol;
@@ -218,7 +210,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void EMVProfile_HomePage_GridcolParameters(Boolean EMVProfile_homepage_gridcolmns)
         {
-
             if (EMVProfile_homepage_IDGridcol.Displayed && EMVProfile__homepage_Name.Displayed && EMVProfile__homepage_Actioncol.Displayed)
             {
                 EMVProfile_homepage_gridcolmns = true;
@@ -256,14 +247,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(PopupHeaderText, Is.EqualTo("New EMV Profile"));
             Assert.That(PopupCancelbuttonText, Is.EqualTo("CANCEL"));
             Assert.That(PopupsavebuttonText, Is.EqualTo("SAVE"));
-            
+
             Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfileId + " added Successfully."));
             Assert.That(Created_EMVProfile_record_details, Does.Contain(EMVProfileText_InputData));
         }
 
         public void EditEMVProfile(string UpdateEMVProfileText)
         {
-
             //create new dynamic info record
             Browser.Click(EMVProfile_AddNew_button);
             NewEMVProfilePopup_Textbox.SendKeys(UpdateEMVProfileText.ToString());
@@ -306,10 +296,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(UpdateEMVProfile_popup_HeaderText, Is.EqualTo("Update EMV Profile"));
             Assert.That(ActualEMVProfileUpdatesuccessmessage, Is.EqualTo("EMV Profile " + EMVProfileId + " updated Successfully."));
             Assert.That(UpdatedEMVProfileActualData, Is.EqualTo(updateEMVProfileExpectedUserData));
-
-
         }
-
 
         public void DeleteEMVProfile(string DeleteEMVProfileText)
         {
@@ -347,7 +334,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             EMVProfile_AutoSearch_textbox.SendKeys(EMVProfileId.ToString());
             var afterdeletedrecorddetails = DeleteEMVProfilePopup_deletedrecorddetails.Text;
 
-
             //validations
             Assert.That(Add_NewEMVProfile_SuccessMessage, Does.Contain("EMV Profile " + EMVProfileId + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
@@ -355,7 +341,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
             Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
             Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("EMV Profile " + EMVProfileId + " deleted Successfully."));
-            
         }
 
         public void ViewandSearchEMVProfile(string ViewSearchFOCDynamicText)
@@ -400,10 +385,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
         }
 
-
         public void ValidationsEMVProfile(string NegativeScenariosEMVProfileText)
         {
-
             //create new dynamic info record
             Browser.Click(EMVProfile_AddNew_button);
             NewEMVProfilePopup_Textbox.SendKeys(NegativeScenariosEMVProfileText.ToString());
@@ -418,10 +401,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var AddEMVProfile_withoutText_ValidationMessage = EMVProfile_Addwithouttext_Error.Text;
 
             // //Scenario 2: Exceed Name TextBox input char limits
-            // NewEMVProfilePopup_Textbox.SendKeys(NegativeScenariosEMVProfileText + "morethan100characters");
-            // Browser.Click(NewEMVProfilePopup_Savebtn);
-            ////Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
-            //  var EMVProfile_TextInput_ExceedLimit_ValidationMessage = EMVProfile_Textinput_exceedcharlimit_error.Text;
+            NewEMVProfilePopup_Textbox.SendKeys(NegativeScenariosEMVProfileText + "morethan100characters");
+            Browser.Click(NewEMVProfilePopup_Savebtn);
+            //Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
+            var EMVProfile_TextInput_ExceedLimit_ValidationMessage = EMVProfile_Textinput_exceedcharlimit_error.Text;
 
             //Scenario 3: Dublicate Record creates
             NewEMVProfilePopup_Textbox.Clear();

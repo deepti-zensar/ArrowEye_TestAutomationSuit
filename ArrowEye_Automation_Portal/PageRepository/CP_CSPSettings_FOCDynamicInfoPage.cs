@@ -4,13 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
-using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -220,7 +214,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void FOCDynamicInfo_HomePage_GridcolParameters(Boolean FOCInfo_homepage_gridcolmns)
         {
-           
+
             if (FOC_homepage_IDGridcol.Displayed && FOC_homepage_FOCDynamicTextcol.Displayed && FOC_homepage_LastUpdatedcol.Displayed && FOCD_homepage_Actioncol.Displayed)
             {
                 FOCInfo_homepage_gridcolmns = true;
@@ -264,7 +258,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void EditFOCDynamicInfo(string UpdateFOCDynamicText)
         {
-           
+
             //create new dynamic info record
             Browser.Click(FOCDynamicInfo_AddNew_button);
             NewFocDynamicInfoPopup_Textbox.SendKeys(UpdateFOCDynamicText.ToString());
@@ -347,7 +341,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
             var afterdeletedrecorddetails = DeleteFocDynamicInfoPopup_deletedrecorddetails.Text;
 
-            
+
             //validations
             Assert.That(Add_FocDynamicInfo_SuccessMessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
@@ -383,7 +377,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
             //search and view with Invalid Text details
             FOCDynamicInfo_AutoSearch_textbox.Clear();
-            FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData+"@#$%^&*(HG");
+            FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData + "@#$%^&*(HG");
             var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
 
             //search and view with Invalid Id details
@@ -410,7 +404,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var BOCDynamicText_InputData = NewFocDynamicInfoPopup_Textbox.GetDomAttribute("value");
             Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-           
+
             //Scenario1 : Without Input text data
             Browser.Click(FOCDynamicInfo_AddNew_button);
             Browser.Click(NewFocDynamicInfoPopup_Savebtn);
@@ -418,12 +412,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var AddFOC_withoutText_ValidationMessage = FocDynamicInfo_Addwithouttext_Error.Text;
 
             //Scenario 2: Exceed TextBox input char limits
-            
-            //NewFocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText+"morethan100characters");
-            //Browser.Click(NewFocDynamicInfoPopup_Savebtn);
-
+            NewFocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText + "morethan100characters");
+            Browser.Click(NewFocDynamicInfoPopup_Savebtn);
             //Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
-            // var AddFOC_TextInput_ExceedLimit_ValidationMessage = FocDynamicInfo_Textinput_exceedcharlimit_error.Text;
+            var AddFOC_TextInput_ExceedLimit_ValidationMessage = FocDynamicInfo_Textinput_exceedcharlimit_error.Text;
 
             //Scenario 3: Dublicate Record creates
             NewFocDynamicInfoPopup_Textbox.Clear();

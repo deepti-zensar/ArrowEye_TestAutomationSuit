@@ -65,6 +65,16 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_EMV_ConfigurationsPage>(); }
         }
 
+        public static CP_ClientSettings_DefaultProofReplacementsPage DefaultProofReplacementsPage
+        {
+            get { return GetPage<CP_ClientSettings_DefaultProofReplacementsPage>(); }
+        }
+
+        public static CP_ConfigurationHierarchyPage ConfigurationHierarchyPage
+        {
+            get { return GetPage<CP_ConfigurationHierarchyPage>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

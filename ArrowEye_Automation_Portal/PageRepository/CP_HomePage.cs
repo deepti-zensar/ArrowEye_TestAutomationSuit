@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ArrowEye_Automation_Framework;
 using System;
 using OpenQA.Selenium.Interactions;
+using static OpenQA.Selenium.BiDi.Modules.Script.RemoteValue;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -66,6 +67,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Modules')]")]
         public IWebElement emvModules;
 
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Settings')]")]
+        public IWebElement clientSettings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Default Proof Replacements')]")]
+        public IWebElement clientSettingsDefaultProofReplacements;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Configuration Hierarchy')]")]
+        public IWebElement configurationHierarchy;
+
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
@@ -121,7 +131,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
 
 
-        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+        public void CSPSettings_SubmenuItems(System.Boolean CSPSetting_SubMenuName)
         {
             Browser.Click(CSPSettings);
             if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
@@ -165,6 +175,39 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 case "Modules":
                     Browser.Click(emvModules);
                     break;
+            }
+        }
+        public void NavigateToClientSettings()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(clientSettings);
+        }
+
+        public void NavigateToClientSettingsSubmenu(string emvSubmenu)
+        {
+            NavigateToClientSettings();
+            switch (emvSubmenu)
+            {
+                case "Default Proof Replacements":
+                    Browser.Click(clientSettingsDefaultProofReplacements);
+                    break;
+               
+            }
+        }
+
+        public void NavigateToMenu(string menu)
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            switch (menu)
+            {
+                case "Configuration Hierarchy":
+                    Browser.Click(configurationHierarchy);
+                    break;
+                
             }
         }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
 {
-    internal class FOC_Dynamic_Info : TestBase
+    public class FOC_Dynamic_Info : TestBase
     {
         string randomString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10);
        

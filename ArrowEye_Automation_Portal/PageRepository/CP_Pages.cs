@@ -60,6 +60,12 @@ namespace ArrowEye_Automation_Portal
         {
             get { return GetPage<CP_ClientSettings_BankIdNumbersPage>(); }
         }
+
+        public static CP_CSPSettings_CardHolderAgreementPage CardHolderAgreement
+
+        {
+            get { return GetPage<CP_CSPSettings_CardHolderAgreementPage>(); }
+        }
         public static void TosterMessage_wait()
         {
 

@@ -188,6 +188,7 @@
   <ItemGroup>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="PageRepository\CP_ClientSettings_BankIdNumbersPage.cs" />
+    <Compile Include="PageRepository\CP_CSPSettings_CardHolderAgreementPage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_EMVProfilePage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_CarrierDynamicInfoPage.cs" />

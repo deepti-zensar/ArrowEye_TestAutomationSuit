@@ -137,7 +137,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(configurationHierarchyText.Text, Is.EqualTo("Configuration Hierarchy"));
         }       
 
-
         // To Search record by replacement value
         public void SearchProofReplacement(string replacementValue)
         {

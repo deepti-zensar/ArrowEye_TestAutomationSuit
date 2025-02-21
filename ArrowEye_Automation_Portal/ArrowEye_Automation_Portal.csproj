@@ -187,6 +187,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="PageRepository\CP_ClientSettings_MagTrackEncodingsPage.cs" />
+    <Compile Include="PageRepository\CP_Products_PinMailersPage.cs" />
     <Compile Include="PageRepository\CP_ConfigurationHierarchyPage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_EMVProfilePage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_BOCDynamicInfoPage.cs" />
@@ -200,6 +202,7 @@
     <Compile Include="PageRepository\CP_LoginPage.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Feature\Client_Settings\MagTrackEncodings.cs" />
     <Compile Include="Tests\Feature\Client_Settings\DefaultProofReplacements.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\BOC_Dynamic_Info.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\Card_Holder_Agreement.cs" />
@@ -207,13 +210,16 @@
     <Compile Include="Tests\Feature\CSP_Settings\EMV_Profile.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\FOC_Dynamic_Info.cs" />
     <Compile Include="Tests\Feature\ConfigurationHierarchy.cs" />
+    <Compile Include="Tests\Feature\Dashboard.cs" />
     <Compile Include="Tests\Feature\EMV\Authentications.cs" />
     <Compile Include="Tests\Feature\EMV\Card_Profiles.cs" />
     <Compile Include="Tests\Feature\EMV\Configurations.cs" />
     <Compile Include="Tests\Feature\EMV\Issuers.cs" />
     <Compile Include="Tests\Feature\EMV\Modules.cs" />
     <Compile Include="Tests\Feature\EMV\Scripts.cs" />
+    <Compile Include="Tests\Feature\Login.cs" />
     <Compile Include="Tests\Feature\Products\Letter_Carriers.cs" />
+    <Compile Include="Tests\Feature\Products\PinMailers.cs" />
     <Compile Include="Tests\Feature\Products\Plastic_Cards.cs" />
   </ItemGroup>
   <ItemGroup>

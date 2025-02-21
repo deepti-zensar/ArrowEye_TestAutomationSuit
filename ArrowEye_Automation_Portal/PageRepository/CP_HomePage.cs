@@ -7,6 +7,7 @@ using ArrowEye_Automation_Framework;
 using System;
 using OpenQA.Selenium.Interactions;
 using static OpenQA.Selenium.BiDi.Modules.Script.RemoteValue;
+using NUnit.Framework;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -46,7 +47,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=13]")]
         public IWebElement AmazonPCL;
 
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Issuers')]")]
@@ -73,14 +74,36 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Default Proof Replacements')]")]
         public IWebElement clientSettingsDefaultProofReplacements;
 
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Mag Track Encodings')]")]
+        public IWebElement clientSettingsMagTrackEncodings;
+
         [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Configuration Hierarchy')]")]
         public IWebElement configurationHierarchy;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Products')]")]
+        public IWebElement products;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Pin Mailers')]")]
+        public IWebElement productsPinMailers;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='menu']")]
+        public IWebElement leftNavigationBar;
+
+        [FindsBy(How = How.XPath, Using = "//ul[@role='menu']//li")]
+        public IList<IWebElement> clientGalleryMenuOptions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//ul[contains(@class,'MuiList-root MuiList-padding')]//p")]
+        public IList<IWebElement> leftNavigationBarOptions { get; set; }
 
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
             var elemnetvisible = homePageTitle.Displayed;
-        }
+            if (elemnetvisible)
+            {
+                Browser.WaitForElement(SearchOrSelect, 10);
+            }
+            }
 
         public void SubmenuItems_display(IWebElement element)
         {
@@ -193,7 +216,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 case "Default Proof Replacements":
                     Browser.Click(clientSettingsDefaultProofReplacements);
                     break;
-               
+
+                case "Mag Track Encodings":
+                    Browser.Click(clientSettingsMagTrackEncodings);
+                    break;
+
             }
         }
 
@@ -207,8 +234,63 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 case "Configuration Hierarchy":
                     Browser.Click(configurationHierarchy);
                     break;
-                
+
+                case "Products":
+                    Browser.Click(products);
+                    break;
+
             }
+        }
+
+        public void NavigateToClientGallery()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);            
+        }
+
+        public void NavigateToLeftBar()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(leftNavigationBar);
+            Thread.Sleep(2000);
+        }
+
+        public void NavigateToProductsSubmenu(string submenu)
+        {
+            NavigateToMenu("Products");
+            switch (submenu)
+            {
+                case "Pin Mailers":
+                    Browser.Click(productsPinMailers);
+                    break;                
+
+            }
+        }
+
+
+        public void ValidateClientGalleryOptions(string[] listOfOptions)
+        {
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in clientGalleryMenuOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }            
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateLeftNavigationBarOptions(string[] listOfOptions)  
+        {            
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in leftNavigationBarOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }
+            Console.WriteLine(string.Join(", ",actualListOfOptions));
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
         }
 
     }

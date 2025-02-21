@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
 using NUnit.Framework;
+using ArrowEye_Automation_Portal.Tests.Feature.Products;
 
 namespace ArrowEye_Automation_Portal
 {
@@ -70,9 +71,19 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_ClientSettings_DefaultProofReplacementsPage>(); }
         }
 
+        public static CP_ClientSettings_MagTrackEncodingsPage MagTrackEncodingsPage
+        {
+            get { return GetPage<CP_ClientSettings_MagTrackEncodingsPage>(); }
+        }
+
         public static CP_ConfigurationHierarchyPage ConfigurationHierarchyPage
         {
             get { return GetPage<CP_ConfigurationHierarchyPage>(); }
+        }
+
+        public static CP_Products_PinMailersPage PinMailersPage
+        {
+            get { return GetPage<CP_Products_PinMailersPage>(); }
         }
 
         public static void TosterMessage_wait()

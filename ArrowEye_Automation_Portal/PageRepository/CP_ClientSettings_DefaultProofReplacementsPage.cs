@@ -100,7 +100,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public void ValidatePageTitle()
         {
            // DriverUtilities.IsElementPresent(defaultProofReplacementText);
-            //Assert.That(defaultProofReplacementText.Text, Is.EqualTo("Default Proof Replacement"));
+            Assert.That(defaultProofReplacementText.Text, Is.EqualTo("Default Proof Replacement"));
         }
 
         public void ValidateNewProofReplacementDialogBox()

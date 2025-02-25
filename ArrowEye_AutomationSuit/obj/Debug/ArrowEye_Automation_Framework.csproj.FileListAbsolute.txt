@@ -688,3 +688,5 @@ C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_Automatio
 C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_AutomationSuit\obj\Debug\ArrowEye.7C092D22.Up2Date
 C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_AutomationSuit\obj\Debug\ArrowEye_Automation_Framework.dll
 C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_AutomationSuit\obj\Debug\ArrowEye_Automation_Framework.pdb
+C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_AutomationSuit\bin\Debug\Npgsql.dll
+C:\Users\KKshrisagar\Source\Repos\ArrowEye_TestAutomationSuit\ArrowEye_AutomationSuit\bin\Debug\Npgsql.xml

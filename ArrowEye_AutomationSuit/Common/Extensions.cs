@@ -84,7 +84,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// </summary>
         /// <param name="collection"></param>
         /// <returns></returns>
-        
+
         public static List<string> GetTextValuesFromEachCollectionItem(this IList<IWebElement> collection)
         {
             List<string> collectionTextList = new List<string>();
@@ -105,7 +105,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// <param name="element"></param>
         /// <param name="exceptThisString"></param>
         /// <returns></returns>
-        public static string GetSelectedValueFromSelectTagDropDown(this IWebElement element,string exceptThisString="Select")
+        public static string GetSelectedValueFromSelectTagDropDown(this IWebElement element, string exceptThisString = "Select")
         {
             SelectElement SelectTagddl = new SelectElement(element);
 
@@ -138,7 +138,7 @@ namespace ArrowEye_Automation_Framework.Common
             elementList.Where(x => x.Text.Contains(requiredText)).Single().Click();
 
         }
-        
+
         /// <summary>
         /// It is used to set focus on required IWebelement
         /// </summary>
@@ -184,7 +184,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// <param name="element"></param>
         /// <param name="numberOfTries"></param>
 
-        static public void ClickItem(this IWebElement element,int numberOfTries=10)
+        static public void ClickItem(this IWebElement element, int numberOfTries = 10)
         {
             bool staleElementException = true;
             int tries = 0;
@@ -192,7 +192,7 @@ namespace ArrowEye_Automation_Framework.Common
             {
                 tries = tries + 1;
                 try
-                {                
+                {
                     element.Click();
                     break;
                 }
@@ -201,7 +201,7 @@ namespace ArrowEye_Automation_Framework.Common
                     Console.WriteLine(e.Message);
                     staleElementException = true;
                 }
-              
+
             }
 
         }
@@ -214,7 +214,7 @@ namespace ArrowEye_Automation_Framework.Common
 
         static public string GetText(this IWebElement element, int numberOfTries = 10)
         {
-            string elementText="initializedText";
+            string elementText = "initializedText";
             bool staleElementException = true;
             int tries = 0;
             while (staleElementException = true && tries < numberOfTries)
@@ -223,7 +223,7 @@ namespace ArrowEye_Automation_Framework.Common
                 try
                 {
                     elementText = element.Text;
-                 
+
                     break;
                 }
                 catch (StaleElementReferenceException e)
@@ -243,7 +243,7 @@ namespace ArrowEye_Automation_Framework.Common
         /// <param name="attributeName"></param>
         /// <param name="numberOfTries"></param>
         /// <returns></returns>
-        static public string GetAttributeValue(this IWebElement element,string attributeName="value", int numberOfTries = 10)
+        static public string GetAttributeValue(this IWebElement element, string attributeName = "value", int numberOfTries = 10)
         {
             string elementText = "initializedText";
             bool staleElementException = true;
@@ -262,9 +262,9 @@ namespace ArrowEye_Automation_Framework.Common
                     Console.WriteLine(e.Message);
                     staleElementException = true;
                 }
-                catch(ElementNotVisibleException e)
+                catch (ElementNotVisibleException e)
                 {
-                     Console.WriteLine(e.Message);
+                    Console.WriteLine(e.Message);
                     staleElementException = true;
                 }
             }
@@ -278,25 +278,25 @@ namespace ArrowEye_Automation_Framework.Common
 
         static public void EnterTextInSteps(this IWebElement element, string textToBeEntered)
         {
-        
-                try
-                {
+
+            try
+            {
                 foreach (var character in textToBeEntered)
                 {
                     element.SendKeys(character.ToString());
 
-                  //  Logger.Log.Info("Entered " + character);
+                    //  Logger.Log.Info("Entered " + character);
                     Thread.Sleep(100);
                 }
-                                
-                }
-                catch (Exception )
-                {
-                throw;
-                }
-         }
 
-        
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
         /// <summary>
         /// Enter the the text ignoring Stale element exception
@@ -383,5 +383,42 @@ namespace ArrowEye_Automation_Framework.Common
         }
 
 
-    }
+        //FileUpload
+        public static void FileUpload(IWebElement Uploadbtn,string fileName, IWebElement uploadfileprogress, IWebElement Cancelupload,IWebElement successuploadfile,IWebElement Removefile)
+        {
+            //click on uploadfile btn
+            Uploadbtn.Click();
+            Thread.Sleep(5000);
+            //select file
+            string Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
+            Uploadbtn.SendKeys(Uploadfilepath);
+            Thread.Sleep(5000);
+            bool fileuploadprogressbar = uploadfileprogress.Displayed;
+            bool Cancellingfileupload = Cancelupload.Displayed;
+            //Click cancel button to cancelling the fileuploading
+            Cancelupload.Click();
+            Thread.Sleep(5000);
+            //Reupload
+            Uploadbtn.Click();
+            Thread.Sleep(5000);
+            Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
+            Uploadbtn.SendKeys(Uploadfilepath);
+            Thread.Sleep(10000);
+            bool successfile = successuploadfile.Displayed;
+            Thread.Sleep(3000);
+            bool removefilebtn = Removefile.Displayed;
+            //click RemovePDF btn to removed uploaded file.
+            Removefile.Click();
+            Thread.Sleep(8000);
+            //Reupload
+            Uploadbtn.Click();
+            Thread.Sleep(5000);
+            Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
+            Uploadbtn.SendKeys(Uploadfilepath);
+            Thread.Sleep(10000);
+            successfile = successuploadfile.Displayed;
+        }
+
+       
+}
 }

@@ -66,6 +66,19 @@ namespace ArrowEye_Automation_Portal
         {
             get { return GetPage<CP_CSPSettings_CardHolderAgreementPage>(); }
         }
+
+        public static CP_PlasticCoreAssembliesPage PlasticCoreAssemblies
+
+        {
+            get { return GetPage<CP_PlasticCoreAssembliesPage>(); }
+        }
+
+        public static CP_Product_Standard_CarrierPage StandardCarrier
+
+        {
+            get { return GetPage<CP_Product_Standard_CarrierPage>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

@@ -17,6 +17,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
 
+        
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-1051h91' and contains(text(),'CLIENT GALLERY') and @data-testid='secondNested']")]
         public IWebElement clientGallery;
 
@@ -29,11 +31,17 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'Client Settings')]")]
         public IWebElement ClientSettings;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'Products')]")]
+        public IWebElement Products;
+
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BOC Dynamic Info')]")]
         public IWebElement BOCDynamicInfo;
 
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Bank ID Numbers')]")]
         public IWebElement BankIdNumbers;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Standard Carriers')]")]
+        public IWebElement StandardCarrier;
 
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Card Holder Agreement')]")]
         public IWebElement CardHolderAgreement;
@@ -115,7 +123,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=13]")]
         public IWebElement AmazonPCL;
 
         public void ValidateHomePageTitle()
@@ -123,6 +131,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(5000);
             var elemnetvisible = homePageTitle.Displayed;
         }
+
+       
 
         public void SubmenuItems_display(IWebElement element)
         {
@@ -246,6 +256,24 @@ namespace ArrowEye_Automation_Portal.PageRepository
                     break;
                 case "SOPConfigurations":
                     Browser.Click(SOPConfigurations);
+                    break;
+
+            }
+        }
+
+
+        public void NavigateToProducts(string ClientSetting_SubMenuName)
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(Products);
+
+            switch (ClientSetting_SubMenuName)
+            {
+
+                case "StandardCarriers":
+                    Browser.Click(StandardCarrier);
                     break;
 
             }

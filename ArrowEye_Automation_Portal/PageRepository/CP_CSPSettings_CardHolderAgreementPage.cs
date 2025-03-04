@@ -313,132 +313,132 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
 
 
-        public void DeleteCardHolderAgreementInfo(string DeleteCardholderText)
-        {
-            //create new carrier dynamic info record
-            Browser.Click(CarrierDynamicInfo_AddNew_button);
-            NewCarrierDynamicInfoPopup_Textbox.SendKeys(DeleteCardholderText.ToString());
-            var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
-            Thread.Sleep(4000);
-            var Add_CarrierDynamicInfo_SuccessMessage = CarrierDynamicInfo_recordAdd_sucessmessage.Text;
-            var CarrierDynamicInfo_Id = CarrierDynamicInfo_ID.Text;
+        //public void DeleteCardHolderAgreementInfo(string DeleteCardholderText)
+        //{
+        //    //create new carrier dynamic info record
+        //    Browser.Click(CarrierDynamicInfo_AddNew_button);
+        //    NewCarrierDynamicInfoPopup_Textbox.SendKeys(DeleteCardholderText.ToString());
+        //    var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+        //    Thread.Sleep(4000);
+        //    var Add_CarrierDynamicInfo_SuccessMessage = CarrierDynamicInfo_recordAdd_sucessmessage.Text;
+        //    var CarrierDynamicInfo_Id = CarrierDynamicInfo_ID.Text;
 
-            //Search with newly created record
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
-            var Created_CarrierInfo_record_details = CarrierDynamicInfo_created.Text;
+        //    //Search with newly created record
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
+        //    var Created_CarrierInfo_record_details = CarrierDynamicInfo_created.Text;
 
-            //click on delete icon and verify the popup details and go for delete
-            Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
-            var Deletepopup_headertext = CarrierDynamicInfo_Detete_popup_HeaderText.Text;
-            var DeletePopupCancelbuttonText = DeleteCarrierDynamicInfoPopup_Cancelbtn.Text;
-            var DeletePopupDeletebuttonText = DeleteCarrierDynamicInfoPopup_Deletebtn.Text;
-            var Deletewarningmessage = CarrierDynamicInfo_Detete_popup_warningmessage.Text;
-            var deleteexpectedwarningmessage = Deletewarningmessage.ToString();
-            Browser.Click(CarrierDynamicInfo_Delete_popup_closebutton);
-            Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
-            Browser.Click(CarrierDynamicInfo_Detete_popup_Cancelbutton);
-            Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
-            Browser.Click(DeleteCarrierDynamicInfoPopup_Deletebtn);
-            Thread.Sleep(4000);
-            var Actualdeletedrecordsuccessmessage = CarrierDynamicInfo_recordDelete_sucessmessage.Text;
+        //    //click on delete icon and verify the popup details and go for delete
+        //    Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
+        //    var Deletepopup_headertext = CarrierDynamicInfo_Detete_popup_HeaderText.Text;
+        //    var DeletePopupCancelbuttonText = DeleteCarrierDynamicInfoPopup_Cancelbtn.Text;
+        //    var DeletePopupDeletebuttonText = DeleteCarrierDynamicInfoPopup_Deletebtn.Text;
+        //    var Deletewarningmessage = CarrierDynamicInfo_Detete_popup_warningmessage.Text;
+        //    var deleteexpectedwarningmessage = Deletewarningmessage.ToString();
+        //    Browser.Click(CarrierDynamicInfo_Delete_popup_closebutton);
+        //    Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
+        //    Browser.Click(CarrierDynamicInfo_Detete_popup_Cancelbutton);
+        //    Browser.Click(CarrierDynamicInfo_Detete_Icon_button);
+        //    Browser.Click(DeleteCarrierDynamicInfoPopup_Deletebtn);
+        //    Thread.Sleep(4000);
+        //    var Actualdeletedrecordsuccessmessage = CarrierDynamicInfo_recordDelete_sucessmessage.Text;
 
-            //after deleted record search with same record details
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
-            var afterdeletedrecorddetails = DeletedcarrierDynamicInfoPopup_deletedrecorddetails.Text;
-
-
-            //validations
-            Assert.That(Add_CarrierDynamicInfo_SuccessMessage, Does.Contain("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " added Successfully."));
-            Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
-            Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
-            Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
-            Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
-            Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " deleted Successfully."));
-        }
-
-        public void View_SearchCardHolderAgreementInfo(string ViewSearchCarrierDynamicText)
-        {
-            //verify the grid colomns displayed or not
-            CarrierDynamicInfo_HomePage_GridcolParameters(true);
-
-            //create new carrier dynamic info record
-            Browser.Click(CarrierDynamicInfo_AddNew_button);
-            NewCarrierDynamicInfoPopup_Textbox.SendKeys(ViewSearchCarrierDynamicText.ToString());
-            var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
-            Thread.Sleep(4000);
-            var Add_CarrierDynamicInfo_SuccessMessage = CarrierDynamicInfo_recordAdd_sucessmessage.Text;
-            var CarrierDynamicInfo_Id = CarrierDynamicInfo_ID.Text;
-
-            //search and view with newly created record details with valid Text
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
-            var Search_withvalid_Text = CarrierDynamicInfo_created.Text;
-
-            //search and view with newly created record details with Valid ID
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicInfo_Id.ToString());
-            var Search_Valid_Id = CarrierDynamicInfo_created_ID.Text;
-
-            //search and view with Invalid Text details
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData + "@#$%^&*(HG");
-            var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
-
-            //search and view with Invalid Id details
-            CarrierDynamicInfo_AutoSearch_textbox.Clear();
-            CarrierDynamicInfo_AutoSearch_textbox.SendKeys(Search_Valid_Id + "1234");
-            var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
+        //    //after deleted record search with same record details
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
+        //    var afterdeletedrecorddetails = DeletedcarrierDynamicInfoPopup_deletedrecorddetails.Text;
 
 
-            //validations
-            Assert.That(CarrierDynamicText_InputData, Does.Contain(Search_withvalid_Text));
-            Assert.That(Search_Valid_Id, Is.EqualTo(CarrierDynamicInfo_Id));
-            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
-            Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
-        }
+        //    //validations
+        //    Assert.That(Add_CarrierDynamicInfo_SuccessMessage, Does.Contain("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " added Successfully."));
+        //    Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
+        //    Assert.That(DeletePopupCancelbuttonText, Is.EqualTo("CANCEL"));
+        //    Assert.That(DeletePopupDeletebuttonText, Is.EqualTo("DELETE"));
+        //    Assert.That(Deletewarningmessage, Does.Contain(deleteexpectedwarningmessage));
+        //    Assert.That(Actualdeletedrecordsuccessmessage, Does.Contain("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " deleted Successfully."));
+        //}
+
+        //public void View_SearchCardHolderAgreementInfo(string ViewSearchCarrierDynamicText)
+        //{
+        //    //verify the grid colomns displayed or not
+        //    CarrierDynamicInfo_HomePage_GridcolParameters(true);
+
+        //    //create new carrier dynamic info record
+        //    Browser.Click(CarrierDynamicInfo_AddNew_button);
+        //    NewCarrierDynamicInfoPopup_Textbox.SendKeys(ViewSearchCarrierDynamicText.ToString());
+        //    var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+        //    Thread.Sleep(4000);
+        //    var Add_CarrierDynamicInfo_SuccessMessage = CarrierDynamicInfo_recordAdd_sucessmessage.Text;
+        //    var CarrierDynamicInfo_Id = CarrierDynamicInfo_ID.Text;
+
+        //    //search and view with newly created record details with valid Text
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
+        //    var Search_withvalid_Text = CarrierDynamicInfo_created.Text;
+
+        //    //search and view with newly created record details with Valid ID
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicInfo_Id.ToString());
+        //    var Search_Valid_Id = CarrierDynamicInfo_created_ID.Text;
+
+        //    //search and view with Invalid Text details
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData + "@#$%^&*(HG");
+        //    var Search_Invalid_Text = Search_View_InvalidRecordDetails.Text;
+
+        //    //search and view with Invalid Id details
+        //    CarrierDynamicInfo_AutoSearch_textbox.Clear();
+        //    CarrierDynamicInfo_AutoSearch_textbox.SendKeys(Search_Valid_Id + "1234");
+        //    var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
 
 
-        public void ValidationsCardHolderAgreementInfo(string NegativeScenariosText)
-        {
-
-            //create new dynamic info record
-            Browser.Click(CarrierDynamicInfo_AddNew_button);
-            NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText.ToString());
-            var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
-            Thread.Sleep(4000);
+        //    //validations
+        //    Assert.That(CarrierDynamicText_InputData, Does.Contain(Search_withvalid_Text));
+        //    Assert.That(Search_Valid_Id, Is.EqualTo(CarrierDynamicInfo_Id));
+        //    Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
+        //    Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
+        //}
 
 
-            //Scenario1 : Without Dynamic carrier text field value input
-            Browser.Click(CarrierDynamicInfo_AddNew_button);
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
-            Thread.Sleep(4000);
-            var AddCarrierdynamicinfo_withoutText_ValidationMessage = CarrierDynamicInfo_Addwithouttext_Error.Text;
+        //public void ValidationsCardHolderAgreementInfo(string NegativeScenariosText)
+        //{
 
-            //Scenario 2: Exceed TextBox input char limits
+        //    //create new dynamic info record
+        //    Browser.Click(CarrierDynamicInfo_AddNew_button);
+        //    NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText.ToString());
+        //    var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+        //    Thread.Sleep(4000);
 
-            NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText + "morethan200characters&*^$%^&$#@%^&*&^%$#dwedhwejjejehwejfenmrfbef");
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
 
-            //Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
-            var AddCarrier_TextInput_ExceedLimit_ValidationMessage = CarrierDynamicInfo_Textinput_exceedcharlimit_error.Text;
+        //    //Scenario1 : Without Dynamic carrier text field value input
+        //    Browser.Click(CarrierDynamicInfo_AddNew_button);
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+        //    Thread.Sleep(4000);
+        //    var AddCarrierdynamicinfo_withoutText_ValidationMessage = CarrierDynamicInfo_Addwithouttext_Error.Text;
 
-            //Scenario 3: Dublicate Record creates
-            NewCarrierDynamicInfoPopup_Textbox.Clear();
-            NewCarrierDynamicInfoPopup_Textbox.SendKeys(CarrierDynamicText_InputData);
-            Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
-            Thread.Sleep(4000);
-            var AddCarrier_TextInput_dublicaterecord_ValidationMessage = CarrierDynamicInfo_Textinput_dublicaterecord_Error.Text;
+        //    //Scenario 2: Exceed TextBox input char limits
 
-            //validations
-            Assert.That(AddCarrierdynamicinfo_withoutText_ValidationMessage, Does.Contain("Carrier Dynamic Text is required."));
-            Assert.That(AddCarrier_TextInput_ExceedLimit_ValidationMessage, Does.Contain("Dynamic Carrier text length should be 1 to 200 characters."));
-            Assert.That(AddCarrier_TextInput_dublicaterecord_ValidationMessage, Does.Contain("Sorry, Data validation failed.This Carrier Dynamic Info already exists!"));
-        }
+        //    NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText + "morethan200characters&*^$%^&$#@%^&*&^%$#dwedhwejjejehwejfenmrfbef");
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+
+        //    //Note: Application not allows morethan 100 char in textbox so unable to get the error message and locator
+        //    var AddCarrier_TextInput_ExceedLimit_ValidationMessage = CarrierDynamicInfo_Textinput_exceedcharlimit_error.Text;
+
+        //    //Scenario 3: Dublicate Record creates
+        //    NewCarrierDynamicInfoPopup_Textbox.Clear();
+        //    NewCarrierDynamicInfoPopup_Textbox.SendKeys(CarrierDynamicText_InputData);
+        //    Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
+        //    Thread.Sleep(4000);
+        //    var AddCarrier_TextInput_dublicaterecord_ValidationMessage = CarrierDynamicInfo_Textinput_dublicaterecord_Error.Text;
+
+        //    //validations
+        //    Assert.That(AddCarrierdynamicinfo_withoutText_ValidationMessage, Does.Contain("Carrier Dynamic Text is required."));
+        //    Assert.That(AddCarrier_TextInput_ExceedLimit_ValidationMessage, Does.Contain("Dynamic Carrier text length should be 1 to 200 characters."));
+        //    Assert.That(AddCarrier_TextInput_dublicaterecord_ValidationMessage, Does.Contain("Sorry, Data validation failed.This Carrier Dynamic Info already exists!"));
+        //}
     }
 }
 

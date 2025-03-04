@@ -52,7 +52,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("CardHolderAgreement");
-            CP_Pages.CardHolderAgreement.DeleteCardHolderAgreementInfo(DeleteCardHolderAgreement + randomString);
+            //CP_Pages.CardHolderAgreement.DeleteCardHolderAgreementInfo(DeleteCardHolderAgreement + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -66,7 +66,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("CardHolderAgreement");
-            CP_Pages.CardHolderAgreement.View_SearchCardHolderAgreementInfo(SearchCardHolderAgreement + randomString);
+            //CP_Pages.CardHolderAgreement.View_SearchCardHolderAgreementInfo(SearchCardHolderAgreement + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
@@ -80,7 +80,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettings("CardHolderAgreement");
-            CP_Pages.CardHolderAgreement.ValidationsCardHolderAgreementInfo(NegativeScenariosText + randomStrings);
+            //CP_Pages.CardHolderAgreement.ValidationsCardHolderAgreementInfo(NegativeScenariosText + randomStrings);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
     }

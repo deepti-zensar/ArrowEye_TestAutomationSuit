@@ -18,7 +18,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
         [Test]
         [Description("Configuration_Hierarchy_Edit")]
         [Category("Smoke")]
-        [TestCase("", "Automation_","Automation_")]
+        [TestCase("Program Profile Test", "Automation_","Automation_")]
         public void Edit_ConfigurationHierarchy(string attributeName, string newAttributeValue,string description)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -31,26 +31,26 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
         [Test]
         [Description("Configuration_Hierarchy_Delete")]
         [Category("Smoke")]
-        [TestCase("")]
-        public void Delete_ConfigurationHierarchy(string attributeName)
+        [TestCase("Client","")]
+        public void Delete_ConfigurationHierarchy(string attributeLevel,string attributeName)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Configuration Hierarchy");
-            CP_Pages.ConfigurationHierarchyPage.DeleteConfigurationHierarchy(attributeName);
+            CP_Pages.ConfigurationHierarchyPage.DeleteConfigurationHierarchy(attributeLevel,attributeName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
         [Description("Configuration_Hierarchy_Validate")]
         [Category("Smoke")]
-        [TestCase("FirstName", "Automation_")]
-        public void Validate_Configuration_Hierarchy(string replacementTag, string replacementValue)
+        [TestCase("")]
+        public void Validate_Configuration_Hierarchy(string attributeName)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Configuration Hierarchy");
-            CP_Pages.DefaultProofReplacementsPage.ValidateProofReplacement(replacementTag, replacementValue + getRandomString());
+            CP_Pages.ConfigurationHierarchyPage.ValidateConfigurationHierarchy(attributeName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
         
@@ -76,7 +76,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Configuration Hierarchy");
-            CP_Pages.DefaultProofReplacementsPage.ProofReplacementExport(fileName);
+            CP_Pages.ConfigurationHierarchyPage.ConfigurationHierarchyExport(fileName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
     }

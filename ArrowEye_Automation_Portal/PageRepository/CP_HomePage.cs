@@ -47,7 +47,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=13]")]
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=32]")]
         public IWebElement AmazonPCL;
 
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Issuers')]")]
@@ -77,17 +77,29 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Mag Track Encodings')]")]
         public IWebElement clientSettingsMagTrackEncodings;
 
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Information')]")]
+        public IWebElement clientInformation;
+
         [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Configuration Hierarchy')]")]
         public IWebElement configurationHierarchy;
 
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Orders On Hold')]")]
+        public IWebElement ordersOnHold;
+
         [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Products')]")]
-        public IWebElement products;
+        public IWebElement products;        
 
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Pin Mailers')]")]
         public IWebElement productsPinMailers;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='menu']")]
         public IWebElement leftNavigationBar;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/*[@data-testid='InfoOutlinedIcon']")]
+        public IWebElement disclaimerBannerIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
+        public IWebElement disclaimerBannerText;
 
         [FindsBy(How = How.XPath, Using = "//ul[@role='menu']//li")]
         public IList<IWebElement> clientGalleryMenuOptions { get; set; }
@@ -103,7 +115,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             {
                 Browser.WaitForElement(SearchOrSelect, 10);
             }
-            }
+        }
 
         public void SubmenuItems_display(IWebElement element)
         {
@@ -231,14 +243,21 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(clientGallery);
             switch (menu)
             {
+                case "Client Information":
+                    Browser.Click(clientInformation);
+                    break;
+
                 case "Configuration Hierarchy":
                     Browser.Click(configurationHierarchy);
+                    break;
+
+                case "Orders On Hold":
+                    Browser.Click(ordersOnHold); 
                     break;
 
                 case "Products":
                     Browser.Click(products);
                     break;
-
             }
         }
 
@@ -291,6 +310,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
             Console.WriteLine(string.Join(", ",actualListOfOptions));
             Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateHomepageDisclaimerBanner()
+        {
+            Browser.WaitForElement(disclaimerBannerText, 10);
+            Assert.That(disclaimerBannerText.Text, Is.EqualTo("Please select a PCL ID to begin"));
+            Assert.That(disclaimerBannerIcon.Displayed, Is.True);
         }
 
     }

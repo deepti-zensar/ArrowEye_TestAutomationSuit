@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading;
 using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
@@ -67,6 +68,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar']")]
         private IWebElement toasterMessage;
+        
+        [FindsBy(How = How.XPath, Using = "//div[@data-field='attributeLevel']//input")]
+        private IWebElement attributeLevelSearch;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='No results found.']")]
+        private IWebElement noResultMsg;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='1'])[position()=1]")]
         private IWebElement searchedID;
@@ -107,6 +114,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p[contains(text(),'Are you sure')]")]
         public IWebElement deleteDialogBoxText;
 
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//h2")]
+        private IWebElement deleteBoxLabel;
+
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']")]
         public IWebElement deleteBoxDeleteBtn;
 
@@ -123,7 +133,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public IWebElement descriptionLimitText;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitleContainerContent']/div)")]
-        public IList<IWebElement> tableHeaderProofReplacement { get; set; }
+        public IList<IWebElement> tableHeader { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//button[@aria-label='Export']")]
         public IWebElement configurationHierarchyExport;
@@ -160,9 +170,30 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(editButton);
             Thread.Sleep(2000);
             Assert.That(editDialogBoxText.Text, Is.EqualTo("Edit Configuration Hierarchy"));
+            var dataType = searchedDataType.Text.ToLower();
             var attributeIDFrmEdit = attributeIDField.GetAttributeValue("value");            
             DriverUtilities.clearText(editAttributeValueField);
-            editAttributeValueField.SendKeys(newAttributeValue);  
+            switch(dataType)
+            {
+                case "string":
+                    editAttributeValueField.SendKeys(newAttributeValue);
+                    break;
+                case "bit":
+                    editAttributeValueField.SendKeys(new Random().Next(0, 2).ToString());
+                    break;
+                case "integer":
+                    editAttributeValueField.SendKeys(new Random().Next(0, 100).ToString());
+                    break;
+                case "float":
+                    var random = new Random();
+                    var randomFloat = (float)(random.NextDouble() * 100); // Generates a random float between 0 and 100
+                    editAttributeValueField.SendKeys(randomFloat.ToString());
+                    break;
+                default:
+                    editAttributeValueField.SendKeys("1");
+                    break;
+            }
+             
             DriverUtilities.clearText(editDescriptionField);
             editDescriptionField.SendKeys(description);
             Browser.Click(saveButton);
@@ -171,7 +202,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
-            Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + configurationHierarchyID + " updated successfully."));
+            Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + attributeID + " updated Successfully."));
 
             //Search with newly edited record and get information from search result          
             DriverUtilities.clearText(searchBox);
@@ -185,38 +216,53 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(editedDescription, Is.EqualTo(description));        
 
         }
-
-        public void DeleteConfigurationHierarchy(string attributeName)
+        //TODO: Get all the details of the delete record and delete popup
+        public void DeleteConfigurationHierarchy(string attributeLevel,string attributeName)
         {
             ValidatePageTitle();
-            //Search with Attribute Name
-            DriverUtilities.clearText(searchBox);
-            searchBox.SendKeys(attributeName);
-            Thread.Sleep(3000);
-            var attributeID = searchedAttributeID.Text;
-            var configurationHierarchyID = searchedID.Text;
-            //TODO: Get all the details of the delete record
-            //Delete details 
-            Browser.Click(deleteButton);
-            Assert.That(deleteDialogBoxTitle.Text, Is.EqualTo("Delete"));
-            var deleteDialogBoxMessage = deleteDialogBoxText.Text;
-            Browser.Click(deleteBoxCancelBtn);
-            Browser.Click(deleteButton);
-            Browser.Click(deleteBoxDeleteBtn);
-            Thread.Sleep(2000);
+            DriverUtilities.clearText(attributeLevelSearch);
+            attributeLevelSearch.SendKeys(attributeLevel);
+            attributeLevelSearch.SendKeys(Keys.Down + Keys.Enter);
+            if (Browser.WaitForElement(noResultMsg, 5))
+            {
+                Console.WriteLine("No Result Found");                
+            }
+            else
+            {
+                //Search with Attribute Name
+                DriverUtilities.clearText(searchBox);
+                searchBox.SendKeys(attributeName);
+                Thread.Sleep(3000);
+                var attributeID = searchedAttributeID.Text;
+                var configurationHierarchyID = searchedID.Text;
 
-            //validate delete popup message            
-            Assert.That(deleteDialogBoxMessage, Is.EqualTo("Are you sure you want to delete this Attribute " + attributeID + "?"));
+                //Delete details 
+                Browser.Click(deleteButton);
+                Assert.That(deleteDialogBoxTitle.Text, Is.EqualTo("Delete"));
+                var deleteDialogBoxMessage = deleteDialogBoxText.Text;
+                Browser.Click(deleteBoxCancelBtn);
+                Browser.Click(deleteButton);
+                Browser.Click(deleteBoxDeleteBtn);
+                Thread.Sleep(2000);
+                //Handle delete pop up 
+                Browser.WaitForElement(deleteBoxLabel, 10);
+                Assert.That(deleteBoxLabel.Text, Is.EqualTo("Delete Pin Mailer"));
+                //validate delete popup message            
+                Assert.That(deleteDialogBoxMessage, Is.EqualTo("Are you sure you want to delete this Attribute " + attributeID + "?"));
+                Browser.Click(deleteBoxDeleteBtn);
 
-            //validate Delete Toaster message
-            var toasterMessage_Text = toasterMessage.Text;
-            Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + configurationHierarchyID + " deleted successfully."));
 
-            //Search with newly Deleted record        
-            DriverUtilities.clearText(searchBox);
-            searchBox.SendKeys(attributeName);
-            Thread.Sleep(3000);
-            Assert.That(noResultFound.Text, Is.EqualTo("No results found."));
+                //validate Delete Toaster message
+                Browser.WaitForElement(toasterMessage, 10);
+                var toasterMessage_Text = toasterMessage.Text;
+                Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + configurationHierarchyID + " deleted successfully."));
+
+                //Search with Deleted record        
+                DriverUtilities.clearText(searchBox);
+                searchBox.SendKeys(attributeName);
+                Thread.Sleep(3000);
+                Assert.That(noResultFound.Text, Is.EqualTo("No results found."));
+            }
 
         }
 
@@ -243,9 +289,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
                         
             //CHARACTER LIMITATIONS FOR Description
             //create new record with longer data
-            string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 155);
+            string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 105);
             editDescriptionField.SendKeys(longString);            
-            Assert.That(descriptionLimitText.Text, Is.EqualTo("150/150"));
+            Assert.That(descriptionLimitText.Text, Is.EqualTo("100/100"));
             //Browser.Click(saveButton);   
 
         }
@@ -256,7 +302,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         {
             List<string> expectedListOfOptions = new List<string>(listOfOptions);
             List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderProofReplacement)
+            foreach (IWebElement actualOption in tableHeader)
             {
                 actualListOfOptions.Add(actualOption.Text);
             }

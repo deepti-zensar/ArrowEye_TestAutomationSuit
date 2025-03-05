@@ -86,6 +86,16 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_Products_PinMailersPage>(); }
         }
 
+        public static CP_ClientInformationPage ClientInformationPage
+        {
+            get { return GetPage<CP_ClientInformationPage>(); }
+        }
+
+        public static CP_OrdersOnHoldPage OrdersOnHoldPage
+        {
+            get { return GetPage<CP_OrdersOnHoldPage>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

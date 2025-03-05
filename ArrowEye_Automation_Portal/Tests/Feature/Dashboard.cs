@@ -46,5 +46,17 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
+        [Test]
+        [Description("Disclaimer homepage Banner")]
+        [Category("Smoke")]
+        public void ValidateDisclaimerHomepage_Banner()
+        {
+            CP_Pages.Login.validateLoginPage();
+            CP_Pages.Login.LogIn(userName, password);
+            CP_Pages.Home.ValidateHomePageTitle();            
+            CP_Pages.Home.ValidateHomepageDisclaimerBanner();
+            DriverUtilities.TakeScreenshot(@"C:\");
+        }
+
     }
 }

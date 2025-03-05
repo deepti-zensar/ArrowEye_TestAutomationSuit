@@ -27,6 +27,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@role='tooltip']/div")]
         public IWebElement infoIconText;
 
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='dropBox']/div/span")]
+        public IWebElement uploadMsg;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='dropBox']/div/p")]
+        public IWebElement fileTypeMsg;
+
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='dropInput']")]
         public IWebElement fileUpload;
 
@@ -36,11 +42,20 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='Remove']")]
         public IWebElement removePDFButton;
 
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='dropBox']/following-sibling::div/p")]
+        public IWebElement uploadErrorMsg;
+
+        [FindsBy(How = How.XPath, Using = "//div[@id='panel1bh-content']//p[contains(text(),'valid')]")]
+        public IWebElement carrierArtworkMsg;
+
         [FindsBy(How = How.XPath, Using = "//p[text()='Carrier details']")]
         public IWebElement carrierDetailsLabel;
 
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='Carriertitle']")]
         public IWebElement carrierTitleField;
+
+        [FindsBy(How = How.XPath, Using = "//label[@id='Carrier title-label']/following-sibling::p")]
+        public IWebElement carrierTitleErrorMsg;
 
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='Carrierdescription']")]
         public IWebElement carrierDescField;
@@ -48,29 +63,56 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//legend[@id='partof']")]
         public IWebElement partOfLabel;
 
+        [FindsBy(How = How.XPath, Using = "//label[@id='consumersite']")]
+        public IWebElement consumerSiteLabel;
+
         [FindsBy(How = How.XPath, Using = "//label[@id='consumersite']//input")]
         public IWebElement consumerSiteCheckBox;
+
+        [FindsBy(How = How.XPath, Using = "//label[@id='corporatesite']")]
+        public IWebElement corporateSiteLabel;
 
         [FindsBy(How = How.XPath, Using = "//label[@id='corporatesite']//input")]
         public IWebElement corporateSiteCheckBox;
 
+        [FindsBy(How = How.XPath, Using = "//legend[@id='partof']/following-sibling::div/p")]
+        public IWebElement partOfErrorMsg;
+
         [FindsBy(How = How.XPath, Using = "//label[@id='carrier-status']")]
         public IWebElement carrierStatusLabel;
+
+        [FindsBy(How = How.XPath, Using = "//label[@id='turnon']")]
+        public IWebElement turnedOnLabel;
 
         [FindsBy(How = How.XPath, Using = "//label[@id='turnon']//input")]
         public IWebElement turnedOnRadio;
 
+        [FindsBy(How = How.XPath, Using = "//label[@id='turnoff']")]
+        public IWebElement turnedOffLabel;
+
         [FindsBy(How = How.XPath, Using = "//label[@id='turnoff']//input")]
         public IWebElement turnedOffRadio;
+
+        [FindsBy(How = How.XPath, Using = "//label[@id='turnoff']/following-sibling::p")]
+        public IWebElement carrierStatusErrorMsg;
 
         [FindsBy(How = How.XPath, Using = "//label[@id='colormode']")]
         public IWebElement colorModeLabel;
 
+        [FindsBy(How = How.XPath, Using = "//label[@id='grayscale']")]
+        public IWebElement grayScaleLabel;
+
         [FindsBy(How = How.XPath, Using = "//label[@id='grayscale']//input")]
         public IWebElement grayScaleRadio;
 
+        [FindsBy(How = How.XPath, Using = "//label[@id='color']")]
+        public IWebElement colorLabel;
+
         [FindsBy(How = How.XPath, Using = "//label[@id='color']//input")]
         public IWebElement colorRadio;
+
+        [FindsBy(How = How.XPath, Using = "//label[@id='colormode']/following-sibling::p")]
+        public IWebElement colorModeErrorMsg;
 
         [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar']")]
         private IWebElement toasterMessage;
@@ -96,6 +138,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='deleteIcon']")]
         private IWebElement deleteButton;
 
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//h2")]
+        private IWebElement deleteBoxLabel;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']")]
+        private IWebElement deleteBoxDeleteBtn;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
+        private IWebElement deleteBoxCancelBtn;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
+        private IWebElement noMatchFound;
+
         public void ValidatePageTitle()
         {            
             Assert.That(PINMailersText.Displayed, Is.True);
@@ -103,7 +157,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
 
         public void selectPartOfOption(string partOf)
-        {            
+        {
+            Assert.That(partOfLabel.Displayed, Is.True);
+            Assert.That(corporateSiteLabel.Displayed, Is.True);
+            Assert.That(corporateSiteLabel.Displayed, Is.True);
             switch (partOf)
             {
                 case "Consumer site":
@@ -119,6 +176,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void selectCarrierStatusOption(string carrierStatus)
         {
+            Assert.That(carrierStatusLabel.Displayed, Is.True);
+            Assert.That(turnedOnLabel.Displayed, Is.True);
+            Assert.That(turnedOffLabel.Displayed, Is.True);
             switch (carrierStatus)
             {
                 case "Turned on":
@@ -132,6 +192,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void selectColorModeOption(string colorMode)
         {
+            Assert.That(colorModeLabel.Displayed, Is.True);
+            Assert.That(grayScaleLabel.Displayed, Is.True);
+            Assert.That(colorLabel.Displayed, Is.True);
             switch (colorMode)
             {
                 case "Grayscale":
@@ -153,6 +216,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(infoIcon);
             Browser.WaitForElement(infoIconText, 2);
             Assert.That(infoIconText.Text, Is.EqualTo("Only upload PDF file."));
+            //Validate upload PDF            
+            Assert.That(uploadMsg.Displayed, Is.True);
+            Assert.That(fileTypeMsg.Displayed, Is.True);
             //Upload PDF
             fileUpload.SendKeys(@"C:\Users\aa65658\Downloads\2272.pdf");
             //Validate uploading status
@@ -168,12 +234,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(carrierDetailsLabel.Displayed, Is.True);
             carrierTitleField.SendKeys(carrierTitle);
             carrierDescField.SendKeys(desc);
-            //Select Part of, Carrier Status and Color Mode
-            Assert.That(partOfLabel.Displayed, Is.True);
-            selectPartOfOption(partOf);
-            Assert.That(carrierStatusLabel.Displayed, Is.True);
-            selectCarrierStatusOption(carrierStatus);
-            Assert.That(colorModeLabel.Displayed, Is.True);
+            //Select Part of, Carrier Status and Color Mode            
+            selectPartOfOption(partOf);            
+            selectCarrierStatusOption(carrierStatus);            
             selectColorModeOption(colorMode);
             //Submit
             Browser.Click(submitButton);
@@ -237,7 +300,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public void DeletePINMailer(string carrierTitle, string desc, string partOf, string carrierStatus, string colorMode)
         {
             ValidatePageTitle();
-            string createdID = "1240";// AddNewPINMailer(carrierTitle, desc, partOf, carrierStatus, colorMode);
+            string createdID = AddNewPINMailer(carrierTitle, desc, partOf, carrierStatus, colorMode);
             //Search and Edit
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
@@ -259,7 +322,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 Browser.WaitForElement(editCarrierLabel, 10);
 
             }
-            Browser.Click(deleteButton);            
+            Browser.Click(deleteButton); 
+            //Handle delete pop up 
+            Browser.WaitForElement(deleteBoxLabel, 10);
+            Assert.That(deleteBoxLabel.Text, Is.EqualTo("Delete Pin Mailer"));
+            Browser.Click(deleteBoxDeleteBtn);
             //Get toaster message
             Browser.WaitForElement(toasterMessage, 10);
             var toasterMessage_Text = toasterMessage.Text;
@@ -268,8 +335,52 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //Validate Toaster message
             Assert.That(createdID, Is.EqualTo(toasterMessageID));
             Assert.That(toasterMessage_Text, Is.EqualTo("Pin Mailer " + createdID + " Deleted Successfully."));
+            //Validate no result
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(createdID);
+            Thread.Sleep(2000);
+            Browser.WaitForElement(noMatchFound, 10);
+            Assert.That(noMatchFound.Text, Is.EqualTo("No Match found"));
         }
 
-
+        public void ValidatePINMailers()
+        {
+            ValidatePageTitle();
+            //Validate all elements
+            Browser.WaitForElement(addNewPINMailer, 10);
+            Assert.That(addNewPINMailer.Displayed, Is.True);
+            Assert.That(searchBox.Displayed, Is.True);
+            Browser.Click(addNewPINMailer);
+            Browser.WaitForElement(carrierArtworkLabel, 10);
+            Assert.That(carrierArtworkLabel.Displayed, Is.True);
+            Assert.That(infoIcon.Displayed, Is.True);
+            Browser.Click(infoIcon);
+            Browser.WaitForElement(infoIconText, 2);
+            Assert.That(infoIconText.Text, Is.EqualTo("Only upload PDF file."));
+            Assert.That(uploadMsg.Displayed, Is.True);
+            Assert.That(fileTypeMsg.Displayed, Is.True);
+            Assert.That(carrierDetailsLabel.Displayed, Is.True);
+            Assert.That(carrierTitleField.Displayed, Is.True);
+            Assert.That(carrierDescField.Displayed, Is.True);
+            Assert.That(partOfLabel.Displayed, Is.True);
+            Browser.Click(partOfLabel);
+            Assert.That(consumerSiteLabel.Displayed, Is.True);
+            Assert.That(corporateSiteLabel.Displayed, Is.True);
+            Assert.That(carrierStatusLabel.Displayed, Is.True);
+            Assert.That(turnedOnLabel.Displayed, Is.True);
+            Assert.That(turnedOffLabel.Displayed, Is.True);
+            Assert.That(colorModeLabel.Displayed, Is.True);
+            Assert.That(grayScaleLabel.Displayed, Is.True);
+            Assert.That(colorLabel.Displayed, Is.True);
+            Assert.That(cancelButton.Displayed, Is.True);
+            Assert.That(submitButton.Displayed, Is.True);
+            Browser.Click(submitButton);
+            //Validate all messages
+            Assert.That(uploadErrorMsg.Text, Is.EqualTo("Please upload a valid PDF for new Product"));
+            Assert.That(carrierTitleErrorMsg.Text, Is.EqualTo("Please enter carrier Title"));
+            Assert.That(partOfErrorMsg.Text, Is.EqualTo("Please select if carrier is Part of Consumer or Corporate"));
+            Assert.That(carrierStatusErrorMsg.Text, Is.EqualTo("Please select a Carrier Status"));
+            Assert.That(colorModeErrorMsg.Text, Is.EqualTo("Please select a Color Mode"));
+        }
     }
 }

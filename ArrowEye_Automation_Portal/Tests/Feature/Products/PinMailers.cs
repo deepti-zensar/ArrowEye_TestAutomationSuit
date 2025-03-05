@@ -49,13 +49,26 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         [Test]
         [Description("PinMailers_Delete")]
         [Category("Smoke")]
-        [TestCase("Automation_", "Automation_", "Consumer site", "Turned off", "Grayscale")]
+        //[TestCase("Automation_", "Automation_", "Consumer site", "Turned on", "Grayscale")]
+        [TestCase("Automation_", "Automation_", "Corporate site", "Turned off", "Color")]
         public void Delete_PINMailers(string carrierTitle, string desc, string partOf, string carrierStatus, string colorMode)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.DeletePINMailer(carrierTitle + getRandomString(), desc, partOf, carrierStatus, colorMode);
+            DriverUtilities.TakeScreenshot(@"C:\");
+        }
+
+        [Test]
+        [Description("PinMailers_Validate")]
+        [Category("Smoke")]        
+        public void Validate_PINMailers()
+        {
+            CP_Pages.Login.LogIn(userName, password);
+            CP_Pages.Home.ValidateHomePageTitle();
+            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.PinMailersPage.ValidatePINMailers();
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 

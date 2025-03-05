@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using ArrowEye_Automation_Framework;
 using System;
 using OpenQA.Selenium.Interactions;
+using static OpenQA.Selenium.BiDi.Modules.Script.RemoteValue;
+using NUnit.Framework;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -45,13 +47,74 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=32]")]
         public IWebElement AmazonPCL;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Issuers')]")]
+        public IWebElement emvIssuers;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Authentications')]")]
+        public IWebElement emvAuthentications;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Card Profiles')]")]
+        public IWebElement emvCardProfiles;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Configurations')]")]
+        public IWebElement emvConfigurations;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Scripts')]")]
+        public IWebElement emvScripts;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Modules')]")]
+        public IWebElement emvModules;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Settings')]")]
+        public IWebElement clientSettings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Default Proof Replacements')]")]
+        public IWebElement clientSettingsDefaultProofReplacements;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Mag Track Encodings')]")]
+        public IWebElement clientSettingsMagTrackEncodings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Information')]")]
+        public IWebElement clientInformation;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Configuration Hierarchy')]")]
+        public IWebElement configurationHierarchy;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Orders On Hold')]")]
+        public IWebElement ordersOnHold;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Products')]")]
+        public IWebElement products;        
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Pin Mailers')]")]
+        public IWebElement productsPinMailers;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='menu']")]
+        public IWebElement leftNavigationBar;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/*[@data-testid='InfoOutlinedIcon']")]
+        public IWebElement disclaimerBannerIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
+        public IWebElement disclaimerBannerText;
+
+        [FindsBy(How = How.XPath, Using = "//ul[@role='menu']//li")]
+        public IList<IWebElement> clientGalleryMenuOptions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//ul[contains(@class,'MuiList-root MuiList-padding')]//p")]
+        public IList<IWebElement> leftNavigationBarOptions { get; set; }
 
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
             var elemnetvisible = homePageTitle.Displayed;
+            if (elemnetvisible)
+            {
+                Browser.WaitForElement(SearchOrSelect, 10);
+            }
         }
 
         public void SubmenuItems_display(IWebElement element)
@@ -103,7 +166,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
 
 
-        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+        public void CSPSettings_SubmenuItems(System.Boolean CSPSetting_SubMenuName)
         {
             Browser.Click(CSPSettings);
             if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
@@ -116,7 +179,145 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
+        public void NavigateToEMV()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(emv);
+        }
 
+        public void NavigateToEMVSubmenu(string emvSubmenu)
+        {
+            NavigateToEMV();
+            switch (emvSubmenu)
+            {
+                case "Authentications":
+                    Browser.Click(emvAuthentications);
+                    break;
+                case "Card Profiles":
+                    Browser.Click(emvCardProfiles);
+                    break;
+                case "Configurations":
+                    Browser.Click(emvConfigurations);
+                    break;
+                case "Issuers":
+                    Browser.Click(emvIssuers);
+                    break;
+                case "Scripts":
+                    Browser.Click(emvScripts);
+                    break;
+                case "Modules":
+                    Browser.Click(emvModules);
+                    break;
+            }
+        }
+        public void NavigateToClientSettings()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(clientSettings);
+        }
+
+        public void NavigateToClientSettingsSubmenu(string emvSubmenu)
+        {
+            NavigateToClientSettings();
+            switch (emvSubmenu)
+            {
+                case "Default Proof Replacements":
+                    Browser.Click(clientSettingsDefaultProofReplacements);
+                    break;
+
+                case "Mag Track Encodings":
+                    Browser.Click(clientSettingsMagTrackEncodings);
+                    break;
+
+            }
+        }
+
+        public void NavigateToMenu(string menu)
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            switch (menu)
+            {
+                case "Client Information":
+                    Browser.Click(clientInformation);
+                    break;
+
+                case "Configuration Hierarchy":
+                    Browser.Click(configurationHierarchy);
+                    break;
+
+                case "Orders On Hold":
+                    Browser.Click(ordersOnHold); 
+                    break;
+
+                case "Products":
+                    Browser.Click(products);
+                    break;
+            }
+        }
+
+        public void NavigateToClientGallery()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);            
+        }
+
+        public void NavigateToLeftBar()
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(leftNavigationBar);
+            Thread.Sleep(2000);
+        }
+
+        public void NavigateToProductsSubmenu(string submenu)
+        {
+            NavigateToMenu("Products");
+            switch (submenu)
+            {
+                case "Pin Mailers":
+                    Browser.Click(productsPinMailers);
+                    break;                
+
+            }
+        }
+
+
+        public void ValidateClientGalleryOptions(string[] listOfOptions)
+        {
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in clientGalleryMenuOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }            
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateLeftNavigationBarOptions(string[] listOfOptions)  
+        {            
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in leftNavigationBarOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }
+            Console.WriteLine(string.Join(", ",actualListOfOptions));
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateHomepageDisclaimerBanner()
+        {
+            Browser.WaitForElement(disclaimerBannerText, 10);
+            Assert.That(disclaimerBannerText.Text, Is.EqualTo("Please select a PCL ID to begin"));
+            Assert.That(disclaimerBannerIcon.Displayed, Is.True);
+        }
 
     }
 }

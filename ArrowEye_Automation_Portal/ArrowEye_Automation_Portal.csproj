@@ -232,7 +232,6 @@
     <Folder Include="bin\Release\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Tests\Feature\HomePage\" />
-    <Folder Include="Tests\Regression\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\ArrowEye_Automation_Framework.dll" />

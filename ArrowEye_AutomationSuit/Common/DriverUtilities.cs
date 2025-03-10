@@ -1428,7 +1428,11 @@ namespace ArrowEye_Automation_Framework.Common
             jse.ExecuteScript("arguments[0].click();", element);
 
         }
-
+        public static void Click(IWebElement element)
+        {
+            Thread.Sleep(3000);
+            element.Click();
+        }
 
         static public void ScrollToElementUsingJavaScript(IWebElement element)
         {

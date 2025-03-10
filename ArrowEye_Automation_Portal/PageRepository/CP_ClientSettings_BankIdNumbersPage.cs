@@ -326,7 +326,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
         public void CreateNewBankIdNumbers(string CreateNewBankIdNumbers)
         {
-
             //create new BankIdNumbers info record verify the add new popup details
             Browser.Click(BankIdNumbers_AddNew_button);
             var PopupHeaderText = NewBankIdNumber_Add_Popup_HeaderText.Text;

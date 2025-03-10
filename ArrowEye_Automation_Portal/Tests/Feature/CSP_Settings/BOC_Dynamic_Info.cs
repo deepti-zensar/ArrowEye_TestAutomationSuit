@@ -18,7 +18,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.AddNewBOCDynamicInfo(CreateBOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -31,7 +31,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.EditBOCDynamicInfo(UpdateBOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -44,7 +44,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.DeleteBOCDynamicInfo(DeleteBOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -57,7 +57,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("BOCDynamicInfo");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.ViewandSearchBOCDynamicInfo(ViewSearchBOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

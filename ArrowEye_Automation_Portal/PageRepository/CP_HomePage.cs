@@ -13,12 +13,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_HomePage :TestBase
     {
+        public static string PclDynamic = "//td[contains(.,'{0}')]";
+        public static string clientGallery = "//p[contains(.,'{0}')]";
+        public static string clientGallerySubMenuItem = "//li[@data-testid='subMenuItems']//p[contains(text(),'{0}')]";
+        public static string clientGalleryMenuItem = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'{0}')]";
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-1051h91' and contains(text(),'CLIENT GALLERY') and @data-testid='secondNested']")]
-        public IWebElement clientGallery;
+        //[FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-1051h91' and contains(text(),'CLIENT GALLERY') and @data-testid='secondNested']")]
+        //public IWebElement clientGallery;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-18ahme0' and contains(text(),'EMV')]")]
         public IWebElement emv;
@@ -118,6 +122,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
         public IWebElement AmazonPCL;
 
+
+
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
@@ -136,21 +142,22 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         }
 
-        public void NavigateToIssuers()
+        public void NavigateToIssuers(string EMV_SubMenuName, string pclID = "9006: Pier 2")
         {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(emv);
-            Browser.Click(issuers);
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "EMV");
+            Browser.ClickDynamicElement(clientGallerySubMenuItem, "Issuers");
         }
 
-        public void NavigateToCSPSettings(string CSPSetting_SubMenuName)
+        public void NavigateToCSPSettingsSubMenu(string CSPSetting_SubMenuName, string pclID = "9006: Pier 2")
         {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(CSPSettings);
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "CSP Settings");
+
             CSPSettings_SubmenuItems(true);
             switch (CSPSetting_SubMenuName)
             {
@@ -172,82 +179,75 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-
-        public void NavigateToClientSettings(string ClientSetting_SubMenuName)
+        public void NavigateToClientSettingsSubMenu(string ClientSetting_SubMenuName, string pclID)
         {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(ClientSettings);
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             
             switch (ClientSetting_SubMenuName)
             {
-                
-                case "BankIDNumbers":
+                case "Bank ID Numbers":
                     Browser.Click(BankIdNumbers);
                     break;
                 case "BCSSConfigurations":
                     Browser.Click(BCSSConfigurations);
                     break;
-                case "ClientProfiles":
+                case "Client Profiles":
                     Browser.Click(ClientProfiles);
                     break;
-                case "DefaultProofReplacements":
+                case "Default Proof Replacements":
                     Browser.Click(DefaultProofReplacements);
                     break;
-                case "EmbosserFieldMaps":
+                case "Embosser Field Maps":
                     Browser.Click(EmbosserFieldMaps);
                     break;
-
-                case "GeneralSettings":
+                case "General Settings":
                     Browser.Click(GeneralSettings);
                     break;
-                case "HotStamps":
+                case "Hot Stamps":
                     Browser.Click(HotStamps);
                     break;
-                case "InventoryConfiguration":
+                case "Inventory Configuration":
                     Browser.Click(InventoryConfiguration);
                     break;
-                case "IssuingBanks":
+                case "Issuing Banks":
                     Browser.Click(IssuingBanks);
                     break;
-                case "MagTrackEncodings":
+                case "Mag Track Encodings":
                     Browser.Click(MagTrackEncodings);
                     break;
-
-                case "ConfigureClient":
+                case "Configure Client":
                     Browser.Click(ConfigureClient);
                     break;
-                case "Platforms_Products":
+                case "Platforms Products":
                     Browser.Click(Platforms_Products);
                     break;
-                case "PrintTags":
+                case "Print Tags":
                     Browser.Click(PrintTags);
                     break;
-                case "PrintSettings":
+                case "Print Settings":
                     Browser.Click(PrintSettings);
                     break;
-                case "PublishingPolicies":
+                case "Publishing Policies":
                     Browser.Click(PublishingPolicies);
                     break;
-
-                case "RetailerClient_Configurations":
+                case "Retailer Client Configurations":
                     Browser.Click(RetailerClient_Configurations);
                     break;
-                case "RetailerProfiles":
+                case "Retailer Profiles":
                     Browser.Click(RetailerProfiles);
                     break;
-                case "ShipTypes":
+                case "Ship Types":
                     Browser.Click(ShipTypes);
                     break;
-
-                case "SOPAdhocKeyValues":
+                case "SOP Adhoc Key Values":
                     Browser.Click(SOPAdhocKeyValues);
                     break;
-                case "SOPConfigurations":
+                case "SOP Configurations":
                     Browser.Click(SOPConfigurations);
                     break;
-
             }
         }
 

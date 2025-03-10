@@ -15,11 +15,11 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Description("EMV_Scripts_Records_Create")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void ADD_New_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Add_EMV_NewRecord(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings("9006: Pier 2");
+            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptsFeild();
             EMV_Pages.EMVScriptsPage.AddNewEMVScriptRecord("Automation_Create_New_Script" + randomString);
         }
@@ -32,7 +32,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings("9006: Pier 2");
+            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
             EMV_Pages.EMVScriptsPage.EditEMVScriptRecord("Automation_Edit_Script" + randomString);
         }
 
@@ -44,7 +44,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings("9006: Pier 2");
+            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptField("Automation_Edit_Script" + randomString);
         }
 
@@ -52,14 +52,13 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Description("EMV_Script_Records_Export")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void EMV_Script_Export_File(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Export_EMV_Script_File(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings("9006: Pier 2");
+            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptsFeild();
             EMV_Pages.EMVScriptsPage.ExportEMVScriptPages();
         }
-        
     }
 }

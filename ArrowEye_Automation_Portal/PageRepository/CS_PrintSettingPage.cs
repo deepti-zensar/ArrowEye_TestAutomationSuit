@@ -67,10 +67,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         private string duplicateKeyErrorMessage = "//li[contains(text(),'{0}')]";
 
-        public void NavigateToPrintSettings()
+        public void NavigateToPrintSettings(string pclID = "9006: Pier 2")
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9006: Pier 2");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
             Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "Print Settings");

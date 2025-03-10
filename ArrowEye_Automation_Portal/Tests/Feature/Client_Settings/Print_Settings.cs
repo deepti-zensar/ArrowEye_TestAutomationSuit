@@ -14,11 +14,11 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("Print_Setting_Records_Create")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void ADD_New_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Add_PrintSettings_NewRecord(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.CSPrintSettingPage.NavigateToPrintSettings();
+            CS_Pages.CSPrintSettingPage.NavigateToPrintSettings("9006: Pier 2");
             CS_Pages.CSPrintSettingPage.AddNewPrintSettingRecord("cltnotifyhttp_get:allcomments");
         }
 
@@ -26,7 +26,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("Print_Setting_Records_Update")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Edit_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Edit_PrintSettings_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
@@ -38,7 +38,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("Print_Setting_Records_Delete")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Delete_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Delete_PrintSettings_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
@@ -51,7 +51,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("Print_Setting_Records_Validation")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Validate_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Validate_PrintSettings_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
@@ -63,7 +63,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("Print_Setting_Records_Export")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Export_Records(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Export_PrintSettings_Records(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();

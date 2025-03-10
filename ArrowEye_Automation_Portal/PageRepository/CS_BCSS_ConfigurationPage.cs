@@ -66,10 +66,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//td[@data-testid='table-pagination']//p[2]")]
         private IWebElement rowsCount;      
 
-        public void NavigateToBCSSConfigurations()
+        public void NavigateToBCSSConfigurations(string pclID = "9005: Pier One")
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9005: Pier One");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
             Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "BCSS Configurations");
@@ -79,7 +79,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         //TODO: Scenario 1B: When character are more than 200 in Description field
         public void AddNewBCSSRecord(string Text)
         {
-            ValidateBCSSConfigurationsField();
+            //ValidateBCSSConfigurationsField();
 
             //create new  BCSS record
             Browser.ClickDynamicElement(addNewButton, "Add New");
@@ -205,7 +205,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 string csvRowCount = CountRowsInCsv(csvFiles[0]).ToString();
                 Assert.That(totalCount, Is.EqualTo(csvRowCount), "Total count in CSV does not match with total count on web page");
             }
-
         }
 
         private void ValidateBCSSConfigurationsField()

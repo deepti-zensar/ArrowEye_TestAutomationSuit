@@ -14,7 +14,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("BCSS_Configuration_Records_Create")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void ADD_New_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Add_BCSSConfiguration_NewRecord(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
@@ -26,7 +26,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("BCSS_Configuration_Records_Edit")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Edit_BCSS_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Edit_BCSSConfiguration_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
@@ -38,7 +38,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Description("BCSS_Configuration_Records_Delete")]
         [Category("Smoke")]
         [TestCaseSource(typeof(ExcelDataParser), "TestData", new object[] { "LoginData", new int[] { 1 } })]
-        public void Delete_BCSS_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
+        public void Delete_BCSSConfiguration_Record(ArrowEye_Automation_Framework.Excel.TestCaseData TestCaseData)
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();

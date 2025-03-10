@@ -96,7 +96,7 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
 
         public static string inputfield = "//label[text()='{0}']/following-sibling::div/input";
 
-        public void NavigateToEMVSettings(string pclID)
+        public void NavigateToEMVSettings(string pclID = "9006: Pier 2")
         {
             DriverUtilities.Click(SearchOrSelect);
             Browser.ClickDynamicElement(PclDynamic, pclID);
@@ -203,7 +203,6 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             validateRecord(record);
         }
 
-
         public void ValidateEMVScriptField(string Text)
         {
             //create new EMV Script record
@@ -227,7 +226,6 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             Assert.That(NameErrorText, Does.Contain("Name is required."));
             Assert.That(DescriptionErrorText, Does.Contain("Description is required."));
             //Name already exists not done
-
         }
         public void ExportEMVScriptPages()
         {
@@ -248,7 +246,6 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
                 string csvRowCount = CountRowsInCsv(csvFiles[0]).ToString();
                 Assert.That(totalCount, Is.EqualTo(csvRowCount), "Total count in CSV does not match with total count on web page");
             }
-
         }
 
         static int CountRowsInCsv(string filePath)

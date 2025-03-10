@@ -15,11 +15,6 @@ namespace ArrowEye_Automation_Framework.Excel
 {
     public class ExcelDataParser
     {
-        //static string pth = System.Reflection.Assembly.GetCallingAssembly().CodeBase.Substring(0, pth.LastIndexOf("/"));
-        //static string actualPath = pth + @"\Excel";
-        //static string projectPath = new Uri(actualPath).LocalPath;
-        //static string excelPath = projectPath + @"com.seloger.resources\excelData\";
-
         public static IEnumerable<TestCaseData> TestData(string sheetName, int[] rowNumbers)
         {
             string currentAssemblyPath = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
@@ -27,16 +22,11 @@ namespace ArrowEye_Automation_Framework.Excel
             string basePath = Uri.UnescapeDataString(uri.Path);
             string finalPath = "C:/Users/PJain/Source/Repos/ArrowEye_TestAutomationSuit/ArrowEye_AutomationSuit/Excel/TestData.xlsx";
 
-
-          //  string finalPath = basePath.Substring(0, basePath.LastIndexOf("/")) + @"/Excel/TestData.xlsx";
-            //var path = new Uri("actualPath").LocalPath;
-
             List<TestCaseData> testCaseDataList = ReadExcelData(finalPath, sheetName, rowNumbers);
 
             if (testCaseDataList != null)
                 foreach (TestCaseData testCaseData in testCaseDataList)
                     yield return testCaseData;
-
         }
 
         public static List<TestCaseData> ReadExcelData(string path, string sheetName, int[] rowNumbers)

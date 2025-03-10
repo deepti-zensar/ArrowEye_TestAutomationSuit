@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Common;
 using ArrowEye_Automation_Portal.PageRepository.Objects;
-using NPOI.SS.Formula.Functions;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using RandomString4Net;
 using SeleniumExtras.PageObjects;
-using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.Locator;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 
 {
-
     public class CS_BCSS_ConfigurationPage : TestBase
     {
         public static string PclDynamic = "//td[contains(.,'{0}')]";
@@ -75,7 +66,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//td[@data-testid='table-pagination']//p[2]")]
         private IWebElement rowsCount;      
 
-
         public void NavigateToBCSSConfigurations()
         {
             DriverUtilities.Click(SearchOrSelect);
@@ -83,7 +73,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
             Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "BCSS Configurations");
-
         }
 
         //TODO: name field value already exists
@@ -192,8 +181,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var cvkvalue = CVKFieldEle.GetDomAttribute("value");
             ValidateIntegerValue(cvkvalue, dynamicMessage1);
 
-
-
             Assert.That(NameErrorText, Does.Contain("Name is required."));
             Assert.That(DescriptionErrorText, Does.Contain("Description is required."));
             Assert.That(ProfileNameErrorText, Does.Contain("Profile Name is required."));
@@ -212,7 +199,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
             else
             {
-
                 string rowsCountText = rowsCount.GetText();
                 string[] parts = rowsCountText.Split(new string[] { " of " }, StringSplitOptions.None);
                 string totalCount = parts[1].Trim();
@@ -253,17 +239,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         private void ValidateIntegerValue(string value, string message)
         {
-
             if (int.TryParse(value, out int result))
             {
                 if (result > 32767)
                 {
-
                     WebElement ErrorEle = Browser.getDynamicElement(errormessage1, message);
                     var ErrorText = ErrorEle.GetText();
                     Assert.That(ErrorText, Does.Contain(message));
-
-
                 }
             }
             else

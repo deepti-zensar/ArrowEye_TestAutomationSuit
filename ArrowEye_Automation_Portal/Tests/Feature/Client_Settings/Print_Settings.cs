@@ -1,12 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArrowEye_Automation_Framework;
+﻿using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Excel;
-using ArrowEye_Automation_Portal.PageRepository.EMV;
 using NUnit.Framework;
 using RandomString4Net;
 

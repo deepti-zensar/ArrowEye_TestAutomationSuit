@@ -1,25 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Common;
 using ArrowEye_Automation_Portal.PageRepository.Objects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V129.Overlay;
-using RandomString4Net;
 using SeleniumExtras.PageObjects;
 
 namespace ArrowEye_Automation_Portal.PageRepository.EMV
   
 {
-    
     public class EMV_Scripts_Page : TestBase
     {
       
@@ -35,12 +26,8 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
 
         public static string clientGallerySubMenuItem = "//li[@data-testid='subMenuItems']//p[contains(text(),'{0}')]";
 
-      //  [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Add New')]")]
-       // public IWebElement addNewButton;
-
         [FindsBy(How = How.XPath, Using = "//label[text()='Name']/following-sibling::div/input")]
         public IWebElement inputName_EVM;
-
 
         [FindsBy(How = How.XPath, Using = "//label[text()='Description']/following-sibling::div/input")]
         public IWebElement descriptionEVM;
@@ -109,24 +96,14 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
 
         public static string inputfield = "//label[text()='{0}']/following-sibling::div/input";
 
-
-
-
-
-
-
-
-        public void NavigateToEMVSettings()
+        public void NavigateToEMVSettings(string pclID)
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9006: Pier 2");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             DriverUtilities.Click(clientGallery);
             Browser.ClickDynamicElement(clientGalleryMenuItem, "EMV");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "Scripts");
-
         }
-
-        
 
         public void ValidateEMVScriptsFeild()
         {
@@ -134,7 +111,7 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             WebElement scriptNameEle = Browser.getDynamicElement(scriptfield, "Name");
             WebElement scriptDescriptionELe = Browser.getDynamicElement(scriptfield, "Description");
             WebElement scriptProfileNameELe = Browser.getDynamicElement(scriptfield, "Profile Name");
-            }
+        }
 
         private void validatePopupMessage(String message)
         {
@@ -265,7 +242,6 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             }
             else
             {
-
                 string rowsCountText = rowsCount.GetText();
                 string[] parts = rowsCountText.Split(new string[] { " of " }, StringSplitOptions.None);
                 string totalCount = parts[1].Trim();
@@ -302,7 +278,5 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             }
             return rowCount;
         }
-
-
     }
 }

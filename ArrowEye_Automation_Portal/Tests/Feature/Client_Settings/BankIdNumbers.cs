@@ -2,11 +2,6 @@
 using ArrowEye_Automation_Framework;
 using NUnit.Framework;
 using RandomString4Net;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
 {
@@ -22,7 +17,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers", "9006: Pier 2");
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.CreateNewBankIdNumbers(CreateBankIdNumbersText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -35,7 +30,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers", "9006: Pier 2");
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.EditNewBankIdNumbers(UpdateBankIdNumbersText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -48,7 +43,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers", "9006: Pier 2");
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.View_export_NewBankIdNumbers(Search_Export_BankIdNumbersText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -62,7 +57,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 70);
             CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers", "9006: Pier 2");
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.ValidationsNewBankIdNumbers(NegativeScenariosText + randomStrings);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

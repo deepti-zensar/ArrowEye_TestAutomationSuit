@@ -15,7 +15,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Create_Info_")]
         public void Create_New_FOC_Dynamic_Info(string CreateFOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.AddNewFOCDynamicInfo(CreateFOCDynamicText + randomString);
@@ -28,7 +28,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Edit_Info_")]
         public void Edit_FOC_Dynamic_Info(string UpdateFOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.EditFOCDynamicInfo(UpdateFOCDynamicText + randomString);
@@ -41,7 +41,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Delete_Info_")]
         public void Delete_FOC_Dynamic_Info(string DeleteBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.DeleteFOCDynamicInfo(DeleteBOCDynamicText + randomString);
@@ -54,7 +54,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Search_View_BOCDynamicInfo_")]
         public void View_Search_FOC_Dynamic_Info(string ViewSearchBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.ViewandSearchFOCDynamicInfo(ViewSearchBOCDynamicText + randomString);
@@ -68,7 +68,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         public void Negative_Validations_FOC_Dynamic_Info(string ViewSearchBOCDynamicText)
         {
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 50);
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("FOCDynamicInfo");
             CP_Pages.FOCDynamicInfoPage.ValidationsFOCDynamicInfo(ViewSearchBOCDynamicText + randomStrings);

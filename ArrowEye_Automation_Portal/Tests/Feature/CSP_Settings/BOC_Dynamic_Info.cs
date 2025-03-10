@@ -16,7 +16,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Create_Info")]
         public void Create_New_BOC_Dynamic_Info(string CreateBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.AddNewBOCDynamicInfo(CreateBOCDynamicText + randomString);
@@ -29,7 +29,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Edit_Info_")]
         public void Edit_BOC_Dynamic_Info(string UpdateBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.EditBOCDynamicInfo(UpdateBOCDynamicText + randomString);
@@ -42,7 +42,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Delete_Info_")]
         public void Delete_BOC_Dynamic_Info(string DeleteBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.DeleteBOCDynamicInfo(DeleteBOCDynamicText + randomString);
@@ -55,7 +55,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Search_View_BOCDynamicInfo_")]
         public void View_Search_BOC_Dynamic_Info(string ViewSearchBOCDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltestuser", "Admin123@");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("BOCDynamicInfo");
             CP_Pages.BOCDynamicInfoPage.ViewandSearchBOCDynamicInfo(ViewSearchBOCDynamicText + randomString);

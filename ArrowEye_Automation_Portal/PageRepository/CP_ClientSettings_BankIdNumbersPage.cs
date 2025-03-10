@@ -4,23 +4,11 @@ using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using ArrowEye_Automation_Framework;
 using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
-using System;
-using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.ClipRectangle;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
-using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
-using OpenQA.Selenium.BiDi.Modules.Log;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using static System.Windows.Forms.LinkLabel;
-
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_ClientSettings_BankIdNumbersPage : TestBase
     {
-
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]")]
         public IWebElement CSVSettings_menu;
 
@@ -166,7 +154,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//h2[@class='MuiTypography-root MuiTypography-h6 MuiDialogTitle-root jss104 css-ohyacs']")]
         private IWebElement NewBankIdNumber_disabled_popup_headertext;
 
-
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss105 css-q3n577']")]
         private IWebElement NewBankIdNumber_disabled_popup_warningmessage;
 
@@ -232,7 +219,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-field='isActive'])[1]")]
         private IWebElement NewBankIdNumber_homepage_Status;
-
 
         [FindsBy(How = How.XPath, Using = "//div[@data-testid='mag_track_encoding']")]
         private IWebElement NewBankIdNumber_popup_magtrackencodingdd;
@@ -356,13 +342,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(Add_NewBankIdNumber_SuccessMessage, Does.Contain("Bank Id Number " + NewlyaddedBankIdNumber_Id + " Added Successfully."));
             Assert.That(Added_NewBankIdNumber_record_details, Does.Contain(NewBankIdNumberTextbox_InputData));
 
-
-            
         }
 
         public void EditNewBankIdNumbers(string UpdateNewBankIdNumbers)
         {
-
             // //create new BankIdNumber info record
             Browser.Click(BankIdNumbers_AddNew_button);
             NewBankIdCreation_Popup_Textbox.SendKeys(UpdateNewBankIdNumbers.ToString());
@@ -399,7 +382,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             NewBankIDNumber_AutoSearch_textbox.SendKeys(updateBankIdNumberExpectedinput.ToString());
             var UpdatedBankIdNumberActualData = BankIdNumber_Updated.Text;
 
-
             //validations
             Assert.That(Add_NewBankIdNumber_SuccessMessage, Does.Contain("Bank Id Number " + NewlyaddedBankIdNumber_Id + " Added Successfully."));
             Assert.That(EditPopupBankIdNumberlable, Is.EqualTo("Bank ID Number"));
@@ -410,11 +392,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(UpdateBankIdNumbersuccessmessage, Is.EqualTo("Bank Id Number " + NewlyaddedBankIdNumber_Id + " Updated Successfully."));
             Assert.That(UpdatedBankIdNumberActualData, Is.EqualTo(updateBankIdNumberExpectedinput));
 
-
         }
-
-
-
         //download BankIdnumber file
         public void BankIdNumber_Export(string fileName)
         {
@@ -474,13 +452,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(Search_Valid_Id, Is.EqualTo(NewlyaddedBankIdNumber_Id));
             Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
             Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
-
         }
-
 
         public void ValidationsNewBankIdNumbers(string NegativeScenariosText)
         {
-
             //create new dynamic info record
             Browser.Click(BankIdNumbers_AddNew_button);
             NewBankIdCreation_Popup_Textbox.SendKeys(NegativeScenariosText.ToString());
@@ -489,8 +464,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(4000);
             var Add_NewBankIdNumber_SuccessMessage = NewBankIdNumber_recordAdd_sucessmessage.Text;
             var NewlyaddedBankIdNumber_Id = AddedNewBankIdNumber_ID.Text;
-
-            
 
             //Scenario 1A: Bank ID Number field value is not entered
             Browser.Click(BankIdNumbers_AddNew_button);
@@ -505,13 +478,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(4000);
             var AddBankIdNumber_TextInput_dublicaterecord_ValidationMessage = NewBankIdNumber_Textinput_dublicaterecord_Error.Text;
 
-
             //Scenario 1C: Only numeric characters and character length from 6 to 10 is allowed
             NewBankIdCreation_Popup_Textbox.Clear();
             NewBankIdCreation_Popup_Textbox.SendKeys(NegativeScenariosText +"1234567");
             Browser.Click(NewBankIdNumber_Popup_Savebtn);
             var AddBankIdNumber_TextInput_ExceedLimit_ValidationMessage = NewBankIdNumber_Textinput_exceedcharlimit_error.Text;
-
 
             //Scenario 1D: Only numeric characters and gives invalid alphanumeric chars
             NewBankIdCreation_Popup_Textbox.Clear();
@@ -530,8 +501,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(NewBankIdNumber_enable_disable_popup_Disabledbutton);
             //if the bankid number is linked with active/inactive it throws the error, this scenarios not works in app.
             var bankIdnumber_linked_active_inactive_errormessage = NewBankIdNumber_linked_active_inactive_error.Text;
-
-
 
             //Scenario 3: When character are more than 50 in Bin Name field
             NewBankIdCreation_Popup_Textbox.Clear();

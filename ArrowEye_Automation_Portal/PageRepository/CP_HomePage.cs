@@ -96,7 +96,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Publishing Policies')]")]
         public IWebElement PublishingPolicies;
 
-
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Retailer Client Configurations')]")]
         public IWebElement RetailerClient_Configurations;
 
@@ -112,17 +111,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'SOP Configurations')]")]
         public IWebElement SOPConfigurations;
 
-
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3' and contains(text(),'Issuers')]")]
         public IWebElement issuers;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
-
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
-        public IWebElement AmazonPCL;
-
-
 
         public void ValidateHomePageTitle()
         {
@@ -179,7 +172,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-        public void NavigateToClientSettingsSubMenu(string ClientSetting_SubMenuName, string pclID)
+        public void NavigateToClientSettingsSubMenu(string ClientSetting_SubMenuName, string pclID = "9006: Pier 2")
         {
             DriverUtilities.Click(SearchOrSelect);
             Browser.ClickDynamicElement(PclDynamic, pclID);

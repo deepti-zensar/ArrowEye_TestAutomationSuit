@@ -10,7 +10,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_CSPSettings_FOCDynamicInfoPage : TestBase
     {
-
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]")]
         public IWebElement CSVSettings_menu;
 
@@ -272,7 +271,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FOCDynamicInfo_AutoSearch_textbox.Clear();
             FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
 
-
             //click on Edit icon and verify the popup details and go for Edit
             Browser.Click(FOCDynamicInfo_Edit_Icon_button);
             var EditPopupTextboxfield = UpdateFocDynamicInfoPopup_FOCDynamicTextField.Text;
@@ -302,10 +300,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(ActualFocDynmaicInfoUpdatesuccessmessage, Is.EqualTo("FOC Dynamic Info " + FOCDynamicInfo_Id + " updated Successfully."));
             Assert.That(UpdatedFocInfoActualData, Is.EqualTo(updateFOCInfoExpectedUserData));
 
-
         }
-
-
         public void DeleteFOCDynamicInfo(string DeleteFOCDynamicText)
         {
             //create new dynamic info record
@@ -340,7 +335,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FOCDynamicInfo_AutoSearch_textbox.Clear();
             FOCDynamicInfo_AutoSearch_textbox.SendKeys(FOCDynamicText_InputData.ToString());
             var afterdeletedrecorddetails = DeleteFocDynamicInfoPopup_deletedrecorddetails.Text;
-
 
             //validations
             Assert.That(Add_FocDynamicInfo_SuccessMessage, Does.Contain("FOC Dynamic Info " + FOCDynamicInfo_Id + " added Successfully."));
@@ -385,8 +379,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FOCDynamicInfo_AutoSearch_textbox.SendKeys(BOCDynamicText_InputData + "1234");
             var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
 
-
-
             //validations
             Assert.That(BOCDynamicText_InputData, Does.Contain(Search_withvalid_Text));
             Assert.That(Search_Valid_Id, Is.EqualTo(FOCDynamicInfo_Id));
@@ -394,10 +386,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
         }
 
-
         public void ValidationsFOCDynamicInfo(string NegativeScenariosFOCDynamicText)
         {
-
             //create new dynamic info record
             Browser.Click(FOCDynamicInfo_AddNew_button);
             NewFocDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosFOCDynamicText.ToString());

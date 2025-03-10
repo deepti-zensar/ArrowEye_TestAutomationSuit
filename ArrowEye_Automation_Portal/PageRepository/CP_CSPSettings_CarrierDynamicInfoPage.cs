@@ -4,14 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Net.NetworkInformation;
-using ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings;
-using System.IO;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -129,8 +122,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall textPrimary css-1pydezi'])[2]")]
         private IWebElement CarrierDynamicInfo_Edit_Icon_button;
 
-        
-
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='closeButton']")]
         private IWebElement NewCarrierDynamicInfoPopup_Closebtn;
 
@@ -232,10 +223,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-
-       
-
-
         public void AddNewCarrierDynamicInfo(string CarrierDynamicText)
         {
             //create new Carrier dynamic info record verify the add new popup details
@@ -270,7 +257,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void EditCarrierDynamicInfo(string UpdateCarrierDynamicText)
         {
-
             //create new carrier dynamic info record
             Browser.Click(CarrierDynamicInfo_AddNew_button);
             NewCarrierDynamicInfoPopup_Textbox.SendKeys(UpdateCarrierDynamicText.ToString());
@@ -284,7 +270,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             CarrierDynamicInfo_AutoSearch_textbox.Clear();
             CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
             var Created_CarrierInfo_record_details = CarrierDynamicInfo_created.Text;
-
 
             //click on Edit icon and verify the popup details and go for Edit
             Browser.Click(CarrierDynamicInfo_Edit_Icon_button);
@@ -314,10 +299,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(UpdateCarrierInfo_popup_HeaderText, Is.EqualTo("Update Carrier Dynamic Info"));
             Assert.That(CarrierDynmaicInfoUpdatesuccessmessage, Is.EqualTo("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " updated Successfully."));
             Assert.That(UpdatedCarrierInfoActualData, Is.EqualTo(updateCarrierInfoExpectedUserData));
-
-
         }
-
 
         public void DeleteCarrierDynamicInfo(string DeleteCarrierDynamicText)
         {
@@ -355,7 +337,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             CarrierDynamicInfo_AutoSearch_textbox.SendKeys(CarrierDynamicText_InputData.ToString());
             var afterdeletedrecorddetails = DeletedcarrierDynamicInfoPopup_deletedrecorddetails.Text;
 
-            
             //validations
             Assert.That(Add_CarrierDynamicInfo_SuccessMessage, Does.Contain("Carrier Dynamic Info " + CarrierDynamicInfo_Id + " added Successfully."));
             Assert.That(Deletepopup_headertext, Is.EqualTo("Delete"));
@@ -399,7 +380,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             CarrierDynamicInfo_AutoSearch_textbox.SendKeys(Search_Valid_Id + "1234");
             var Search_Invalid_Id = Search_View_InvalidRecordDetails.Text;
 
-
             //validations
             Assert.That(CarrierDynamicText_InputData, Does.Contain(Search_withvalid_Text));
             Assert.That(Search_Valid_Id, Is.EqualTo(CarrierDynamicInfo_Id));
@@ -407,17 +387,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(Search_Invalid_Text, Does.Contain("No results found."));
         }
 
-
         public void ValidationsCarrierDynamicInfo(string NegativeScenariosText)
         {
-
             //create new dynamic info record
             Browser.Click(CarrierDynamicInfo_AddNew_button);
             NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText.ToString());
             var CarrierDynamicText_InputData = NewCarrierDynamicInfoPopup_Textbox.GetDomAttribute("value");
             Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
             Thread.Sleep(4000);
-
 
             //Scenario1 : Without Dynamic carrier text field value input
             Browser.Click(CarrierDynamicInfo_AddNew_button);
@@ -426,7 +403,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var AddCarrierdynamicinfo_withoutText_ValidationMessage = CarrierDynamicInfo_Addwithouttext_Error.Text;
 
             //Scenario 2: Exceed TextBox input char limits
-
             NewCarrierDynamicInfoPopup_Textbox.SendKeys(NegativeScenariosText + "morethan200characters&*^$%^&$#@%^&*&^%$#dwedhwejjejehwejfenmrfbef");
             Browser.Click(NewCarrierDynamicInfoPopup_Savebtn);
 

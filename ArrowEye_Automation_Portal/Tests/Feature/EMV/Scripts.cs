@@ -19,7 +19,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
+            CP_Pages.Home.NavigateToEMVSubMenu("Scripts");
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptsFeild();
             EMV_Pages.EMVScriptsPage.AddNewEMVScriptRecord("Automation_Create_New_Script" + randomString);
         }
@@ -32,7 +32,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
+            CP_Pages.Home.NavigateToEMVSubMenu("Scripts");
             EMV_Pages.EMVScriptsPage.EditEMVScriptRecord("Automation_Edit_Script" + randomString);
         }
 
@@ -45,6 +45,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
             EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
+            CP_Pages.Home.NavigateToEMVSubMenu("Scripts");
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptField("Automation_Edit_Script" + randomString);
         }
 
@@ -56,7 +57,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            EMV_Pages.EMVScriptsPage.NavigateToEMVSettings();
+            CP_Pages.Home.NavigateToEMVSubMenu("Scripts");
             EMV_Pages.EMVScriptsPage.ValidateEMVScriptsFeild();
             EMV_Pages.EMVScriptsPage.ExportEMVScriptPages();
         }

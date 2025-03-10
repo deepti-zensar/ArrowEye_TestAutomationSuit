@@ -18,7 +18,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.BCSSConfigurationPage.NavigateToBCSSConfigurations();
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
             CS_Pages.BCSSConfigurationPage.AddNewBCSSRecord("BCSS-Configuration-" + RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10));
         }
 
@@ -30,7 +30,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.BCSSConfigurationPage.NavigateToBCSSConfigurations();
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
             CS_Pages.BCSSConfigurationPage.EditBCSSRecord("BCSS-Configuration-" + RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10));
         }
 
@@ -42,7 +42,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.BCSSConfigurationPage.NavigateToBCSSConfigurations();
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
             CS_Pages.BCSSConfigurationPage.DeleteBCSSRecord("BCSS-Configuration-" + RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10));
         }
 
@@ -54,7 +54,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.BCSSConfigurationPage.NavigateToBCSSConfigurations();
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
             CS_Pages.BCSSConfigurationPage.ValidateBCSSConfigurationField();
         }
 
@@ -66,7 +66,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
-            CS_Pages.BCSSConfigurationPage.NavigateToBCSSConfigurations();
+            CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
             CS_Pages.BCSSConfigurationPage.ExportBCSSConfigurationRecord();
         }
     }

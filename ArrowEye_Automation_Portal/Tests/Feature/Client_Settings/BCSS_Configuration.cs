@@ -55,7 +55,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
             CP_Pages.Login.LogIn(TestCaseData.GetValue("Username"), TestCaseData.GetValue("Password"));
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToClientSettingsSubMenu("BCSS Configurations");
-            CS_Pages.BCSSConfigurationPage.ValidateBCSSConfigurationField();
+            CS_Pages.BCSSConfigurationPage.ValidateBCSSConfigurationField("BCSS-Configuration-" + RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10));
         }
 
         [Test]

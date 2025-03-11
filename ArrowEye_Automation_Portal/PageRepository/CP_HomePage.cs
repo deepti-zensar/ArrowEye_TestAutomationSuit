@@ -6,17 +6,23 @@ using System.Collections.Generic;
 using ArrowEye_Automation_Framework;
 using System;
 using OpenQA.Selenium.Interactions;
+using static OpenQA.Selenium.BiDi.Modules.Script.RemoteValue;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_HomePage :TestBase
     {
+        public static string PclDynamic = "//td[contains(.,'{0}')]";
+        public static string clientGallery = "//p[contains(.,'{0}')]";
+        public static string clientGallerySubMenuItem = "//li[@data-testid='subMenuItems']//p[contains(text(),'{0}')]";
+        public static string clientGalleryMenuItem = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'{0}')]";
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-1051h91' and contains(text(),'CLIENT GALLERY') and @data-testid='secondNested']")]
-        public IWebElement clientGallery;
+        //[FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-1051h91' and contains(text(),'CLIENT GALLERY') and @data-testid='secondNested']")]
+        //public IWebElement clientGallery;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-18ahme0' and contains(text(),'EMV')]")]
         public IWebElement emv;
@@ -24,8 +30,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'CSP Settings')]")]
         public IWebElement CSPSettings;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'Client Settings')]")]
+        public IWebElement ClientSettings;
+
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BOC Dynamic Info')]")]
         public IWebElement BOCDynamicInfo;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Bank ID Numbers')]")]
+        public IWebElement BankIdNumbers;
 
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Card Holder Agreement')]")]
         public IWebElement CardHolderAgreement;
@@ -39,14 +51,71 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'FOC Dynamic Info')]")]
         public IWebElement FOCDynamicInfo;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BCSS Configurations')]")]
+        public IWebElement BCSSConfigurations;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Client Profiles')]")]
+        public IWebElement ClientProfiles;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Default Proof Replacements')]")]
+        public IWebElement DefaultProofReplacements;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Embosser Field Maps')]")]
+        public IWebElement EmbosserFieldMaps;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'General Settings')]")]
+        public IWebElement GeneralSettings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Hot Stamps')]")]
+        public IWebElement HotStamps;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Inventory Configuration')]")]
+        public IWebElement InventoryConfiguration;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Issuing Banks')]")]
+        public IWebElement IssuingBanks;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Mag Track Encodings')]")]
+        public IWebElement MagTrackEncodings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Configure Client')]")]
+        public IWebElement ConfigureClient;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Number Generators')]")]
+        public IWebElement NumberGenerators;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Platforms & Products')]")]
+        public IWebElement Platforms_Products;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Print Tags')]")]
+        public IWebElement PrintTags;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Print Settings')]")]
+        public IWebElement PrintSettings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Publishing Policies')]")]
+        public IWebElement PublishingPolicies;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Retailer Client Configurations')]")]
+        public IWebElement RetailerClient_Configurations;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Retailer Profiles')]")]
+        public IWebElement RetailerProfiles;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'Ship Types')]")]
+        public IWebElement ShipTypes;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'SOP Adhoc Key-Values')]")]
+        public IWebElement SOPAdhocKeyValues;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'SOP Configurations')]")]
+        public IWebElement SOPConfigurations;
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3' and contains(text(),'Issuers')]")]
         public IWebElement issuers;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-qiwgdb' and contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
-
-        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=1]")]
-        public IWebElement AmazonPCL;
 
         public void ValidateHomePageTitle()
         {
@@ -66,21 +135,22 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         }
 
-        public void NavigateToIssuers()
+        public void NavigateToIssuers(string EMV_SubMenuName, string pclID = "9006: Pier 2")
         {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(emv);
-            Browser.Click(issuers);
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "EMV");
+            Browser.ClickDynamicElement(clientGallerySubMenuItem, "Issuers");
         }
 
-        public void NavigateToCSPSettings(string CSPSetting_SubMenuName)
+        public void NavigateToCSPSettingsSubMenu(string CSPSetting_SubMenuName, string pclID = "9006: Pier 2")
         {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(CSPSettings);
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "CSP Settings");
+
             CSPSettings_SubmenuItems(true);
             switch (CSPSetting_SubMenuName)
             {
@@ -102,8 +172,80 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
+        public void NavigateToClientSettingsSubMenu(string ClientSetting_SubMenuName, string pclID = "9006: Pier 2")
+        {
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
+            
+            switch (ClientSetting_SubMenuName)
+            {
+                case "Bank ID Numbers":
+                    Browser.Click(BankIdNumbers);
+                    break;
+                case "BCSSConfigurations":
+                    Browser.Click(BCSSConfigurations);
+                    break;
+                case "Client Profiles":
+                    Browser.Click(ClientProfiles);
+                    break;
+                case "Default Proof Replacements":
+                    Browser.Click(DefaultProofReplacements);
+                    break;
+                case "Embosser Field Maps":
+                    Browser.Click(EmbosserFieldMaps);
+                    break;
+                case "General Settings":
+                    Browser.Click(GeneralSettings);
+                    break;
+                case "Hot Stamps":
+                    Browser.Click(HotStamps);
+                    break;
+                case "Inventory Configuration":
+                    Browser.Click(InventoryConfiguration);
+                    break;
+                case "Issuing Banks":
+                    Browser.Click(IssuingBanks);
+                    break;
+                case "Mag Track Encodings":
+                    Browser.Click(MagTrackEncodings);
+                    break;
+                case "Configure Client":
+                    Browser.Click(ConfigureClient);
+                    break;
+                case "Platforms Products":
+                    Browser.Click(Platforms_Products);
+                    break;
+                case "Print Tags":
+                    Browser.Click(PrintTags);
+                    break;
+                case "Print Settings":
+                    Browser.Click(PrintSettings);
+                    break;
+                case "Publishing Policies":
+                    Browser.Click(PublishingPolicies);
+                    break;
+                case "Retailer Client Configurations":
+                    Browser.Click(RetailerClient_Configurations);
+                    break;
+                case "Retailer Profiles":
+                    Browser.Click(RetailerProfiles);
+                    break;
+                case "Ship Types":
+                    Browser.Click(ShipTypes);
+                    break;
+                case "SOP Adhoc Key Values":
+                    Browser.Click(SOPAdhocKeyValues);
+                    break;
+                case "SOP Configurations":
+                    Browser.Click(SOPConfigurations);
+                    break;
+            }
+        }
 
-        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+
+        public void CSPSettings_SubmenuItems(bool CSPSetting_SubMenuName)
         {
             Browser.Click(CSPSettings);
             if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)

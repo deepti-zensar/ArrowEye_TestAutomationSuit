@@ -50,6 +50,16 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_CSPSettings_EMVProfilePage>(); }
         }
 
+        public static CP_CSPSettings_CarrierDynamicInfoPage CarrierDynamicInfoPage
+        {
+            get { return GetPage<CP_CSPSettings_CarrierDynamicInfoPage>(); }
+        }
+
+        public static CP_ClientSettings_BankIdNumbersPage BankIdNumbersPage
+
+        {
+            get { return GetPage<CP_ClientSettings_BankIdNumbersPage>(); }
+        }
         public static void TosterMessage_wait()
         {
 

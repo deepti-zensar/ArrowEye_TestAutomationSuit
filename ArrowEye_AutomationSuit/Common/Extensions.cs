@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System.Threading;
 using OpenQA.Selenium.Interactions;
 using NLog;
+using System.IO;
 
 namespace ArrowEye_Automation_Framework.Common
 {
@@ -363,7 +364,23 @@ namespace ArrowEye_Automation_Framework.Common
         }
 
 
-        
+        //verify the file is downloaded path and name clear the downloads
+        public static bool Verify_Downloaded_CSV_PDF_files_Clear(string fileName)
+        {
+            string folderpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            string Downloadfilepath = Path.Combine(folderpath, "Downloads");
+            DirectoryInfo dirInfo = new DirectoryInfo(Downloadfilepath);
+            var filedircontent = dirInfo.GetFiles();
+            foreach (var sheet in filedircontent)
+            {
+                if (sheet.Name.Equals(fileName))
+                {
+                    sheet.Delete();
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
     }

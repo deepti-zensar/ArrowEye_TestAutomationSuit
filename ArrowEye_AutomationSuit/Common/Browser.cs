@@ -71,5 +71,19 @@ namespace ArrowEye_Automation_Framework.Common
              webDriver.Close();
             //webDriver.Quit();
         }
+        public static void ClickDynamicElement(string xpath, string text)
+        {
+            try
+            {
+                xpath = string.Format(xpath, text);
+                var element = webDriver.FindElement(By.XPath(xpath));
+                Click(element);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

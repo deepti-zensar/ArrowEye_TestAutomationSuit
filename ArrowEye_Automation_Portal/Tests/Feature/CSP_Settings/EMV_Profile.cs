@@ -17,7 +17,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("EMV Profile");
             CP_Pages.EMVProfilePage.AddNewEMVProfile(CreateEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -30,7 +30,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("EMV Profile");
             CP_Pages.EMVProfilePage.EditEMVProfile(UpdateEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -43,7 +43,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("EMV Profile");
             CP_Pages.EMVProfilePage.DeleteEMVProfile(DeleteEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -56,7 +56,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("EMV Profile");
             CP_Pages.EMVProfilePage.ViewandSearchEMVProfile(ViewSearchEMVProfileText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -70,7 +70,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 10);
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("EMVProfile");
+            CP_Pages.Home.NavigateToCSPSettingsSubMenu("EMV Profile");
             CP_Pages.EMVProfilePage.ValidationsEMVProfile(Invalid_EMVProfile_InputsText + randomStrings);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

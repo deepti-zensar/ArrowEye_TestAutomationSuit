@@ -198,6 +198,7 @@
     <Compile Include="PageRepository\CP_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
+    <Compile Include="PageRepository\CP_PackageComponents_ActivationLabels.cs" />
     <Compile Include="PageRepository\CP_Product_Standard_CarrierPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Feature\Client_Settings\BankIdNumbers.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Tests\Feature\EMV\Issuers.cs" />
     <Compile Include="Tests\Feature\EMV\Modules.cs" />
     <Compile Include="Tests\Feature\EMV\Scripts.cs" />
+    <Compile Include="Tests\Feature\Package_Component\ActivationLabels.cs" />
     <Compile Include="Tests\Feature\PlasticCoreAssemblies\Plastic_Core_Assemblies.cs" />
     <Compile Include="Tests\Feature\Products\Standard_Carrier.cs" />
     <Compile Include="Tests\Feature\Products\Letter_Carriers.cs" />

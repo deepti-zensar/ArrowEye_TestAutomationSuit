@@ -387,7 +387,7 @@ namespace ArrowEye_Automation_Framework.Common
         public static void FileUpload(IWebElement Uploadbtn,string fileName, IWebElement uploadfileprogress, IWebElement Cancelupload,IWebElement successuploadfile,IWebElement Removefile)
         {
             //click on uploadfile btn
-            Uploadbtn.Click();
+            Browser.Click(Uploadbtn);
             Thread.Sleep(5000);
             //select file
             string Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
@@ -396,10 +396,10 @@ namespace ArrowEye_Automation_Framework.Common
             bool fileuploadprogressbar = uploadfileprogress.Displayed;
             bool Cancellingfileupload = Cancelupload.Displayed;
             //Click cancel button to cancelling the fileuploading
-            Cancelupload.Click();
+            Browser.Click(Cancelupload);
             Thread.Sleep(5000);
             //Reupload
-            Uploadbtn.Click();
+            Browser.Click(Uploadbtn);
             Thread.Sleep(5000);
             Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
             Uploadbtn.SendKeys(Uploadfilepath);
@@ -408,10 +408,10 @@ namespace ArrowEye_Automation_Framework.Common
             Thread.Sleep(3000);
             bool removefilebtn = Removefile.Displayed;
             //click RemovePDF btn to removed uploaded file.
-            Removefile.Click();
-            Thread.Sleep(8000);
+            Browser.Click(Removefile);
+            Thread.Sleep(5000);
             //Reupload
-            Uploadbtn.Click();
+            Browser.Click(Uploadbtn);
             Thread.Sleep(5000);
             Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
             Uploadbtn.SendKeys(Uploadfilepath);
@@ -419,6 +419,16 @@ namespace ArrowEye_Automation_Framework.Common
             successfile = successuploadfile.Displayed;
         }
 
-       
+       public static void File_uploads(IWebElement Uploadbtn, string fileName)
+        {
+            Browser.Click(Uploadbtn);
+            string Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
+            Uploadbtn.SendKeys(Uploadfilepath);
+            Thread.Sleep(5000);
+
+        }
+        
+
+        
 }
 }

@@ -34,6 +34,18 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'Products')]")]
         public IWebElement Products;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='nestedMenuItem']//p[text()='Package Components']")]
+        public IWebElement Packagecomponents;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[text()='Activation Labels']")]
+        public IWebElement Activationlabels;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[text()='Inserts']")]
+        public IWebElement Inserts;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[text()='Packing Slips']")]
+        public IWebElement PackingSlips;
+
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'BOC Dynamic Info')]")]
         public IWebElement BOCDynamicInfo;
 
@@ -274,6 +286,30 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
                 case "StandardCarriers":
                     Browser.Click(StandardCarrier);
+                    break;
+
+            }
+        }
+
+        public void NavigateToPackagecomponents(string ClientSetting_SubMenuName)
+        {
+            Browser.Click(SearchOrSelect);
+            Browser.Click(AmazonPCL);
+            Browser.Click(clientGallery);
+            Browser.Click(Packagecomponents);
+
+            switch (ClientSetting_SubMenuName)
+            {
+
+                case "ActivationLabels":
+                    Browser.Click(Activationlabels);
+                    break;
+                case "Inserts":
+                    Browser.Click(Inserts);
+                    break;
+
+                case "PackingSlips":
+                    Browser.Click(PackingSlips);
                     break;
 
             }

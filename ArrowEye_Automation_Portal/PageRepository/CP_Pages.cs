@@ -79,6 +79,12 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_Product_Standard_CarrierPage>(); }
         }
 
+        public static CP_PackageComponents_ActivationLabels ActivationLabels
+
+        {
+            get { return GetPage<CP_PackageComponents_ActivationLabels>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

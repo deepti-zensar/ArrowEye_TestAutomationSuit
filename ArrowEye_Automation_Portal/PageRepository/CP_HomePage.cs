@@ -92,6 +92,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Pin Mailers')]")]
         public IWebElement productsPinMailers;
 
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Plastic Card Front Templates')]")]
+        public IWebElement productsPlasticCardFrontTemplate;
+
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='menu']")]
         public IWebElement leftNavigationBar;
 
@@ -283,8 +286,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             {
                 case "Pin Mailers":
                     Browser.Click(productsPinMailers);
-                    break;                
-
+                    break;
+                case "Plastic Card Front Templates":
+                    Browser.Click(productsPlasticCardFrontTemplate);
+                    break;
             }
         }
 

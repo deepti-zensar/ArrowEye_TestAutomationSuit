@@ -5,6 +5,7 @@ using System.Threading;
 using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using RandomString4Net;
 using SeleniumExtras.PageObjects;
 
@@ -150,8 +151,20 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
         private IWebElement noMatchFound;
 
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='treeItem']")]
+        private IWebElement categoryTree;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='treeItem']//p")]
+        private IWebElement categoryName;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='rename']")]
+        private IWebElement renameCategory;
+
+        [FindsBy(How = How.XPath, Using = "//input[@data-testid='editInput']")]
+        private IWebElement renameCategoryInput;
+
         public void ValidatePageTitle()
-        {            
+        {
             Assert.That(PINMailersText.Displayed, Is.True);
             Assert.That(PINMailersText.Text, Is.EqualTo("Pin Mailer"));
         }
@@ -235,8 +248,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             carrierTitleField.SendKeys(carrierTitle);
             carrierDescField.SendKeys(desc);
             //Select Part of, Carrier Status and Color Mode            
-            selectPartOfOption(partOf);            
-            selectCarrierStatusOption(carrierStatus);            
+            selectPartOfOption(partOf);
+            selectCarrierStatusOption(carrierStatus);
             selectColorModeOption(colorMode);
             //Submit
             Browser.Click(submitButton);
@@ -273,15 +286,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.WaitForElement(removePDFButton, 20);
             //Validate and provide carrier details
             Assert.That(carrierDetailsLabel.Displayed, Is.True);
-            DriverUtilities.clearText(carrierTitleField);            
+            DriverUtilities.clearText(carrierTitleField);
             carrierTitleField.SendKeys(newCarrierTitle);
-            DriverUtilities.clearText(carrierDescField);            
+            DriverUtilities.clearText(carrierDescField);
             carrierDescField.SendKeys(newDesc);
             //Select Part of, Carrier Status and Color Mode
             Assert.That(partOfLabel.Displayed, Is.True);
             selectPartOfOption(partOf);
             selectPartOfOption(newPartOf);
-            Assert.That(carrierStatusLabel.Displayed, Is.True);                        
+            Assert.That(carrierStatusLabel.Displayed, Is.True);
             selectCarrierStatusOption(newCarrierStatus);
             Assert.That(colorModeLabel.Displayed, Is.True);
             selectColorModeOption(newColorMode);
@@ -291,7 +304,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.WaitForElement(toasterMessage, 10);
             var toasterMessage_Text = toasterMessage.Text;
             Console.WriteLine(toasterMessage_Text);
-            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;            
+            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
             //Validate Toaster message
             Assert.That(createdID, Is.EqualTo(toasterMessageID));
             Assert.That(toasterMessage_Text, Is.EqualTo("Pin Mailer " + createdID + " Updated Successfully."));
@@ -322,7 +335,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 Browser.WaitForElement(editCarrierLabel, 10);
 
             }
-            Browser.Click(deleteButton); 
+            Browser.Click(deleteButton);
             //Handle delete pop up 
             Browser.WaitForElement(deleteBoxLabel, 10);
             Assert.That(deleteBoxLabel.Text, Is.EqualTo("Delete Pin Mailer"));
@@ -381,6 +394,25 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(partOfErrorMsg.Text, Is.EqualTo("Please select if carrier is Part of Consumer or Corporate"));
             Assert.That(carrierStatusErrorMsg.Text, Is.EqualTo("Please select a Carrier Status"));
             Assert.That(colorModeErrorMsg.Text, Is.EqualTo("Please select a Color Mode"));
+        }
+
+        public void RenamePINMailersCategory(string newCategoryName)
+        {
+            ValidatePageTitle();
+            //Validate category tree
+            Browser.WaitForElement(categoryTree, 10);
+            Assert.That(categoryTree.Displayed, Is.True);
+            //Rename category
+            Actions actions = new Actions(Browser._Driver);
+            actions.ContextClick(categoryName).Perform();
+            Browser.WaitForElement(renameCategory, 10);
+            Browser.Click(renameCategory);
+            DriverUtilities.clearText(renameCategoryInput);
+            renameCategoryInput.SendKeys(newCategoryName);
+            renameCategoryInput.SendKeys(Keys.Enter);
+            //validate new category name
+            Assert.That(categoryName.GetAttributeValue("value"), Is.EqualTo(newCategoryName));
+
         }
     }
 }

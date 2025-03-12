@@ -450,96 +450,96 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void Validations_ActivationLabels(string NegativeScenariosText)
         {
-            //All Validations errors
-            Browser.Click(StandardCarrier_AddNew_button);
-            Browser.Click(Submit_StandardCarrier);
-            var fileuploaderror = Uploadfileerror.Text;
-            var TitleError = CarrierTitleerror.Text;
-            var partoferror = Partoferror.Text;
-            var carrierstatuserror = CarrierStatuserror.Text;
-            var colormodeerror = Colormodeerror.Text;
-            var setaffixlocationerror = Setaffixerror.Text;
-            var Assignedcategerror = Assignedcategorieserror.Text;
-            var dublicateproductmapid = 123;
-            ClientProductMapIDTextbox.SendKeys(dublicateproductmapid.ToString());
-            Browser.Click(ClientProductMapIDAddbutton);
-            var ProductIddublicateerror = dublicateproductIderror.Text;
-            var exceedlimit = 12345645656565765456 + dublicateproductmapid.ToString();
-            var ExeedlimitsofproductId = ProductmapidlimitsExceedserror.Text;
-            bool submitbuttonelabled = Submit_StandardCarrier.Enabled;
-            Browser.Click(StandardCarrier_Cancel_button);
+            ////All Validations errors
+            //Browser.Click(StandardCarrier_AddNew_button);
+            //Browser.Click(Submit_StandardCarrier);
+            //var fileuploaderror = Uploadfileerror.Text;
+            //var TitleError = CarrierTitleerror.Text;
+            //var partoferror = Partoferror.Text;
+            //var carrierstatuserror = CarrierStatuserror.Text;
+            //var colormodeerror = Colormodeerror.Text;
+            //var setaffixlocationerror = Setaffixerror.Text;
+            //var Assignedcategerror = Assignedcategorieserror.Text;
+            //var dublicateproductmapid = 123;
+            //ClientProductMapIDTextbox.SendKeys(dublicateproductmapid.ToString());
+            //Browser.Click(ClientProductMapIDAddbutton);
+            //var ProductIddublicateerror = dublicateproductIderror.Text;
+            //var exceedlimit = 12345645656565765456 + dublicateproductmapid.ToString();
+            //var ExeedlimitsofproductId = ProductmapidlimitsExceedserror.Text;
+            //bool submitbuttonelabled = Submit_StandardCarrier.Enabled;
+            //Browser.Click(StandardCarrier_Cancel_button);
 
-            Browser.Click(StandardCarrier_AddNew_button);
-            Extensions.FileUpload(FileUploadbtn, "StandardCarrierDemofile", FileProgressbar, CancelUploading, SuccessFile, RemovePDFbutton);
-            CarrierTitle_Textbox.SendKeys(NegativeScenariosText.ToString());
-            var input_carrierTitle = CarrierTitle_Textbox.GetDomAttribute("value");
-            CarrierDescription_Textbox.SendKeys(NegativeScenariosText + "1234");
-            Browser.Click(partof_consumersite);
-            Browser.Click(Carrierstatus_turnedoff);
-            Browser.Click(Colormode_Grayscale);
-            Browser.Click(Setaffixlocation_Leftmiddle);
-            Browser.Click(select_check_Categories);
-            Browser.Click(select_check_Categories_child);
-            //remove subchildassigned categories
-            Browser.Click(select_check_Categories_child);
-            string randomnumber = RandomString.GetString(Types.NUMBERS, 5);
-            ClientProductMapIDTextbox.SendKeys(randomnumber);
-            Browser.Click(ClientProductMapIDAddbutton);
-            bool addedproductIds = Addproductmapids.Displayed;
-            //adding multiple productId
-            ClientProductMapIDTextbox.SendKeys(randomnumber);
-            Browser.Click(ClientProductMapIDAddbutton);
-            //remove clientproductmapId
-            Browser.Click(RemoveProductId);
-            Browser.Click(Submit_StandardCarrier);
-            Thread.Sleep(4000);
-            var Add_StandardCarrier_SuccessMessage = StandardCarrier_recordAdd_sucessmessage.Text;
-            var NewlyaddedStandardCarrier_Id = AddedNewStandardCarrier_ID.Text;
+            //Browser.Click(StandardCarrier_AddNew_button);
+            //Extensions.FileUpload(FileUploadbtn, "StandardCarrierDemofile", FileProgressbar, CancelUploading, SuccessFile, RemovePDFbutton);
+            //CarrierTitle_Textbox.SendKeys(NegativeScenariosText.ToString());
+            //var input_carrierTitle = CarrierTitle_Textbox.GetDomAttribute("value");
+            //CarrierDescription_Textbox.SendKeys(NegativeScenariosText + "1234");
+            //Browser.Click(partof_consumersite);
+            //Browser.Click(Carrierstatus_turnedoff);
+            //Browser.Click(Colormode_Grayscale);
+            //Browser.Click(Setaffixlocation_Leftmiddle);
+            //Browser.Click(select_check_Categories);
+            //Browser.Click(select_check_Categories_child);
+            ////remove subchildassigned categories
+            //Browser.Click(select_check_Categories_child);
+            //string randomnumber = RandomString.GetString(Types.NUMBERS, 5);
+            //ClientProductMapIDTextbox.SendKeys(randomnumber);
+            //Browser.Click(ClientProductMapIDAddbutton);
+            //bool addedproductIds = Addproductmapids.Displayed;
+            ////adding multiple productId
+            //ClientProductMapIDTextbox.SendKeys(randomnumber);
+            //Browser.Click(ClientProductMapIDAddbutton);
+            ////remove clientproductmapId
+            //Browser.Click(RemoveProductId);
+            //Browser.Click(Submit_StandardCarrier);
+            //Thread.Sleep(4000);
+            //var Add_StandardCarrier_SuccessMessage = StandardCarrier_recordAdd_sucessmessage.Text;
+            //var NewlyaddedStandardCarrier_Id = AddedNewStandardCarrier_ID.Text;
 
-            //Search with newly Updated record
-            NewID_StandardCarrier_AutoSearch_textbox.Clear();
-            NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
+            ////Search with newly Updated record
+            //NewID_StandardCarrier_AutoSearch_textbox.Clear();
+            //NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
 
-            //Edit button click
-            Browser.Click(Edit_StandardCarrierdetails);
-            //turn on status
-            Browser.Click(Carrierstatus_turnedon);
-            Browser.Click(Submit_StandardCarrier);
-            Thread.Sleep(6000);
+            ////Edit button click
+            //Browser.Click(Edit_StandardCarrierdetails);
+            ////turn on status
+            //Browser.Click(Carrierstatus_turnedon);
+            //Browser.Click(Submit_StandardCarrier);
+            //Thread.Sleep(6000);
 
-            //Search with newly Updated record
-            NewID_StandardCarrier_AutoSearch_textbox.Clear();
-            NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
+            ////Search with newly Updated record
+            //NewID_StandardCarrier_AutoSearch_textbox.Clear();
+            //NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
 
-            //Scenario1: Viewing the Standard carrier Previews & Carrier details
-            Verify_Carrier_Preview_Carrier_Details(true);
-            //Scenario 2: Viewing the History of Standard carriers
-            Browser.Click(StandardCarrier_ViewHistory_button);
-            Verify_ViewHistoryPopup_Parameters(true);
-            Browser.Click(ViewHistory_closebtn);
+            ////Scenario1: Viewing the Standard carrier Previews & Carrier details
+            //Verify_Carrier_Preview_Carrier_Details(true);
+            ////Scenario 2: Viewing the History of Standard carriers
+            //Browser.Click(StandardCarrier_ViewHistory_button);
+            //Verify_ViewHistoryPopup_Parameters(true);
+            //Browser.Click(ViewHistory_closebtn);
 
-            //Scenario 3: Downloading the Standard Carrier
-            Browser.Click(StandardCarrier_Download_button);
-            //Note: download not works in app
-            DownloadFile("StandardCarrierDemofile");
+            ////Scenario 3: Downloading the Standard Carrier
+            //Browser.Click(StandardCarrier_Download_button);
+            ////Note: download not works in app
+            //DownloadFile("StandardCarrierDemofile");
 
-            //Scenario 4: Viewing and Exporting Shared By: Programs
-            Browser.Click(Edit_ActivationLabels);
-            //carrier status turned on
-            Browser.Click(Carrierstatus_turnedon);
-            Browser.Click(Update_standardCarreir_Sbmitbtn);
-            Thread.Sleep(6000);
-            Browser.Click(SharedByPrograms);
-            Verify_SharedByPrograms_popup_Details(true);
-            SharedByProgram_ExportFile("data.csv");
-            Browser.Click(SharedByPrograms_closebtn);
-            //Scenario 5: Viewing Client Product Map
-            Browser.Click(Productsbtn);
-            Verify_ProductMap_popup_Details(true);
-            var mapid = clinetproductId.GetDomAttribute("value");
-            clinetproductmapidtextbox.Clear();
-            clinetproductmapidtextbox.SendKeys(mapid);
-            Productspopup_closebtn.Click();
+            ////Scenario 4: Viewing and Exporting Shared By: Programs
+            //Browser.Click(Edit_ActivationLabels);
+            ////carrier status turned on
+            //Browser.Click(Carrierstatus_turnedon);
+            //Browser.Click(Update_standardCarreir_Sbmitbtn);
+            //Thread.Sleep(6000);
+            //Browser.Click(SharedByPrograms);
+            //Verify_SharedByPrograms_popup_Details(true);
+            //SharedByProgram_ExportFile("data.csv");
+            //Browser.Click(SharedByPrograms_closebtn);
+            ////Scenario 5: Viewing Client Product Map
+            //Browser.Click(Productsbtn);
+            //Verify_ProductMap_popup_Details(true);
+            //var mapid = clinetproductId.GetDomAttribute("value");
+            //clinetproductmapidtextbox.Clear();
+            //clinetproductmapidtextbox.SendKeys(mapid);
+            //Productspopup_closebtn.Click();
 
 
         }

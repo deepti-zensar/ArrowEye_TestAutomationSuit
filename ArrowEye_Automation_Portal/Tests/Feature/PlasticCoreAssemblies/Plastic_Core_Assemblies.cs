@@ -17,7 +17,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         {
             CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToCSPSettings("FOCDynamicInfo");
+            CP_Pages.Home.NavigateToPlasticCoreAssemblies();
             CP_Pages.PlasticCoreAssemblies.CreatePlasticCoreAssemblies(CreateFOCDynamicText + randomString);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

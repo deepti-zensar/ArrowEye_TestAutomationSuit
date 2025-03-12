@@ -384,7 +384,7 @@ namespace ArrowEye_Automation_Framework.Common
 
 
         //FileUpload
-        public static void FileUpload(IWebElement Uploadbtn,string fileName, IWebElement uploadfileprogress, IWebElement Cancelupload,IWebElement successuploadfile,IWebElement Removefile)
+        public static void FileUpload(IWebElement Uploadbtn, string fileName, IWebElement uploadfileprogress, IWebElement Cancelupload, IWebElement successuploadfile, IWebElement Removefile)
         {
             //click on uploadfile btn
             Browser.Click(Uploadbtn);
@@ -419,7 +419,7 @@ namespace ArrowEye_Automation_Framework.Common
             successfile = successuploadfile.Displayed;
         }
 
-       public static void File_uploads(IWebElement Uploadbtn, string fileName)
+        public static void File_uploads(IWebElement Uploadbtn, string fileName)
         {
             Browser.Click(Uploadbtn);
             string Uploadfilepath = @"C:\Users\sh63656\source\repos\ArrowEye_TestAutomationSuit\ArrowEye_Automation_Portal\FileUpload\fileName";
@@ -427,8 +427,8 @@ namespace ArrowEye_Automation_Framework.Common
             Thread.Sleep(5000);
 
         }
-        
 
-        
-}
+
+
+    }
 }

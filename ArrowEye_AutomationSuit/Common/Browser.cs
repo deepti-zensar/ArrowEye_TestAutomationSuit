@@ -27,7 +27,7 @@ namespace ArrowEye_Automation_Framework.Common
 
         public Browser(IWebDriver webDriver)
         {
-            environmentURL = AppNameHelper.appBaseURL;
+            //environmentURL = AppNameHelper.appBaseURL;
             WebDriver = webDriver;
         }
 
@@ -89,8 +89,9 @@ namespace ArrowEye_Automation_Framework.Common
 
         public static void Close()
         {
-            webDriver.Close();
-            webDriver.Quit();
+            
+             webDriver.Close();
+            //webDriver.Quit();
         }
 
         public static void ClickDynamicElement(string xpath, string text)

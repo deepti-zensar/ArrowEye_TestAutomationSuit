@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Common;
 using ArrowEye_Automation_Portal.PageRepository.Objects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools.V129.Overlay;
 using RandomString4Net;
 using SeleniumExtras.PageObjects;
 
 namespace ArrowEye_Automation_Portal.PageRepository.EMV
-  
+
 {
-    
     public class EMV_Scripts_Page : TestBase
     {
-      
+
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
 
@@ -35,12 +27,8 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
 
         public static string clientGallerySubMenuItem = "//li[@data-testid='subMenuItems']//p[contains(text(),'{0}')]";
 
-      //  [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Add New')]")]
-       // public IWebElement addNewButton;
-
         [FindsBy(How = How.XPath, Using = "//label[text()='Name']/following-sibling::div/input")]
         public IWebElement inputName_EVM;
-
 
         [FindsBy(How = How.XPath, Using = "//label[text()='Description']/following-sibling::div/input")]
         public IWebElement descriptionEVM;
@@ -109,24 +97,18 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
 
         public static string inputfield = "//label[text()='{0}']/following-sibling::div/input";
 
+        public static string sizeLimitField = "//label[text()='{0}']/following-sibling::p";
 
+        public static string dialogueBoxErrorMessage = "//p[text()='{0}']/following-sibling::div//li";
 
-
-
-
-
-
-        public void NavigateToEMVSettings()
+        public void NavigateToEMVSettings(string pclID = "9006: Pier 2")
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9006: Pier 2");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             DriverUtilities.Click(clientGallery);
             Browser.ClickDynamicElement(clientGalleryMenuItem, "EMV");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "Scripts");
-
         }
-
-        
 
         public void ValidateEMVScriptsFeild()
         {
@@ -134,7 +116,8 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             WebElement scriptNameEle = Browser.getDynamicElement(scriptfield, "Name");
             WebElement scriptDescriptionELe = Browser.getDynamicElement(scriptfield, "Description");
             WebElement scriptProfileNameELe = Browser.getDynamicElement(scriptfield, "Profile Name");
-            }
+            WebElement actionsELe = Browser.getDynamicElement(scriptfield, "Actions");
+        }
 
         private void validatePopupMessage(String message)
         {
@@ -226,7 +209,6 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             validateRecord(record);
         }
 
-
         public void ValidateEMVScriptField(string Text)
         {
             //create new EMV Script record
@@ -237,8 +219,8 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             descriptionEVM.SendKeys(Text.ToString());
             Browser.Click(NewEMVPopup_Savebtn);
             Thread.Sleep(500);
-            var EMV_nameexists_errorMessage = EMV_recordAdd_sucessmessage.Text;
-            Assert.That(EMV_nameexists_errorMessage, Does.Contain("EMV Personalization Script Name " + Text + " already exists."));
+            var EMV_nameexists_errorMessage = Browser.getDynamicElement(dialogueBoxErrorMessage, "New Script").Text;
+            Assert.That(EMV_nameexists_errorMessage, Does.Contain("EMV Script Service " + Text + " already exists."));
             Browser.Click(NewEMVPopup_Cancelbtn);
             Browser.ClickDynamicElement(addNewButton, "Add New");
             Thread.Sleep(1000);
@@ -251,7 +233,12 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             Assert.That(DescriptionErrorText, Does.Contain("Description is required."));
             //Name already exists not done
 
+            //Validate Character Limitation
+            validateFieldLength("Name", 50);
+            validateFieldLength("Description", 150);
+            validateFieldLength("Profile Name", 50);
         }
+
         public void ExportEMVScriptPages()
         {
             DriverUtilities.Click(exportButton);
@@ -265,14 +252,12 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             }
             else
             {
-
                 string rowsCountText = rowsCount.GetText();
                 string[] parts = rowsCountText.Split(new string[] { " of " }, StringSplitOptions.None);
                 string totalCount = parts[1].Trim();
                 string csvRowCount = CountRowsInCsv(csvFiles[0]).ToString();
                 Assert.That(totalCount, Is.EqualTo(csvRowCount), "Total count in CSV does not match with total count on web page");
             }
-
         }
 
         static int CountRowsInCsv(string filePath)
@@ -303,6 +288,11 @@ namespace ArrowEye_Automation_Portal.PageRepository.EMV
             return rowCount;
         }
 
-
+        private void validateFieldLength(String fieldName, int length)
+        {
+            string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, length + 5);
+            Browser.getDynamicElement(inputfield, fieldName).SendKeys(longString);
+            Assert.That(Browser.getDynamicElement(sizeLimitField, fieldName).Text, Is.EqualTo(length + "/" + length));
+        }
     }
 }

@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Common;
 using ArrowEye_Automation_Portal.PageRepository.Objects;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using RandomString4Net;
 using SeleniumExtras.PageObjects;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 
 {
-
     public class CS_PrintSettingPage : TestBase
     {
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'Search or Select')]")]
@@ -34,7 +27,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public static string printsettingsfield = "//div[text()='{0}']";
 
         public static string addNewButton = "//p[contains(text(),'{0}')]";
-
 
         public static string popupheaderText = "//p[text()='{0}']";
 
@@ -75,16 +67,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         private string duplicateKeyErrorMessage = "//li[contains(text(),'{0}')]";
 
-
-
-        public void NavigateToPrintSettings()
+        public void NavigateToPrintSettings(string pclID = "9006: Pier 2")
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9006: Pier 2");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
             Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "Print Settings");
-
         }
 
         public void ExportPrintSettings()
@@ -107,7 +96,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 string csvRowCount = CountRowsInCsv(csvFiles[0]).ToString();
                 Assert.That(totalCount, Is.EqualTo(csvRowCount), "Total count in CSV does not match with total count on web page");
             }
-
         }
 
         static int CountRowsInCsv(string filePath)
@@ -166,7 +154,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.getDynamicElement(inputfield, "Key").SendKeys(key);
             Browser.getDynamicElement(dropDown, key).Click();
 
-            
             PrintSettingsRecord record = new PrintSettingsRecord()
             {
                 Key = key,

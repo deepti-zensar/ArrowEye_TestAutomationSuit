@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using ArrowEye_Automation_Framework;
 using ArrowEye_Automation_Framework.Common;
 using ArrowEye_Automation_Portal.PageRepository.Objects;
-using NPOI.SS.Formula.Functions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using RandomString4Net;
 using SeleniumExtras.PageObjects;
-using static OpenQA.Selenium.BiDi.Modules.BrowsingContext.Locator;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 
 {
-
     public class CS_BCSS_ConfigurationPage : TestBase
     {
         public static string PclDynamic = "//td[contains(.,'{0}')]";
@@ -30,9 +22,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public static string clientGalleryMenuItem = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'{0}')]";
 
-        public static string bcssConfigurationsfield = "//div[(text()='{0}']";
+        public static string bcssConfigurationsfield = "//div[text()='{0}']";
 
-        public static string bcssConfigurationsMultilinefield = "//div/span[(text()='{0}']";
+        public static string bcssConfigurationsMultilinefield = "//div/span[text()='{0}']";
 
         public static string addNewButton = "//p[contains(text(),'{0}')]";
 
@@ -47,6 +39,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public static string errormessage = "//p[text()='{0}']";
 
         public static string errormessage1 = "//p[text()=\"{0}\"]";
+
+        public static string sizeLimitField = "//label[text()='{0}']/following-sibling::p";
+
+        public static string dialogueBoxErrorMessage = "//p[text()='{0}']/../following-sibling::ul/li";
 
         [FindsBy(How = How.XPath, Using = "//div[contains(text(),'Search or Select')]")]
         public IWebElement SearchOrSelect;
@@ -75,23 +71,19 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//td[@data-testid='table-pagination']//p[2]")]
         private IWebElement rowsCount;      
 
-
-        public void NavigateToBCSSConfigurations()
+        public void NavigateToBCSSConfigurations(string pclID = "9005: Pier One")
         {
             DriverUtilities.Click(SearchOrSelect);
-            Browser.ClickDynamicElement(PclDynamic, "9005: Pier One");
+            Browser.ClickDynamicElement(PclDynamic, pclID);
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
             Browser.ClickDynamicElement(clientGalleryMenuItem, "Client Settings");
             Browser.ClickDynamicElement(clientGallerySubMenuItem, "BCSS Configurations");
-
         }
 
         //TODO: name field value already exists
         //TODO: Scenario 1B: When character are more than 200 in Description field
         public void AddNewBCSSRecord(string Text)
         {
-            ValidateBCSSConfigurationsField();
-
             //create new  BCSS record
             Browser.ClickDynamicElement(addNewButton, "Add New");
 
@@ -163,23 +155,21 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(BCSSUpdatesuccessmessage, Does.Contain("BCSS Configuration " + idvalue + " Deleted Successfully."));
         }
 
-        public void ValidateBCSSConfigurationField()
+        public void ValidateBCSSConfigurationField(string Text)
         {
             ValidateBCSSConfigurationsField();
 
-            //create new BCSS record
+            ValidateAddingDuplicateRecord(Text);
+
+            //Validate mandatory fields and field lengths
             Browser.ClickDynamicElement(addNewButton, "Add New");
             Browser.ClickDynamicElement(popupbtn, "Save");
             Thread.Sleep(500);
-            WebElement NameFieldErrorValue = Browser.getDynamicElement(errormessage, "Name is required.");
-            var NameErrorText = NameFieldErrorValue.GetText();
 
-            WebElement DescriptionErrorValue = Browser.getDynamicElement(errormessage, "Description is required.");
-            var DescriptionErrorText = DescriptionErrorValue.GetText();
+            Assert.That(Browser.getDynamicElement(errormessage, "Name is required.").Text, Does.Contain("Name is required."));
+            Assert.That(Browser.getDynamicElement(errormessage, "Description is required.").Text, Does.Contain("Description is required."));
+            Assert.That(Browser.getDynamicElement(errormessage, "Profile Name is required.").Text, Does.Contain("Profile Name is required."));
 
-            WebElement ProfileNameErrorValue = Browser.getDynamicElement(errormessage, "Profile Name is required.");
-            var ProfileNameErrorText = ProfileNameErrorValue.GetText();
-            
             string dynamicMessage = "PVKI Code can't be more than 32767.";
             WebElement PVKIFieldEle = Browser.getDynamicElement(inputfield, "PVKI Code");
             PVKIFieldEle.SendKeys("45673");   
@@ -192,11 +182,39 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var cvkvalue = CVKFieldEle.GetDomAttribute("value");
             ValidateIntegerValue(cvkvalue, dynamicMessage1);
 
+            
 
+            //Validate Character Limitation
+            ValidateFieldLength("Name", 100);
+            ValidateFieldLength("Description", 200);
+            ValidateFieldLength("Profile Name", 50);
+        }
 
-            Assert.That(NameErrorText, Does.Contain("Name is required."));
-            Assert.That(DescriptionErrorText, Does.Contain("Description is required."));
-            Assert.That(ProfileNameErrorText, Does.Contain("Profile Name is required."));
+        private void ValidateAddingDuplicateRecord(string Text)
+        {
+            AddNewBCSSRecord(Text);
+
+            //create new  BCSS record
+            Browser.ClickDynamicElement(addNewButton, "Add New");
+
+            Browser.getDynamicElement(inputfield, "Name").SendKeys(Text);
+            Browser.getDynamicElement(inputfield, "Description").SendKeys(Text);
+            Browser.getDynamicElement(inputfield, "Profile Name").SendKeys(Text);
+            Browser.ClickDynamicElement(popupbtn, "Save");
+            Thread.Sleep(2000);
+
+            var EMV_nameexists_errorMessage = Browser.getDynamicElement(dialogueBoxErrorMessage, "New BCSS Configuration").Text;
+            Assert.That(EMV_nameexists_errorMessage, Does.Contain("The BCSS Configuration " + Text + " already exists."));
+
+            Browser.ClickDynamicElement(popupbtn, "Cancel");
+            Thread.Sleep(500);
+        }
+
+        private void ValidateFieldLength(String fieldName, int length)
+        {
+            string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, length + 5);
+            Browser.getDynamicElement(inputfield, fieldName).SendKeys(longString);
+            Assert.That(Browser.getDynamicElement(sizeLimitField, fieldName).Text, Is.EqualTo(length + "/" + length));
         }
 
         public void ExportBCSSConfigurationRecord()
@@ -212,58 +230,43 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
             else
             {
-
                 string rowsCountText = rowsCount.GetText();
                 string[] parts = rowsCountText.Split(new string[] { " of " }, StringSplitOptions.None);
                 string totalCount = parts[1].Trim();
                 string csvRowCount = CountRowsInCsv(csvFiles[0]).ToString();
                 Assert.That(totalCount, Is.EqualTo(csvRowCount), "Total count in CSV does not match with total count on web page");
             }
-
         }
 
         private void ValidateBCSSConfigurationsField()
         {
-            WebElement bcssConfigurationsIDELe = Browser.getDynamicElement(bcssConfigurationsfield, "ID");
-            WebElement bcssConfigurationsNameEle = Browser.getDynamicElement(bcssConfigurationsfield, "Name");
-            WebElement bcssConfigurationsDescriptionELe = Browser.getDynamicElement(bcssConfigurationsfield, "Description");
-            WebElement pbcssConfigurationsProfileNameEle = Browser.getDynamicElement(bcssConfigurationsfield, "Profile Name");
-            WebElement bcssConfigurationsCVVDateFormatEle = Browser.getDynamicElement(bcssConfigurationsfield, "CVV Date Format");
-            WebElement bcssConfigurationsCVV2DateFormatEle = Browser.getDynamicElement(bcssConfigurationsfield, "CVV2 Date Format");
-            WebElement bcssConfigurationsCVVkeypairEle = Browser.getDynamicElement(bcssConfigurationsfield, "CVV key pair");
-            WebElement bcssConfigurationsCVV2keypairEle = Browser.getDynamicElement(bcssConfigurationsfield, "CVV2 key pair");
-            WebElement bcssConfigurationsServicecodeEle = Browser.getDynamicElement(bcssConfigurationsfield, "Service Code");
-            WebElement bcssConfigurationsServicecodeCVVLine1Ele = Browser.getDynamicElement(bcssConfigurationsMultilinefield, "User service");
-            WebElement bcssConfigurationsServicecodeCVVLine2Ele = Browser.getDynamicElement(bcssConfigurationsMultilinefield, " code CVV");
-            WebElement bcssConfigurationsServicecodeCVV2Line1Ele = Browser.getDynamicElement(bcssConfigurationsMultilinefield, "User service");
-            WebElement bcssConfigurationsServicecodeCVV2Line2Ele = Browser.getDynamicElement(bcssConfigurationsMultilinefield, " code CVV2");
-            WebElement bcssConfigurationsPVKICodeEle = Browser.getDynamicElement(bcssConfigurationsfield, "PVKI code");
-            WebElement bcssConfigurationsCVKTypeEle = Browser.getDynamicElement(bcssConfigurationsfield, "CVK type");
-            //validation
-
-            //Browser.isElementPresent(bcssConfigurationsIDELe);
-            //Browser.isElementPresent(bcssConfigurationsNameEle);
-            //Browser.isElementPresent(bcssConfigurationsDescriptionELe);
-            //Browser.isElementPresent(pbcssConfigurationsProfileNameEle);
-            //Browser.isElementPresent(bcssConfigurationsCVVDateFormatEle);
-            //Browser.isElementPresent(bcssConfigurationsCVV2DateFormatEle);
-            //Browser.isElementPresent(bcssConfigurationsCVVkeypairEle);
-            //Browser.isElementPresent(bcssConfigurationsCVV2keypairEle);
+            Browser.getDynamicElement(bcssConfigurationsfield, "ID");
+            Browser.getDynamicElement(bcssConfigurationsfield, "Name");
+            Browser.getDynamicElement(bcssConfigurationsfield, "Description");
+            Browser.getDynamicElement(bcssConfigurationsfield, "Profile Name");
+            Browser.getDynamicElement(bcssConfigurationsfield, "CVV Date Format");
+            Browser.getDynamicElement(bcssConfigurationsfield, "CVV2 Date Format");
+            Browser.getDynamicElement(bcssConfigurationsfield, "CVV key pair");
+            Browser.getDynamicElement(bcssConfigurationsfield, "CVV2 key pair");
+            Browser.getDynamicElement(bcssConfigurationsfield, "Service Code");
+            Browser.getDynamicElement(bcssConfigurationsMultilinefield, "User service");
+            Browser.getDynamicElement(bcssConfigurationsMultilinefield, "code CVV");
+            Browser.getDynamicElement(bcssConfigurationsMultilinefield, "User service");
+            Browser.getDynamicElement(bcssConfigurationsMultilinefield, "code CVV2");
+            Browser.getDynamicElement(bcssConfigurationsfield, "PVKI code");
+            Browser.getDynamicElement(bcssConfigurationsfield, "CVK type");
+            Browser.getDynamicElement(bcssConfigurationsfield, "Actions");
         }
 
         private void ValidateIntegerValue(string value, string message)
         {
-
             if (int.TryParse(value, out int result))
             {
                 if (result > 32767)
                 {
-
                     WebElement ErrorEle = Browser.getDynamicElement(errormessage1, message);
                     var ErrorText = ErrorEle.GetText();
                     Assert.That(ErrorText, Does.Contain(message));
-
-
                 }
             }
             else

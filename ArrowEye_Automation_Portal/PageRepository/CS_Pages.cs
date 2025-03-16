@@ -26,6 +26,24 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CS_BCSS_ConfigurationPage>(); }
         }
 
+        public static CS_Ship_TypesPage ShipTypesPage
+        {
+            get { return GetPage<CS_Ship_TypesPage>(); }
+        }
+
+        public static CS_IssuingBankPage IssuingBankPage
+        {
+            get { return GetPage<CS_IssuingBankPage>(); }
+        }
+        
+        public static CS_Hot_StampsPage HotStampsPage
+        {
+            get { return GetPage<CS_Hot_StampsPage>(); }
+        }
+        public static CS_Print_TagsPage PrintTagsPage
+        {
+            get { return GetPage<CS_Print_TagsPage>(); }
+        }
 
     }
 }

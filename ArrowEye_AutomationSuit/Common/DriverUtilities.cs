@@ -1462,5 +1462,75 @@ namespace ArrowEye_Automation_Framework.Common
             element.SendKeys(OpenQA.Selenium.Keys.Control + "a");  // Select all text
             element.SendKeys(OpenQA.Selenium.Keys.Backspace);
         }
+
+        public static void SelectAllDropdowns()
+        {
+            try
+            {
+                // Handle all <select> dropdowns
+                SelectAllSelectDropdowns();
+
+                // Handle all custom (autocomplete) dropdowns
+                SelectAllCustomDropdowns();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+        }
+
+        // Method to handle <select> dropdowns
+        public static void SelectAllSelectDropdowns()
+        {
+            var selectElements = driver.FindElements(By.TagName("select"));
+
+            foreach (var selectElement in selectElements)
+            {
+                SelectElement select = new SelectElement(selectElement);
+
+                // Deselect all previously selected options (if any)
+                select.DeselectAll();
+
+                // Select all options
+                foreach (var option in select.Options)
+                {
+                    select.SelectByValue(option.GetAttribute("value"));
+                }
+
+                Console.WriteLine("Selected all options in a <select> dropdown.");
+            }
+        }
+
+        // Method to handle custom dropdowns (autocomplete, div-based)
+        public static void SelectAllCustomDropdowns()
+        {
+            var dropdownInputs = driver.FindElements(By.XPath("//input[@role='combobox']"));
+
+            foreach (var input in dropdownInputs)
+            {
+                input.Click(); // Open the dropdown
+
+                // Wait for the options to be visible (you can use WebDriverWait for better synchronization)
+                Thread.Sleep(500); // Replace this with WebDriverWait in production code
+
+                var options = driver.FindElements(By.XPath("//ul[contains(@class, 'MuiAutocomplete-listbox')]//li[contains(@class, 'MuiAutocomplete-option')]"));
+
+                // Iterate through the options and select each one
+                foreach (var option in options)
+                {
+                    try
+                    {
+                        option.Click();
+                        Console.WriteLine("Selected option: " + option.Text);
+                        // Close the dropdown after selecting an option (if necessary)
+                        // input.Click(); // You might need to click the input again to close the dropdown
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error selecting option: " + ex.Message);
+                    }
+                }
+            }
+        }
     }
 }

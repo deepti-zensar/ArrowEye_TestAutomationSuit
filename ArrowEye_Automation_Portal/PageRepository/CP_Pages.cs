@@ -2,6 +2,9 @@
 using SeleniumExtras.PageObjects;
 using OpenQA.Selenium;
 using ArrowEye_Automation_Portal.PageRepository;
+using ArrowEye_Automation_Portal.PageRepository.Products;
+using ArrowEye_Automation_Portal.PageRepository.Programs;
+using ArrowEye_Automation_Portal.PageRepository.EMV;
 
 namespace ArrowEye_Automation_Portal
 {
@@ -36,6 +39,10 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_CSPSettings_BOCDynamicInfoPage>(); }
         }
 
+        public static Order_On_Hold_Page OrderOnHold
+        {
+            get { return GetPage<Order_On_Hold_Page>(); }
+        }
 
     }
 }

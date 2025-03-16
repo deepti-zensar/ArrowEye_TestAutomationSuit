@@ -237,15 +237,32 @@
     <Compile Include="PageRepository\CP_HomePage.cs" />
     <Compile Include="PageRepository\CP_IssuersPage.cs" />
     <Compile Include="PageRepository\CP_LoginPage.cs" />
+    <Compile Include="PageRepository\CS_Hot_StampsPage.cs" />
+    <Compile Include="PageRepository\CS_Issuing_BankPage.cs" />
+    <Compile Include="PageRepository\Order_On_Hold_Page.cs" />
+    <Compile Include="PageRepository\Programs_CommonSetting_Page.cs" />
+    <Compile Include="PageRepository\Program_Pages.cs" />
+    <Compile Include="PageRepository\Product_Pages.cs" />
+    <Compile Include="PageRepository\Product_MultiSheetCarrierPage.cs" />
+    <Compile Include="PageRepository\CS_Print_TagsPage.cs" />
+    <Compile Include="PageRepository\CS_Ship_TypesPage.cs" />
     <Compile Include="PageRepository\CS_Pages.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
     <Compile Include="PageRepository\CS_BCSS_ConfigurationPage.cs" />
     <Compile Include="PageRepository\CS_PrintSettingPage.cs" />
     <Compile Include="PageRepository\EMV_Pages.cs" />
     <Compile Include="PageRepository\EMV_Scripts_Page.cs" />
+    <Compile Include="PageRepository\Objects\HotStampRecord.cs" />
+    <Compile Include="PageRepository\Objects\IssuingBankRecord.cs" />
+    <Compile Include="PageRepository\Objects\PrintTagsRecord.cs" />
+    <Compile Include="PageRepository\Objects\ShipTypesRecord.cs" />
     <Compile Include="PageRepository\Objects\BcssConfigurationRecord.cs" />
     <Compile Include="PageRepository\Objects\PrintSettingsRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Feature\Client_Settings\Hot_Stamps.cs" />
+    <Compile Include="Tests\Feature\Client_Settings\Issuing_Banks.cs" />
+    <Compile Include="Tests\Feature\Client_Settings\Print_Tags.cs" />
+    <Compile Include="Tests\Feature\Client_Settings\Ship_Types.cs" />
     <Compile Include="Tests\Feature\Client_Settings\BCSS_Configuration.cs" />
     <Compile Include="Tests\Feature\Client_Settings\Print_Settings.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\BOC_Dynamic_Info.cs" />
@@ -261,6 +278,9 @@
     <Compile Include="Tests\Feature\EMV\Scripts.cs" />
     <Compile Include="Tests\Feature\Products\Letter_Carriers.cs" />
     <Compile Include="Tests\Feature\Products\Plastic_Cards.cs" />
+    <Compile Include="Tests\Feature\Products\Multi_Sheet_Letter_Carriers.cs" />
+    <Compile Include="Tests\Feature\Orders_On_Hold\OrdersOnHold.cs" />
+    <Compile Include="Tests\Feature\Programs\Programs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />
@@ -271,6 +291,9 @@
     <None Include="bin\Debug\nunit_random_seed.tmp" />
     <None Include="bin\Debug\selenium-manager\linux\selenium-manager" />
     <None Include="bin\Debug\selenium-manager\macos\selenium-manager" />
+    <None Include="Config\ExecutionRunner.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="obj\Debug\ArrowEye.45EDEB65.Up2Date" />
     <None Include="obj\Debug\ArrowEye_Automation_Portal.csproj.AssemblyReference.cache" />
     <None Include="obj\Debug\ArrowEye_Automation_Portal.csproj.CoreCompileInputs.cache" />

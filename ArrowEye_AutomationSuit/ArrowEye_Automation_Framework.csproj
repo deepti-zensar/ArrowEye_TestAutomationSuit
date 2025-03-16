@@ -261,6 +261,8 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\Logger.cs" />
     <Compile Include="DataSources\DataSources.cs" />
+    <Compile Include="Excel\DynamicTestExecutor.cs" />
+    <Compile Include="Excel\ExcelTestFilter.cs" />
     <Compile Include="Excel\ExcelDataParser.cs" />
     <Compile Include="Excel\TestCaseData.cs" />
     <Compile Include="TestBase.cs" />

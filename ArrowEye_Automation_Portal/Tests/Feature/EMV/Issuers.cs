@@ -8,6 +8,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
     [TestFixture]
     public class Issuers : TestBase
     {
+        string userName = "portaltestuser";
+        string password = "Admin123@";
         public string getRandomString()
         {
             return RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5); ;
@@ -22,9 +24,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [TestCase("Automation_Create_Issuer_PE_","123","PE","Testing Issuer")]
         public void Create_New_EMV_Issuer(string name, string cpv, string appPath, string notes)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMVSubmenu("Issuers");
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");            
             CP_Pages.EMVIssuersPage.AddNewIssuer(name + getRandomString(), cpv, appPath, notes);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -35,9 +38,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [TestCase("Automation_Edit_Issuer_", "678", "Certified", "Testing Issuer", "PE")]        
         public void Edit_EMV_Issuer(string name, string cpv, string appPath, string notes, string newAppPath)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMVSubmenu("Issuers");
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.EditIssuer(name + getRandomString(), cpv, appPath, notes, newAppPath);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -48,9 +52,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [TestCase("Automation_EMV_Issuer_Validation_", "234", "Certified", "Testing Issuer")]        
         public void Validate_EMV_Issuer(string name, string cpv, string appPath, string notes)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMVSubmenu("Issuers");
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.ValidateEMVIssuer(name + getRandomString(), cpv, appPath, notes);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -61,9 +66,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [TestCase("Authentications", "Card Profiles","Configurations","Issuers","Scripts","Modules")]        
         public void EMV_Options_View(params string[] listOfOptions)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMV();
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.EMVOptionsView(listOfOptions);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -74,9 +80,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [TestCase("ID", "Name", "CPV / PVT Number", "Approval Path", "Notes", "Actions")]
         public void EMV_Issuer_Homepage_View(params string[] listOfOptions)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMVSubmenu("Issuers");
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.EMVIssuerHomepageView(listOfOptions);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -84,12 +91,13 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Test]
         [Description("EMV_Issuer_Export")]
         [Category("Smoke")]
-        [TestCase("React App.csv")]
+        [TestCase("ASI Portal.csv")]
         public void EMV_Issuer_Export(string fileName)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToEMVSubmenu("Issuers");
+            CP_Pages.Home.NavigateToMenu("EMV");
+            CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.EMVIssuerExport(fileName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

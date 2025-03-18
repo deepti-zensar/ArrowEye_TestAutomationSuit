@@ -16,7 +16,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public static string PclDynamic = "//td[contains(.,'{0}')]";
         public static string clientGallery = "//p[contains(.,'{0}')]";
         public static string clientGallerySubMenuItem = "//li[@data-testid='subMenuItems']//p[contains(text(),'{0}')]";
-        public static string clientGalleryMenuItem = "//li[@data-testid='nestedMenuItem']//p[contains(text(),'{0}')]";
+        public static string clientGalleryMenuItem = "//li[@role='menuitem']//p[contains(text(),'{0}')]";
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3']")]
         public IWebElement homePageTitle;
@@ -117,6 +117,69 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//li[@data-testid='subMenuItems']//p[contains(text(),'SOP Configurations')]")]
         public IWebElement SOPConfigurations;
 
+        [FindsBy(How = How.XPath, Using = "(//td[@class='MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium jss6 css-q34dxg'])[position()=32]")]
+        public IWebElement AmazonPCL;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Issuers')]")]
+        public IWebElement emvIssuers;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Authentications')]")]
+        public IWebElement emvAuthentications;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Card Profiles')]")]
+        public IWebElement emvCardProfiles;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Configurations')]")]
+        public IWebElement emvConfigurations;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Scripts')]")]
+        public IWebElement emvScripts;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Modules')]")]
+        public IWebElement emvModules;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Settings')]")]
+        public IWebElement clientSettings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Default Proof Replacements')]")]
+        public IWebElement clientSettingsDefaultProofReplacements;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Mag Track Encodings')]")]
+        public IWebElement clientSettingsMagTrackEncodings;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Client Information')]")]
+        public IWebElement clientInformation;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Configuration Hierarchy')]")]
+        public IWebElement configurationHierarchy;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Orders On Hold')]")]
+        public IWebElement ordersOnHold;
+
+        [FindsBy(How = How.XPath, Using = "//li[@role='menuitem']//p[contains(text(),'Products')]")]
+        public IWebElement products;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Pin Mailers')]")]
+        public IWebElement productsPinMailers;
+
+        [FindsBy(How = How.XPath, Using = "//li[@id='subMenuItems']//p[contains(text(),'Plastic Card Front Templates')]")]
+        public IWebElement productsPlasticCardFrontTemplate;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='menu']")]
+        public IWebElement leftNavigationBar;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/*[@data-testid='InfoOutlinedIcon']")]
+        public IWebElement disclaimerBannerIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
+        public IWebElement disclaimerBannerText;
+
+        [FindsBy(How = How.XPath, Using = "//ul[@role='menu']//li")]
+        public IList<IWebElement> clientGalleryMenuOptions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "//ul[contains(@class,'MuiList-root MuiList-padding')]//p")]
+        public IList<IWebElement> leftNavigationBarOptions { get; set; }
+
         public void ValidateHomePageTitle()
         {
             Thread.Sleep(5000);
@@ -185,7 +248,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
-        public void CSPSettings_SubmenuItems(Boolean CSPSetting_SubMenuName)
+        public void CSPSettings_SubmenuItems(bool CSPSetting_SubMenuName)
         {
             Browser.Click(CSPSettings);
             if (BOCDynamicInfo.Displayed&& CardHolderAgreement.Displayed && CarrierDynamicInfo.Displayed&& EMVProfile.Displayed&& FOCDynamicInfo.Displayed)
@@ -196,48 +259,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             {
                 Browser.Close();
             }
-        }
-
-        public void NavigateToEMV()
-        {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(emv);
-        }
-
-        public void NavigateToEMVSubmenu(string emvSubmenu)
-        {
-            NavigateToEMV();
-            switch (emvSubmenu)
-            {
-                case "Authentications":
-                    Browser.Click(emvAuthentications);
-                    break;
-                case "Card Profiles":
-                    Browser.Click(emvCardProfiles);
-                    break;
-                case "Configurations":
-                    Browser.Click(emvConfigurations);
-                    break;
-                case "Issuers":
-                    Browser.Click(emvIssuers);
-                    break;
-                case "Scripts":
-                    Browser.Click(emvScripts);
-                    break;
-                case "Modules":
-                    Browser.Click(emvModules);
-                    break;
-            }
-        }
-        public void NavigateToClientSettings()
-        {
-            Browser.Click(SearchOrSelect);
-            Browser.Click(AmazonPCL);
-            Browser.Click(clientGallery);
-            Browser.Click(clientSettings);
-        }
+        }           
 
         public void NavigateToClientSettingsSubMenu(string ClientSetting_SubMenuName, string pclID = "9006: Pier 2")
         {
@@ -310,6 +332,61 @@ namespace ArrowEye_Automation_Portal.PageRepository
                     break;
             }
         }
+        public void NavigateToMenu(string menu, string pclID = "8003: CorpGraduationArrowEye")
+        {
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+            Browser.ClickDynamicElement(clientGalleryMenuItem, menu);            
+        }
+        public void NavigateToSubmenu(string subMenu)
+        {
+            Browser.ClickDynamicElement(clientGallerySubMenuItem, subMenu);
+        }
 
+        public void NavigateToClientGallery(string pclID = "9006: Pier 2")
+        {
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
+        }
+
+        public void NavigateToLeftBar(string pclID = "9006: Pier 2")
+        {
+            DriverUtilities.Click(SearchOrSelect);
+            Browser.ClickDynamicElement(PclDynamic, pclID);
+            Browser.Click(leftNavigationBar);
+            Thread.Sleep(2000);
+        }
+        
+        public void ValidateClientGalleryOptions(string[] listOfOptions)
+        {
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in clientGalleryMenuOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateLeftNavigationBarOptions(string[] listOfOptions)
+        {
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in leftNavigationBarOptions)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }
+            Console.WriteLine(string.Join(", ", actualListOfOptions));
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+
+        public void ValidateHomepageDisclaimerBanner()
+        {
+            Browser.WaitForElement(disclaimerBannerText, 10);
+            Assert.That(disclaimerBannerText.Text, Is.EqualTo("Please select a PCL ID to begin"));
+            Assert.That(disclaimerBannerIcon.Displayed, Is.True);
+        }
     }
 }

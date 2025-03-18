@@ -13,8 +13,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
     [TestFixture]
     public class PinMailers : TestBase
     {
-        string userName = "sbabu";
-        string password = "Sudarshan@12345";
+        string userName = "portaltestuser";
+        string password = "Admin123@";
         public string getRandomString()
         {
             return RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5); ;
@@ -28,7 +28,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.Home.NavigateToMenu("Products");
+            CP_Pages.Home.NavigateToSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.AddNewPINMailer(carrierTitle + getRandomString(), desc, partOf, carrierStatus, colorMode);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -41,7 +42,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.Home.NavigateToMenu("Products");
+            CP_Pages.Home.NavigateToSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.EditPINMailer(carrierTitle + getRandomString(), desc, partOf, carrierStatus, colorMode, newCarrierTitle + getRandomString(), newDesc, newPartOf, newCarrierStatus, newColorMode);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -55,7 +57,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.Home.NavigateToMenu("Products");
+            CP_Pages.Home.NavigateToSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.DeletePINMailer(carrierTitle + getRandomString(), desc, partOf, carrierStatus, colorMode);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -67,7 +70,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.Home.NavigateToMenu("Products");
+            CP_Pages.Home.NavigateToSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.ValidatePINMailers();
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -80,7 +84,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToProductsSubmenu("Pin Mailers");
+            CP_Pages.Home.NavigateToMenu("Products");
+            CP_Pages.Home.NavigateToSubmenu("Pin Mailers");
             CP_Pages.PinMailersPage.RenamePINMailersCategory(newCategoryName + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }

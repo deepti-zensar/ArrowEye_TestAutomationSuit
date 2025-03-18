@@ -48,11 +48,41 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar']")]
         private IWebElement toasterMessage;
 
+        [FindsBy(How = How.XPath, Using = "//p[text()='ID:']")]
+        public IWebElement idLabel;
+
         [FindsBy(How = How.XPath, Using = "(//p[text()='ID:']/following-sibling::p/b)[1]")]
         public IWebElement firstID;
 
+        [FindsBy(How = How.XPath, Using = "//p[text()='Name:']")]
+        public IWebElement nameLabel;
+
         [FindsBy(How = How.XPath, Using = "(//p[text()='Name:']/following-sibling::p)[1]")]
-        public IWebElement firstName;        
+        public IWebElement firstName;
+
+        [FindsBy(How = How.XPath, Using = "//p[text()='Shared By:']")]
+        public IWebElement sharedByLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='letCarPrograms']")]
+        public IWebElement sharedByLink;
+
+        [FindsBy(How = How.XPath, Using = "//h6[@id='modal-modal-title']")]
+        public IWebElement sharedByPopupHeading;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='ID']")]
+        public IWebElement sharedByIDLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Version']")]
+        public IWebElement sharedByVersionLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Program name']")]
+        public IWebElement sharedByProgramLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Status']")]
+        public IWebElement sharedByStatusLabel;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='exportButton']")]
+        public IWebElement sharedByExport;
 
         [FindsBy(How = How.XPath, Using = "//input[@placeholder='Search..']")]
         private IWebElement searchBox;
@@ -68,6 +98,48 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p[text()='ID: ']/div")]
         public IWebElement editFOCID;
+
+        [FindsBy(How = How.XPath, Using = "//button[@aria-label='duplicate']")]
+        private IWebElement duplicateIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
+        public IWebElement duplicateFOCLabel;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='save']")]
+        public IWebElement duplicateButton;
+
+        [FindsBy(How = How.XPath, Using = "//button[@aria-label='Deactivate']")]
+        private IWebElement deactivateIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//h2")]
+        public IWebElement deactivateLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
+        public IWebElement deactivateMsg;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-testid='okButton']")]
+        public IWebElement deactivateButton;
+
+        [FindsBy(How = How.XPath, Using = "//button[@aria-label='History']")]
+        private IWebElement historyIcon;
+
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
+        public IWebElement viewHistoryLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='ID']")]
+        public IWebElement historyIDLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Version']")]
+        public IWebElement historyVersionLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Date']")]
+        public IWebElement historyDateLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='Text']")]
+        public IWebElement historyTextLabel;
+
+        [FindsBy(How = How.XPath, Using = "//div[@aria-label='User']")]
+        public IWebElement historyUserLabel;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='deleteIcon']")]
         private IWebElement deleteButton;
@@ -120,10 +192,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(firstID.Text, Is.EqualTo(toasterMessageID));
             Assert.That(firstName.Text, Is.EqualTo(name));
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
+            //validate dashboard
+            Assert.That(idLabel.Displayed, Is.True);            
+            Assert.That(nameLabel.Displayed, Is.True);
+            Assert.That(sharedByLabel.Displayed, Is.True);
             return toasterMessageID;
         }
-
-        public void EditPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public string EditPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             ValidatePageTitle();
             string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
@@ -157,54 +232,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(firstID.Text, Is.EqualTo(toasterMessageID));
             Assert.That(firstName.Text, Is.EqualTo(newName));
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
-        }
-
-        //public void DeletePINMailer(string carrierTitle, string desc, string partOf, string carrierStatus, string colorMode)
-        //{
-        //    ValidatePageTitle();
-        //    string createdID = AddNewPINMailer(carrierTitle, desc, partOf, carrierStatus, colorMode);
-        //    //Search and Edit
-        //    DriverUtilities.clearText(searchBox);
-        //    searchBox.SendKeys(createdID);
-        //    Browser.WaitForElement(editIcon, 10);
-        //    Browser.Click(editIcon);
-        //    Browser.WaitForElement(editCarrierLabel, 10);
-        //    Assert.That(editCarrierLabel.Text, Does.Contain(createdID));
-        //    //Delete
-        //    if (!deleteButton.Enabled)
-        //    {
-        //        selectCarrierStatusOption("Turned off");
-        //        Browser.Click(submitButton);
-        //        Browser.WaitForElement(searchBox, 10);
-        //        DriverUtilities.clearText(searchBox);
-        //        searchBox.SendKeys(createdID);
-        //        Thread.Sleep(2000);
-        //        Browser.WaitForElement(editIcon, 10);
-        //        Browser.Click(editIcon);
-        //        Browser.WaitForElement(editCarrierLabel, 10);
-
-        //    }
-        //    Browser.Click(deleteButton); 
-        //    //Handle delete pop up 
-        //    Browser.WaitForElement(deleteBoxLabel, 10);
-        //    Assert.That(deleteBoxLabel.Text, Is.EqualTo("Delete Pin Mailer"));
-        //    Browser.Click(deleteBoxDeleteBtn);
-        //    //Get toaster message
-        //    Browser.WaitForElement(toasterMessage, 10);
-        //    var toasterMessage_Text = toasterMessage.Text;
-        //    Console.WriteLine(toasterMessage_Text);
-        //    var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
-        //    //Validate Toaster message
-        //    Assert.That(createdID, Is.EqualTo(toasterMessageID));
-        //    Assert.That(toasterMessage_Text, Is.EqualTo("Pin Mailer " + createdID + " Deleted Successfully."));
-        //    //Validate no result
-        //    DriverUtilities.clearText(searchBox);
-        //    searchBox.SendKeys(createdID);
-        //    Thread.Sleep(2000);
-        //    Browser.WaitForElement(noMatchFound, 10);
-        //    Assert.That(noMatchFound.Text, Is.EqualTo("No Match found"));
-        //}
-
+            return createdID;
+        }        
         public void ValidatePlasticCardFrontTemplate()
         {
             ValidatePageTitle();
@@ -230,6 +259,125 @@ namespace ArrowEye_Automation_Portal.PageRepository
             descField.SendKeys(RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 501));
             Assert.That(nameField.GetAttributeValue("value").Length, Is.EqualTo(100));
             Assert.That(descField.GetAttributeValue("value").Length, Is.EqualTo(200));
+        }
+
+        public void DuplicatePlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        {
+            ValidatePageTitle();
+            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            //Search and Duplicate
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(createdID);
+            Browser.WaitForElement(duplicateIcon, 10);
+            Browser.Click(duplicateIcon);
+            Browser.WaitForElement(duplicateFOCLabel, 10);
+            Assert.That(duplicateFOCLabel.Text, Is.EqualTo("Duplicate FOC"));            
+            //Enter new details
+            DriverUtilities.clearText(nameField);
+            nameField.SendKeys(newName);
+            DriverUtilities.clearText(descField);
+            descField.SendKeys(newDesc);
+            //Duplicate
+            Browser.Click(duplicateButton);
+            //Get toaster message
+            Browser.WaitForElement(toasterMessage, 10);
+            var toasterMessage_Text = toasterMessage.Text;
+            Console.WriteLine(toasterMessage_Text);
+            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
+            //Get latest ID
+            DriverUtilities.clearText(searchBox);
+            Thread.Sleep(4000);
+            var firstIDText = firstID.Text;
+            //Validate Toaster message
+            Assert.That(firstIDText, Is.EqualTo(toasterMessageID));
+            Assert.That(toasterMessage_Text, Is.EqualTo("FOC " + firstIDText + " Added Successfully."));
+            //search and verify in Active status
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(toasterMessageID);
+            Browser.WaitForElement(firstID, 5);
+            Assert.That(firstID.Text, Is.EqualTo(toasterMessageID));
+            Assert.That(firstName.Text, Is.EqualTo(newName));
+            Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
+        }
+
+        public void DeactivatePlasticCardFrontTemplate(string template, string name, string desc)
+        {
+            ValidatePageTitle();
+            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            //Search and Duplicate
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(createdID);
+            Browser.WaitForElement(deactivateIcon, 10);
+            Browser.Click(deactivateIcon);
+            Browser.WaitForElement(deactivateMsg, 10);
+            Assert.That(deactivateMsg.Text, Is.EqualTo("Are you sure you want to Deactivate Front Card Template ID \""+ createdID + "\" ?"));            
+            //Deactivate
+            Browser.Click(deactivateButton);
+            //Get toaster message
+            Browser.WaitForElement(toasterMessage, 10);
+            var toasterMessage_Text = toasterMessage.Text;
+            Console.WriteLine(toasterMessage_Text);
+            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
+            //Validate Toaster message
+            //TODO- Need to change the toaster message as per US                         
+            Assert.That(createdID, Is.EqualTo(toasterMessageID));
+            Assert.That(toasterMessage_Text, Is.EqualTo("Plastic Card " + createdID + " Updated Successfully."));
+            //search and verify in Inactive status
+            DriverUtilities.clearText(statusBox);
+            statusBox.SendKeys("Inactive");
+            statusBox.SendKeys(Keys.Down + Keys.Enter);
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(toasterMessageID);
+            Browser.WaitForElement(firstID, 5);
+            Assert.That(firstID.Text, Is.EqualTo(toasterMessageID));
+            Assert.That(firstName.Text, Is.EqualTo(name));
+            Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Inactive"));
+        }
+
+        public void ViewHistoryPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        {
+            ValidatePageTitle();
+            string createdID = EditPlasticCardFrontTemplate(template, name, desc,newName,newDesc);
+            //Search and View History
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(createdID);
+            Browser.WaitForElement(historyIcon, 10);
+            Browser.Click(historyIcon);
+            Browser.WaitForElement(viewHistoryLabel, 10);
+            Assert.That(viewHistoryLabel.Text, Is.EqualTo("View History"));  
+            Thread.Sleep(3000);
+            //validate all fields in view history popup
+            Assert.That(historyIDLabel.Displayed, Is.True);
+            Assert.That(historyVersionLabel.Displayed, Is.True);
+            Assert.That(historyDateLabel.Displayed, Is.True);
+            Assert.That(historyTextLabel.Displayed, Is.True);
+            Assert.That(historyUserLabel.Displayed, Is.True);
+            //ToDo: Export functionality as per US
+        }
+
+        public void ViewSharedByPlasticCardFrontTemplate(string template, string name, string desc)
+        {
+            ValidatePageTitle();
+            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            //Search and View History
+            DriverUtilities.clearText(searchBox);
+            searchBox.SendKeys(createdID);
+            Browser.WaitForElement(sharedByLabel, 10);
+            Assert.That(sharedByLabel.Displayed, Is.True);
+            Browser.Click(sharedByLink);
+            Browser.WaitForElement(sharedByPopupHeading, 10);
+            Assert.That(sharedByPopupHeading.Text, Is.EqualTo("Shared programs"));
+            Thread.Sleep(3000);
+            //validate all fields in Shared By popup
+            Assert.That(sharedByIDLabel.Displayed, Is.True);
+            Assert.That(sharedByVersionLabel.Displayed, Is.True);
+            Assert.That(sharedByProgramLabel.Displayed, Is.True);
+            Assert.That(sharedByStatusLabel.Displayed, Is.True);
+            //validate export functionality
+            Browser.Click(sharedByExport);            
+            Thread.Sleep(4000);
+            bool fileStatus = Extensions.IsFileDownloaded("data.csv");
+            Assert.That(fileStatus, Is.True);
         }
     }
 }

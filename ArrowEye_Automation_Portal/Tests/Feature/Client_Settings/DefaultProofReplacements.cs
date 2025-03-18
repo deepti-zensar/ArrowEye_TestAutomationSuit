@@ -8,6 +8,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
     [TestFixture]
     public class DefaultProofReplacements : TestBase
     {
+        string userName = "portaltestuser";
+        string password = "Admin123@";
         public string getRandomString()
         {
             return RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5); ;
@@ -20,9 +22,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         
         public void Create_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
-            CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");            
             CP_Pages.DefaultProofReplacementsPage.AddNewProofReplacement(replacementTag, replacementValue + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -33,9 +36,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("FirstName", "Automation_")]
         public void Edit_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
-            CP_Pages.Login.LogIn("sudarshan", "Test@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");
             CP_Pages.DefaultProofReplacementsPage.EditProofReplacement(replacementTag, replacementValue + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -46,9 +50,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("FirstName", "Automation_")]
         public void Delete_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
-            CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");
             CP_Pages.DefaultProofReplacementsPage.DeleteProofReplacement(replacementTag, replacementValue + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -59,9 +64,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("FirstName", "Automation_")]
         public void Validate_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
-            CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");
             CP_Pages.DefaultProofReplacementsPage.ValidateProofReplacement(replacementTag, replacementValue + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -72,9 +78,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("ID", "Replacement Tag", "Replacement value", "Actions")]
         public void HomepageView_DefaultProofReplacements(params string[] listOfOptions)
         {
-            CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");
             CP_Pages.DefaultProofReplacementsPage.ProofReplacementHomepageView(listOfOptions);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -85,9 +92,10 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("React App.csv")]
         public void Export_DefaultProofReplacements(string fileName)
         {
-            CP_Pages.Login.LogIn("sbabu", "Sudarshan@12345");
+            CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Default Proof Replacements");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Default Proof Replacements");
             CP_Pages.DefaultProofReplacementsPage.ProofReplacementExport(fileName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

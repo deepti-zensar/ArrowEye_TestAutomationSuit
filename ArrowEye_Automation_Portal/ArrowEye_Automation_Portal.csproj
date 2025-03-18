@@ -252,7 +252,13 @@
     <Compile Include="PageRepository\EMV_Scripts_Page.cs" />
     <Compile Include="PageRepository\Objects\BcssConfigurationRecord.cs" />
     <Compile Include="PageRepository\Objects\PrintSettingsRecord.cs" />
+	<Compile Include="PageRepository\CP_ClientSettings_MagTrackEncodingsPage.cs" />
+<Compile Include="PageRepository\CP_ConfigurationHierarchyPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<Compile Include="PageRepository\CP_Products_PinMailersPage.cs" />
+<Compile Include="PageRepository\CP_ClientInformationPage.cs" />
+<Compile Include="PageRepository\CP_OrdersOnHoldPage.cs" />
+<Compile Include="PageRepository\CP_Products_PlasticCardFrontTemplatePage.cs" />
     <Compile Include="Tests\Feature\Client_Settings\BCSS_Configuration.cs" />
     <Compile Include="Tests\Feature\Client_Settings\Print_Settings.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\BOC_Dynamic_Info.cs" />
@@ -272,6 +278,12 @@
     <Compile Include="Tests\Feature\Products\PlasticCardFrontTemplate.cs" />
     <Compile Include="Tests\Feature\Products\PinMailers.cs" />
     <Compile Include="Tests\Feature\Products\Plastic_Cards.cs" />
+<Compile Include="Tests\Feature\Client_Settings\MagTrackEncodings.cs" />
+<Compile Include="Tests\Feature\Client_Settings\DefaultProofReplacements.cs" />
+<Compile Include="Tests\Feature\ClientInformation.cs" />
+    <Compile Include="Tests\Feature\OrdersOnHold.cs" />
+<Compile Include="Tests\Feature\Login.cs" />
+
   </ItemGroup>
   <ItemGroup>
     <None Include=".bin\node.cmd" />

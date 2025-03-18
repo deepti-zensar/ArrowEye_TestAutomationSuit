@@ -23,7 +23,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(userName,password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Mag Track Encodings");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Mag Track Encodings");
             CP_Pages.MagTrackEncodingsPage.ValidateMagTrackEncodings();
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -36,7 +37,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Mag Track Encodings");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Mag Track Encodings");
             CP_Pages.MagTrackEncodingsPage.DeleteBINMagTrackEncodings(name);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -49,7 +51,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Mag Track Encodings");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Mag Track Encodings");
             CP_Pages.MagTrackEncodingsPage.MagTrackEncodingsHomepageView(listOfOptions);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
@@ -62,7 +65,8 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToClientSettingsSubmenu("Mag Track Encodings");
+            CP_Pages.Home.NavigateToMenu("Client Settings");
+            CP_Pages.Home.NavigateToSubmenu("Mag Track Encodings");
             CP_Pages.MagTrackEncodingsPage.MagTrackEncodingsExport(fileName);
             DriverUtilities.TakeScreenshot(@"C:\");
         }

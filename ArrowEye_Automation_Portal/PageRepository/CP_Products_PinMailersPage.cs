@@ -410,8 +410,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             DriverUtilities.clearText(renameCategoryInput);
             renameCategoryInput.SendKeys(newCategoryName);
             renameCategoryInput.SendKeys(Keys.Enter);
+            Thread.Sleep(4000);
             //validate new category name
-            Assert.That(categoryName.GetAttributeValue("value"), Is.EqualTo(newCategoryName));
+            Assert.That(categoryName.Text, Is.EqualTo(newCategoryName));
 
         }
     }

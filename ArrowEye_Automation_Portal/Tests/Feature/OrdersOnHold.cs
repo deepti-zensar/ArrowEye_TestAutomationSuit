@@ -8,13 +8,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
     [TestFixture]
     public class OrdersOnHold : TestBase
     {
-        string userName = "sbabu";
-        string password = "Sudarshan@12345";
+        string userName = "portaltestuser";
+        string password = "Admin123@";
         public string getRandomString()
         {
             return RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5); ;
         }
-
         
         [Test]
         [Description("OrdersOnHold_Homepage_View")]

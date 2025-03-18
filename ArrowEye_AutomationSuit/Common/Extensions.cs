@@ -367,7 +367,7 @@ namespace ArrowEye_Automation_Framework.Common
         public static bool IsFileDownloaded(string fileName)
         {
             string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathDownload = Path.Combine(pathUser, "Downloads");
+            string pathDownload = Path.Combine(pathUser, "Downloads", "automation");
             DirectoryInfo downloadDir = new DirectoryInfo(pathDownload);
             var dirContents = downloadDir.GetFiles();
             foreach (var file in dirContents)

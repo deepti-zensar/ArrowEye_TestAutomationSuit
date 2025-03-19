@@ -22,7 +22,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_CardHolderAgreement_Create_Info_")]
         public void Create_New_CardHolderAggrement_Info(string CreateCardHolderAgreement)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Card Holder Agreement");
             CP_Pages.CardHolderAgreement.AddCardHolderAgreementInfo(CreateCardHolderAgreement + randomString);
@@ -35,7 +35,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_CardHolderAgreement_Edit_Info_")]
         public void Edit_CardHolderAggrement_Info(string UpdateCardHolderAgreement)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Card Holder Agreement");
             CP_Pages.CardHolderAgreement.EditCardHolderAgreementInfo(UpdateCardHolderAgreement + randomString);
@@ -49,7 +49,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Delete_CardHolderAgreement_")]
         public void Delete_CardHolderAggrement_Info(string DeleteCardHolderAgreement)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Card Holder Agreement");
             //CP_Pages.CardHolderAgreement.DeleteCardHolderAgreementInfo(DeleteCardHolderAgreement + randomString);
@@ -63,7 +63,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         public void View_Search_CardHolderAggrement_Info(string SearchCardHolderAgreement)
         {
 
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Card Holder Agreement");
             //CP_Pages.CardHolderAgreement.View_SearchCardHolderAgreementInfo(SearchCardHolderAgreement + randomString);
@@ -77,7 +77,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         public void Negative_Validations_CardHolderAggrement_Info(string NegativeScenariosText)
         {
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 90);
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Card Holder Agreement");
             //CP_Pages.CardHolderAgreement.ValidationsCardHolderAgreementInfo(NegativeScenariosText + randomStrings);

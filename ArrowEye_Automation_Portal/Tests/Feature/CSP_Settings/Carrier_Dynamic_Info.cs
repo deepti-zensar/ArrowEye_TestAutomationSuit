@@ -22,7 +22,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Carrier_Create_Info_")]
         public void Create_New_Carrier_Dynamic_Info(string CreateCarrierDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToCSPSettingsSubMenu("Carrier Dynamic Info");
             CP_Pages.CarrierDynamicInfoPage.AddNewCarrierDynamicInfo(CreateCarrierDynamicText + randomString);
@@ -35,7 +35,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Cariier_Edit_Info_")]
         public void Edit_Carrier_Dynamic_Info(string UpdateCarrierDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
              CP_Pages.Home.NavigateToCSPSettingsSubMenu("Carrier Dynamic Info");
             CP_Pages.CarrierDynamicInfoPage.EditCarrierDynamicInfo(UpdateCarrierDynamicText + randomString);
@@ -49,7 +49,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         [TestCase("Automation_Delete_Carrier_Info_")]
         public void Delete_Carrier_Dynamic_Info(string DeleteCarrierDynamicText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
              CP_Pages.Home.NavigateToCSPSettingsSubMenu("Carrier Dynamic Info");
             CP_Pages.CarrierDynamicInfoPage.DeleteCarrierDynamicInfo(DeleteCarrierDynamicText + randomString);
@@ -63,7 +63,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         public void View_Search_Carrier_Dynamic_Info(string ViewSearchCarrierDynamicText)
         {
 
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
              CP_Pages.Home.NavigateToCSPSettingsSubMenu("Carrier Dynamic Info");
             CP_Pages.CarrierDynamicInfoPage.ViewandSearchCarrierDynamicInfo(ViewSearchCarrierDynamicText + randomString);
@@ -77,7 +77,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.CSP_Settings
         public void Negative_Validations_Carrier_Dynamic_Info(string NegativeScenariosText)
         {
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 90);
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
              CP_Pages.Home.NavigateToCSPSettingsSubMenu("Carrier Dynamic Info");
             CP_Pages.CarrierDynamicInfoPage.ValidationsCarrierDynamicInfo(NegativeScenariosText + randomStrings);

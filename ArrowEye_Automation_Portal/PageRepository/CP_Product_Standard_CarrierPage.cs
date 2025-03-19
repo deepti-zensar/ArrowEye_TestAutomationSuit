@@ -3,18 +3,9 @@ using ArrowEye_Automation_Framework;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.IO;
-using OpenQA.Selenium.BiDi.Modules.Script;
-using System.Web.UI.WebControls;
 using RandomString4Net;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
-using OpenQA.Selenium.DevTools;
+
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -140,6 +131,72 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//h6[@id='modal-modal-title']")]
         private IWebElement SaharedProgramsText;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label'])[1]")]
+        private IWebElement MainCategories;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label' and text()='New Category'])[1]")]
+        private IWebElement NewCategory;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label' and text()='New Category'])[2]")]
+        private IWebElement NewchildCategory;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='down']")]
+        private IWebElement MoveDown;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='default']")]
+        private IWebElement MakeDefault;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='add']")]
+        private IWebElement AddNewSubCategory_option;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='rename']")]
+        private IWebElement RenameCategory;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label'])[2]")]
+        private IWebElement subCategories;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label'])[3]")]
+        private IWebElement secondsubCategories;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='up']")]
+        private IWebElement subCategories_MoveUp;
+
+        [FindsBy(How = How.XPath, Using = "//h2[@id='child-modal-title']")]
+        private IWebElement DeleteCategorylabeltext;
+
+        [FindsBy(How = How.XPath, Using = "(//*[name()='svg' and @class='MuiSvgIcon-root'])[2]")]
+        private IWebElement DeleteCategorypopupclosebtn;
+
+        [FindsBy(How = How.XPath, Using = "//p[@id='child-modal-description']")]
+        private IWebElement DeleteCategorypopupwarningmsg;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='down']")]
+        private IWebElement subCategories_MoveDown;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='default']")]
+        private IWebElement Categories_MakeDefault;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='add']")]
+        private IWebElement AddNew_subcategory;
+
+        [FindsBy(How = How.XPath, Using = "//button[text()='Cancel']")]
+        private IWebElement categorydeletepopup_cancel_btn;
+
+        [FindsBy(How = How.XPath, Using = "//button[text()='Delete']")]
+        private IWebElement categorydeletepopup_delete_btn;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='rename']")]
+        private IWebElement subCategories_Rename;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='delete']")]
+        private IWebElement subCategories_delete;
+
+        [FindsBy(How = How.XPath, Using = "//li[@data-testid='turnoff']")]
+        private IWebElement subCategories_turnoff;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@data-testid='Label'])[3]")]
+        private IWebElement subchildCategories;
 
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss1051 css-9l3uo3']")]
         private IWebElement SaharedProgramsMessage;
@@ -308,6 +365,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
         private IWebElement AddedNewStandardCarrier_ID;
 
         [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 css-1ndd0bs'])[position()=1]")]
+        private IWebElement Joblocator;
+
+
+        [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 css-1ndd0bs'])[position()=1]")]
         private IWebElement UpdatedNewStandardCarrier_ID;
 
         [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body1 css-1cdulpx'])[position()=1]")]
@@ -427,6 +488,82 @@ namespace ArrowEye_Automation_Portal.PageRepository
         }
 
 
+
+        public void View_ctegories_subcategories_CategoriesList(bool fields)
+        {
+            if (fields != false)
+            {
+                Thread.Sleep(7000);
+                if (MainCategories.Displayed && subCategories.Displayed
+                    && subchildCategories.Displayed)
+
+                {
+
+                }
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
+
+        public void Verify_Maincategory_options(bool fields)
+        {
+            if (fields != false)
+            {
+                Thread.Sleep(7000);
+                if (MoveDown.Displayed && MakeDefault.Displayed
+                    && AddNewSubCategory_option.Displayed && RenameCategory.Displayed)
+
+                {
+
+                }
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
+
+
+        public void Verify_Subcategory_options(bool fields)
+        {
+            if (fields != false)
+            {
+                Thread.Sleep(7000);
+                if (subCategories_MoveUp.Displayed && subCategories_MoveDown.Displayed
+                    && Categories_MakeDefault.Displayed && AddNew_subcategory.Displayed
+                    && subCategories_Rename.Displayed && subCategories_delete.Displayed
+                    && subCategories_turnoff.Displayed)
+
+                {
+
+                }
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
+
+        public void Verify_delete_categorypopup_elements(bool fields)
+        {
+            if (fields != false)
+            {
+                Thread.Sleep(7000);
+                if (DeleteCategorylabeltext.Displayed && DeleteCategorypopupclosebtn.Displayed
+                    && DeleteCategorypopupwarningmsg.Displayed && categorydeletepopup_cancel_btn.Displayed &&
+                    categorydeletepopup_delete_btn.Displayed)
+
+                {
+
+                }
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
 
         public void Verify_SharedByPrograms_popup_Details(bool fields)
         {
@@ -616,6 +753,64 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         }
 
+
+        public void Maintanence_StandardCarrier(string MaintanenceStandardCarrier)
+        {
+            //bug: CRP-7249
+            //Note: create,moveup,movedown,make default,trrnoff,rename,delete categories are working after navigates from categories page to someother page and comeback to subcategory page.
+            var homepage = StandardCarrierhomePageTitle.Displayed;
+            View_ctegories_subcategories_CategoriesList(true);
+            //Right click main category
+            Browser.Element_RightClick(MainCategories);
+            Verify_Maincategory_options(true);
+
+            Browser.Element_RightClick(MainCategories);
+            //click on addnewsubcategory option
+            Browser.Click(AddNewSubCategory_option);
+            Browser.Click(MainCategories);
+
+            //Right click sub category
+            Browser.Element_RightClick(subCategories);
+            Verify_Subcategory_options(true);
+
+            //click on newlyadded subcategory
+            Browser.Element_RightClick(subCategories);
+
+            //Rename category
+            Browser.Click(RenameCategory);
+            subCategories.SendKeys("AutomationTestCategory");
+            var RenameInputs = subCategories.GetDomAttribute("value");
+
+            //move down
+            Browser.Element_RightClick(subCategories);
+            Browser.Click(MoveDown);
+
+            //move up
+            Browser.Element_RightClick(subCategories);
+            Browser.Click(subCategories_MoveUp);
+
+            //Add subchaildcategory from sub category
+            Browser.Element_RightClick(NewCategory);
+            Browser.Click(AddNewSubCategory_option);
+            Browser.Click(NewCategory);
+
+            //delete subcategory
+            Browser.Element_RightClick(NewchildCategory);
+            Browser.Click(subCategories_delete);
+            Verify_delete_categorypopup_elements(true);
+            Browser.Click(categorydeletepopup_delete_btn);
+
+            //Right click main category
+            Browser.Element_RightClick(MainCategories);
+            Browser.Click(AddNewSubCategory_option);
+            Browser.Click(MainCategories);
+            //right click on second sub category
+            Browser.Element_RightClick(secondsubCategories);
+            //make default
+            Browser.Click(MakeDefault);
+
+        }
+
         public void Validations_StandardCarrier(string NegativeScenariosText)
         {
             //All Validations errors
@@ -709,7 +904,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             clinetproductmapidtextbox.SendKeys(mapid);
             Productspopup_closebtn.Click();
 
-           
+
         }
 
     }

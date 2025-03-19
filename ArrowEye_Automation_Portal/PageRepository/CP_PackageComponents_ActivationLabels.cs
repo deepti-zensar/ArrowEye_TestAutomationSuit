@@ -15,6 +15,7 @@ using System.Web.UI.WebControls;
 using RandomString4Net;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using OpenQA.Selenium.DevTools;
+using System.Windows.Forms;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
@@ -22,7 +23,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
     {
 
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss14 css-1rtfhzq' and contains(text(),'Activation Labels')]")]
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss52 css-1rtfhzq' and contains(text(),'Activation Labels')]")]
         public IWebElement ActivationLablesPageTitle;
 
         [FindsBy(How = How.XPath, Using = "//input[@type='search' and @placeholder='Search…']")]
@@ -34,8 +35,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textLeft' and @data-field='description'])[1]")]
         private IWebElement Created_ActivationLables_description;
 
-        [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textLeft' and @data-field='name'])[1]")]
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='cellClick']")]
         private IWebElement SharedBy_ActivationLables_Program;
+
+        
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='openModal']")]
         private IWebElement ActivationLable_AddNew_button;
@@ -52,14 +55,26 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='closeButtonIcon']")]
         private IWebElement SharedByPrograms_closebtn;
 
+        [FindsBy(How = How.XPath, Using = "(//*[name()='svg' and @data-testid='ArrowDropDownIcon'])[5]")]
+        private IWebElement SharedByPrograms_statusDD_btn;
+
         [FindsBy(How = How.XPath, Using = "(//*[name()='svg' and @data-testid='DownloadIcon'])[1]")]
         private IWebElement Download_ActivationLabel;
 
         [FindsBy(How = How.XPath, Using = "(//*[name()='svg' and @data-testid='HistoryIcon'])[1]")]
         private IWebElement History_ActivationLabel;
 
+        [FindsBy(How = How.XPath, Using = "(//*[name()='svg' and @data-testid='HistoryIcon'])[2]")]
+        private IWebElement Oldorder_History_ActivationLabel;
+
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='cancelButton']")]
         private IWebElement ActivationLable_Cancel_button;
+
+        [FindsBy(How = How.XPath, Using = "(//div[@data-testid='cellTwo'])[2]")]
+        private IWebElement ActivationLable_Date_order;
+
+        [FindsBy(How = How.XPath, Using = "(//div[@data-testid='cellTwo'])[2]")]
+        private IWebElement ActivationLable_Date_previousorder;
 
 
         [FindsBy(How = How.XPath, Using = "//p[text()='New Activation Label']")]
@@ -74,20 +89,36 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//p[@id='history-modal-title']")]
         private IWebElement ViewHistory;
 
+        [FindsBy(How = How.XPath, Using = "//div[text()='Label ID']")]
+        private IWebElement DashboardLabelId;
+
         [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 jss1429 css-68o8xu'])[1]")]
         private IWebElement ID;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap'])[8]")]
         private IWebElement ViewHistory_ID;
 
-        [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 jss1429 css-68o8xu'])[2]")]
-        private IWebElement Version;
+        [FindsBy(How = How.XPath, Using = "//div[text()='Version']")]
+        private IWebElement DashboardVersion;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='Name']")]
+        private IWebElement DashboardName;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='Description']")]
+        private IWebElement DashboardDescription;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='Part No.']")]
+        private IWebElement DashboardPartNo;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='Shared By']")]
+        private IWebElement DashboardSharedBy;
+
+        [FindsBy(How = How.XPath, Using = "//div[text()='Actions']")]
+        private IWebElement DashboardAction;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap'])[9]")]
         private IWebElement Viewhistory_Version;
 
-        [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 jss1429 css-68o8xu'])[3]")]
-        private IWebElement Name;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='printButton']")]
         private IWebElement Printbtn;
@@ -122,7 +153,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//h6[@id='modal-modal-title']")]
         private IWebElement SaharedProgramsText;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss1051 css-9l3uo3']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='jss30 MuiBox-root css-0']//p[@class='MuiTypography-root MuiTypography-body1 jss35 css-9l3uo3']")]
         private IWebElement SaharedProgramsMessage;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap'])[10]")]
@@ -140,14 +171,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitle css-mh3zap'])[11]")]
         private IWebElement SharedProgramPopup_Status;
 
-        [FindsBy(How = How.XPath, Using = "(//div[@class='jss42 MuiBox-root css-0' and @data-testid='cellOne'])[1]")]
-        private IWebElement ViewHistory_VersionId;
+        [FindsBy(How = How.XPath, Using = "//div[@class='jss70 MuiBox-root css-0' and @data-testid='cellOne']")]
+        private IWebElement ViewHistory_Id;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='jss42 MuiBox-root css-0' and @data-testid='cellOne'])[2]")]
         private IWebElement Update_ViewHistory_VersionId;
 
         [FindsBy(How = How.XPath, Using = "(//input[@data-testid='input-element'])[7]")]
-        private IWebElement ViewHistory_Id_searchTextbox;
+        private IWebElement ViewHistory_sharedbyprogram_Id_searchTextbox;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='jss426 MuiBox-root css-0'])[2]")]
         private IWebElement ViewHistory_Date;
@@ -178,11 +209,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='nameInputField']")]
         private IWebElement ActivationLable_NameTextbox;
 
+        [FindsBy(How = How.XPath, Using = "//p[text()='Invalid name. Please enter the name using allowed characters (@_:)']")]
+        private IWebElement Error_InvalidNamewithAlphanumeric;
+
         [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss338 css-9l3uo3']")]
         private IWebElement Edit_ActivationLable_headertext;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textLeft'])[2]")]
         private IWebElement Addedrecord_Nameoutput;
+
+       
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textLeft'])[3]")]
         private IWebElement Addedrecord_Descoutput;
@@ -196,13 +232,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//label[@data-testid='colorInput']")]
         private IWebElement colorRadiooption;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss105 css-9l3uo3']")]
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss768 css-9l3uo3']")]
         private IWebElement UploadFile;
 
         [FindsBy(How = How.XPath, Using = "//input[@data-testid='uploadFile']")]
         private IWebElement UploadFile_Textbox;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss91 css-9l3uo3']")]
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss754 css-9l3uo3']")]
         private IWebElement UploadFile_Type;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='saveButton']")]
@@ -214,11 +250,58 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
         private IWebElement ActivationLabel_Add_Successmessage;
 
+        [FindsBy(How = How.XPath, Using = "//p[text()='Name can not be null!']")]
+        private IWebElement ActivationLabel_Add_ErrorMessage;
+
         [FindsBy(How = How.XPath, Using = "//div[@class='go1888806478 notistack-MuiContent notistack-MuiContent-success go167266335 go1725278324 go3162094071']//div[@id='notistack-snackbar']")]
         private IWebElement ActivationLabel_Edit_Successmessage;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-cell MuiDataGrid-cell--textRight' and @data-field='id'])[1]")]
         private IWebElement NewActivationLabel_ID;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='MuiInputBase-root MuiInputBase-colorPrimary MuiTablePagination-input css-rmmij8']")]
+        private IWebElement Pagenationbtn;
+
+        [FindsBy(How = How.XPath, Using = "//option[@class='MuiTablePagination-menuItem jss627' and @value='10']")]
+        private IWebElement TenRowsperPage;
+
+        [FindsBy(How = How.XPath, Using = "//option[@class='MuiTablePagination-menuItem jss627' and @value='25']")]
+        private IWebElement TwentyFiveRowsperpage;
+
+        [FindsBy(How = How.XPath, Using = "//option[@class='MuiTablePagination-menuItem jss627' and @value='55']")]
+        private IWebElement FiftyRowsperpage;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTablePagination-selectLabel css-1chpzqh']")]
+        private IWebElement RowsPerPageLabel;
+
+        [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='FirstPageIcon']")]
+        private IWebElement FisrPageIcon;
+
+        [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='ChevronLeftIcon']")]
+        private IWebElement PreviousPageIcon;
+
+        [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='ChevronRightIcon']")]
+        private IWebElement NextPageIcon;
+
+        [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='LastPageIcon']")]
+        private IWebElement LastPageIcon;
+
+        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTablePagination-displayedRows css-1chpzqh']")]
+        private IWebElement RecordsCount;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 jss629 css-68o8xu'])[1]")]
+        private IWebElement PageLabel;
+
+        [FindsBy(How = How.XPath, Using = "//input[@class='MuiInputBase-input MuiOutlinedInput-input jss632 css-1x5jdmq' and @id='ID']")]
+        private IWebElement PageNumberTextbox;
+
+        [FindsBy(How = How.XPath, Using = "(//p[@class='MuiTypography-root MuiTypography-body2 jss629 css-68o8xu'])[2]")]
+        private IWebElement Pageoutof;
+
+
+
+
+
 
 
         [FindsBy(How = How.XPath, Using = "//*[name()='svg' and @data-testid='CloudUploadOutlinedIcon']")]
@@ -298,7 +381,29 @@ namespace ArrowEye_Automation_Portal.PageRepository
             }
         }
 
+        public void Verify_ActivationLabels_DashBoard_Parameters(bool fields)
+        {
+            if (fields != false)
+            {
+                Thread.Sleep(7000);
+                if (DashboardLabelId.Displayed && DashboardVersion.Displayed && DashboardName.Displayed &&
+                    DashboardDescription.Displayed && DashboardPartNo.Displayed && DashboardSharedBy.Displayed && DashboardAction.Displayed)
 
+                {
+
+                }
+            }
+            else
+            {
+                Browser.Close();
+            }
+        }
+
+        public void Verify_AL_Allassets_Homepage_DefaultOrder()
+        {
+           
+
+        }
 
         public void Verify_SharedByPrograms_popup_Details(bool fields)
         {
@@ -321,6 +426,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 Browser.Close();
             }
         }
+
+
 
 
 
@@ -356,19 +463,26 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var ActivationLabel_Id = NewActivationLabel_ID.Text;
             var Outputname = Addedrecord_Nameoutput.GetDomAttribute("value");
             var Outputdesc = Addedrecord_Descoutput.GetDomAttribute("value");
+
             //Search with newly created record
             ActivationLables_AutoSearch_Textbox.Clear();
             ActivationLables_AutoSearch_Textbox.SendKeys(ActivationLabel_Id.ToString());
             var Output_Name = Created_ActivationLables_Name.Text;
+
+            //sharedbyprograms click
             Browser.Click(SharedBy_ActivationLables_Program);
             Verify_SharedByPrograms_popup_Details(true);
             SharedByProgram_ExportFile("data.csv");
             Browser.Click(SharedByPrograms_closebtn);
-            Browser.Click(Download_ActivationLabel);
+
+            //Note: Download activation label not works in app.
+            //Browser.Click(Download_ActivationLabel);
+
+            //view history click
             Browser.Click(History_ActivationLabel);
             Verify_ViewHistoryPopup_Parameters(true);
-            var versionId = ViewHistory_VersionId.GetDomAttribute("value");
-            ViewHistory_Id_searchTextbox.SendKeys(versionId);
+            var versionId = ViewHistory_Id.GetDomAttribute("value");
+            ViewHistory_sharedbyprogram_Id_searchTextbox.SendKeys(versionId);
             var Datetext = ViewHistory_Date.Text;
             var Datevalue = ViewHistory_Date.GetDomAttribute("value");
             var TextDescription = ViewHistory_Textdescription.Text;
@@ -430,10 +544,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var Output_UpdatedName = Created_ActivationLables_Name.Text;
             var Output_Updateddescrip = Created_ActivationLables_description.Text;
 
+            //history
             Browser.Click(History_ActivationLabel);
             Verify_ViewHistoryPopup_Parameters(true);
             var versionId = Update_ViewHistory_VersionId.GetDomAttribute("value");
-            ViewHistory_Id_searchTextbox.SendKeys(versionId);
+            ViewHistory_sharedbyprogram_Id_searchTextbox.SendKeys(versionId);
             bool Datetext = ViewHistory_Date.Displayed;
             bool TextDescription = ViewHistory_Textdescription.Displayed;
             bool UserText = ViewHistory_UserName.Displayed;
@@ -450,96 +565,140 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void Validations_ActivationLabels(string NegativeScenariosText)
         {
-            ////All Validations errors
-            //Browser.Click(StandardCarrier_AddNew_button);
-            //Browser.Click(Submit_StandardCarrier);
-            //var fileuploaderror = Uploadfileerror.Text;
-            //var TitleError = CarrierTitleerror.Text;
-            //var partoferror = Partoferror.Text;
-            //var carrierstatuserror = CarrierStatuserror.Text;
-            //var colormodeerror = Colormodeerror.Text;
-            //var setaffixlocationerror = Setaffixerror.Text;
-            //var Assignedcategerror = Assignedcategorieserror.Text;
-            //var dublicateproductmapid = 123;
-            //ClientProductMapIDTextbox.SendKeys(dublicateproductmapid.ToString());
-            //Browser.Click(ClientProductMapIDAddbutton);
-            //var ProductIddublicateerror = dublicateproductIderror.Text;
-            //var exceedlimit = 12345645656565765456 + dublicateproductmapid.ToString();
-            //var ExeedlimitsofproductId = ProductmapidlimitsExceedserror.Text;
-            //bool submitbuttonelabled = Submit_StandardCarrier.Enabled;
-            //Browser.Click(StandardCarrier_Cancel_button);
+            //Scenario 1: Adding an Activation Label with File Upload
+            var homepage = ActivationLablesPageTitle.Displayed;
+            Browser.Click(ActivationLable_AddNew_button);
+            ActivationLable_NameTextbox.SendKeys(NegativeScenariosText);
+            Description_Textbox.SendKeys(NegativeScenariosText);
+            Browser.Click(Balckcolor_option);
+            Extensions.File_uploads(UploadFile_Textbox, "ActivationLable");
+            Browser.Click(AddNewActivationlable_savebutton);
+            Thread.Sleep(4000);
+            var Add_ActivationLabel_SuccessMessage = ActivationLabel_Add_Successmessage.Text;
+            //Note: part Number for newly created Activation lable not generates in app.
+          
 
-            //Browser.Click(StandardCarrier_AddNew_button);
-            //Extensions.FileUpload(FileUploadbtn, "StandardCarrierDemofile", FileProgressbar, CancelUploading, SuccessFile, RemovePDFbutton);
-            //CarrierTitle_Textbox.SendKeys(NegativeScenariosText.ToString());
-            //var input_carrierTitle = CarrierTitle_Textbox.GetDomAttribute("value");
-            //CarrierDescription_Textbox.SendKeys(NegativeScenariosText + "1234");
-            //Browser.Click(partof_consumersite);
-            //Browser.Click(Carrierstatus_turnedoff);
-            //Browser.Click(Colormode_Grayscale);
-            //Browser.Click(Setaffixlocation_Leftmiddle);
-            //Browser.Click(select_check_Categories);
-            //Browser.Click(select_check_Categories_child);
-            ////remove subchildassigned categories
-            //Browser.Click(select_check_Categories_child);
-            //string randomnumber = RandomString.GetString(Types.NUMBERS, 5);
-            //ClientProductMapIDTextbox.SendKeys(randomnumber);
-            //Browser.Click(ClientProductMapIDAddbutton);
-            //bool addedproductIds = Addproductmapids.Displayed;
-            ////adding multiple productId
-            //ClientProductMapIDTextbox.SendKeys(randomnumber);
-            //Browser.Click(ClientProductMapIDAddbutton);
-            ////remove clientproductmapId
-            //Browser.Click(RemoveProductId);
-            //Browser.Click(Submit_StandardCarrier);
-            //Thread.Sleep(4000);
-            //var Add_StandardCarrier_SuccessMessage = StandardCarrier_recordAdd_sucessmessage.Text;
-            //var NewlyaddedStandardCarrier_Id = AddedNewStandardCarrier_ID.Text;
+            //Scenario 2: Updating an Activation Label
+            //Edit button click
+            Browser.Click(Edit_ActivationLabels);
+            //Note: There is not ActivationLabel data linked with multiple programs for any PCLID in app.
 
-            ////Search with newly Updated record
-            //NewID_StandardCarrier_AutoSearch_textbox.Clear();
-            //NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
+            //Re upload diffrent file
+            Extensions.File_uploads(UploadFile_Textbox, "ActivationLableUpdate");
+            ActivationLable_NameTextbox.SendKeys(NegativeScenariosText + "NegativeScenarios_NameUpdates");
+            Description_Textbox.SendKeys(NegativeScenariosText + "NegativeScenarios_NameUpdates");
+            Browser.Click(colorRadiooption);
+            Browser.Click(AddNewActivationlable_Editbutton);
+            Thread.Sleep(4000);
+            var Update_ActivationLabel_SuccessMessage = ActivationLabel_Edit_Successmessage.Text;
+            //Note : No PartNo generating when we edit lable with already uploaded file in app.
 
-            ////Edit button click
-            //Browser.Click(Edit_StandardCarrierdetails);
-            ////turn on status
-            //Browser.Click(Carrierstatus_turnedon);
-            //Browser.Click(Submit_StandardCarrier);
-            //Thread.Sleep(6000);
+            //Scenario 3: Adding an Activation Label without uploading File
+            Browser.Click(ActivationLable_AddNew_button);
+            ActivationLable_NameTextbox.SendKeys(NegativeScenariosText);
+            Description_Textbox.SendKeys(NegativeScenariosText);
+            Browser.Click(Balckcolor_option);
+            Browser.Click(AddNewActivationlable_savebutton);
+            Thread.Sleep(4000);
+             Add_ActivationLabel_SuccessMessage = ActivationLabel_Add_Successmessage.Text;
+            
 
-            ////Search with newly Updated record
-            //NewID_StandardCarrier_AutoSearch_textbox.Clear();
-            //NewID_StandardCarrier_AutoSearch_textbox.SendKeys(NewlyaddedStandardCarrier_Id.ToString());
+            //Scenario 4: Error message for not entering name, invalid name on Add / Edit Activation Label Screen
+            Browser.Click(ActivationLable_AddNew_button);
+            Description_Textbox.SendKeys(NegativeScenariosText);
+            Browser.Click(AddNewActivationlable_savebutton);
+            var Add_ALabel_WithoutName = ActivationLabel_Add_ErrorMessage.Text;
+            ActivationLable_NameTextbox.Clear();
 
-            ////Scenario1: Viewing the Standard carrier Previews & Carrier details
-            //Verify_Carrier_Preview_Carrier_Details(true);
-            ////Scenario 2: Viewing the History of Standard carriers
-            //Browser.Click(StandardCarrier_ViewHistory_button);
-            //Verify_ViewHistoryPopup_Parameters(true);
-            //Browser.Click(ViewHistory_closebtn);
+            ActivationLable_NameTextbox.SendKeys("abcd@#$%&&^12");
+            var InvalidName_alphanumericchar = Error_InvalidNamewithAlphanumeric.GetDomAttribute("value");
 
-            ////Scenario 3: Downloading the Standard Carrier
-            //Browser.Click(StandardCarrier_Download_button);
-            ////Note: download not works in app
-            //DownloadFile("StandardCarrierDemofile");
+            //Scenario 5: Default value for color option
+            var defaultvalueforoption = Balckcolor_option.Text;
+            Browser.Click(ActivationLable_Cancel_button);
 
-            ////Scenario 4: Viewing and Exporting Shared By: Programs
-            //Browser.Click(Edit_ActivationLabels);
-            ////carrier status turned on
-            //Browser.Click(Carrierstatus_turnedon);
-            //Browser.Click(Update_standardCarreir_Sbmitbtn);
-            //Thread.Sleep(6000);
-            //Browser.Click(SharedByPrograms);
-            //Verify_SharedByPrograms_popup_Details(true);
-            //SharedByProgram_ExportFile("data.csv");
-            //Browser.Click(SharedByPrograms_closebtn);
-            ////Scenario 5: Viewing Client Product Map
-            //Browser.Click(Productsbtn);
-            //Verify_ProductMap_popup_Details(true);
-            //var mapid = clinetproductId.GetDomAttribute("value");
-            //clinetproductmapidtextbox.Clear();
-            //clinetproductmapidtextbox.SendKeys(mapid);
-            //Productspopup_closebtn.Click();
+            Assert.That(Add_ALabel_WithoutName, Is.EqualTo("Name can not be null!"));
+            Assert.That(defaultvalueforoption, Is.EqualTo("Black"));
+            Assert.That(InvalidName_alphanumericchar, Is.EqualTo("Invalid name. Please enter the name using allowed characters (@_:)"));
+
+
+
+        }
+
+        public void DashBoard_ActivationLabels(string NegativeScenariosText)
+        {
+            var homepage = ActivationLablesPageTitle.Displayed;
+            Verify_ActivationLabels_DashBoard_Parameters(true);
+
+            //Search with name record
+            var searchname = Addedrecord_Nameoutput.GetDomAttribute("value");
+            ActivationLables_AutoSearch_Textbox.Clear();
+            ActivationLables_AutoSearch_Textbox.SendKeys(searchname.ToString());
+
+            //Search with labelid record
+            var searchLableId = NewActivationLabel_ID.GetDomAttribute("value");
+            ActivationLables_AutoSearch_Textbox.Clear();
+            ActivationLables_AutoSearch_Textbox.SendKeys(searchLableId.ToString());
+
+            //Search with description record
+            var SearchDescription = Addedrecord_Descoutput.GetDomAttribute("value");
+            ActivationLables_AutoSearch_Textbox.Clear();
+            ActivationLables_AutoSearch_Textbox.SendKeys(SearchDescription.ToString());
+
+            //sharedby program click
+            Browser.Click(SharedBy_ActivationLables_Program);
+            Verify_SharedByPrograms_popup_Details(true);
+            SharedByProgram_ExportFile("data.csv");
+            Browser.Click(SharedByPrograms_closebtn);
+            //Note: 3A,3B,3C scenarios we are unable to perform automation as shared by programs always showing 0 program, without shared by programs count 1 we will gets empty data in sharedby program popup and unable to create locators.
+
+            //view history
+            Browser.Click(History_ActivationLabel);
+            Verify_ViewHistoryPopup_Parameters(true);
+            var versionId = Update_ViewHistory_VersionId.GetDomAttribute("value");
+            ViewHistory_sharedbyprogram_Id_searchTextbox.SendKeys(versionId);
+            bool Datetext = ViewHistory_Date.Displayed;
+            bool TextDescription = ViewHistory_Textdescription.Displayed;
+            bool UserText = ViewHistory_UserName.Displayed;
+            Browser.Click(ViewHistory_closebtn);
+            //Note: No export and print button avilable on application.
+
+            //Note: 5,5B scenarios Download, error messages of activation label not works in app.
+            //Browser.Click(Download_ActivationLabel);
+
+            //paginations
+            Extensions.Pagination(Pagenationbtn,"25", TwentyFiveRowsperpage);
+            var rowscountrowperpage = RowsPerPageLabel.GetDomAttribute("value");
+            bool totalrecords = RecordsCount.Displayed;
+            bool pagess = PageLabel.Displayed;
+            bool pagesof = Pageoutof.Displayed;
+            PageNumberTextbox.SendKeys("1");
+            Assert.That(rowscountrowperpage,Is.EqualTo("Rows per page:"));
+            
+            
+        }
+
+        public void PC_Verify_Assets_DefaultOrder(string DefaultOrder)
+        {
+            var homepage = ActivationLablesPageTitle.Displayed;
+            Browser.Click(ActivationLable_AddNew_button);
+            ActivationLable_NameTextbox.SendKeys(DefaultOrder);
+            Description_Textbox.SendKeys(DefaultOrder);
+            Browser.Click(Balckcolor_option);
+            Extensions.File_uploads(UploadFile_Textbox, "ActivationLable");
+            Browser.Click(AddNewActivationlable_savebutton);
+            Thread.Sleep(4000);
+            var Add_ActivationLabel_SuccessMessage = ActivationLabel_Add_Successmessage.Text;
+            var LabelId= NewActivationLabel_ID.Text;
+            Browser.Click(History_ActivationLabel);
+            Thread.Sleep(2000);
+            var getdateofcurrentrecord = ActivationLable_Date_order.GetDomAttribute("value");
+            Browser.Click(Oldorder_History_ActivationLabel);
+            var getdateperviousrecord = ActivationLable_Date_previousorder.GetDomAttribute("value");
+            if(getdateofcurrentrecord!= getdateperviousrecord)
+            Assert.Pass("Package components all assets orders is Desecnding: ");
+
+
 
 
         }

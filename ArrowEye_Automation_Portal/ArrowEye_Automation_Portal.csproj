@@ -233,6 +233,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="PageRepository\CP_PackageComponents_PackingSlips.cs" />
+    <Compile Include="PageRepository\CP_PackageComponents_Inserts.cs" />
     <Compile Include="PageRepository\CP_PlasticCoreAssembliesPage.cs" />
     <Compile Include="PageRepository\CP_ClientSettings_BankIdNumbersPage.cs" />
     <Compile Include="PageRepository\CP_CSPSettings_CardHolderAgreementPage.cs" />
@@ -245,12 +247,10 @@
     <Compile Include="PageRepository\CP_LoginPage.cs" />
     <Compile Include="PageRepository\CS_Pages.cs" />
     <Compile Include="PageRepository\CP_Pages.cs" />
-
     <Compile Include="PageRepository\CP_PackageComponents_ActivationLabels.cs" />
     <Compile Include="PageRepository\CP_Product_Standard_CarrierPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Feature\Client_Settings\BankIdNumbers.cs" />
-
     <Compile Include="PageRepository\CS_BCSS_ConfigurationPage.cs" />
     <Compile Include="PageRepository\CS_PrintSettingPage.cs" />
     <Compile Include="PageRepository\EMV_Pages.cs" />
@@ -260,7 +260,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Feature\Client_Settings\BCSS_Configuration.cs" />
     <Compile Include="Tests\Feature\Client_Settings\Print_Settings.cs" />
-
     <Compile Include="Tests\Feature\CSP_Settings\BOC_Dynamic_Info.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\Card_Holder_Agreement.cs" />
     <Compile Include="Tests\Feature\CSP_Settings\Carrier_Dynamic_Info.cs" />
@@ -272,6 +271,8 @@
     <Compile Include="Tests\Feature\EMV\Issuers.cs" />
     <Compile Include="Tests\Feature\EMV\Modules.cs" />
     <Compile Include="Tests\Feature\EMV\Scripts.cs" />
+    <Compile Include="Tests\Feature\Package_Component\PackingSlips.cs" />
+    <Compile Include="Tests\Feature\Package_Component\Inserts.cs" />
     <Compile Include="Tests\Feature\Package_Component\ActivationLabels.cs" />
     <Compile Include="Tests\Feature\PlasticCoreAssemblies\Plastic_Core_Assemblies.cs" />
     <Compile Include="Tests\Feature\Products\Standard_Carrier.cs" />

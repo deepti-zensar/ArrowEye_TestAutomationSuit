@@ -290,14 +290,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
             switch (ClientSetting_SubMenuName)
             {
 
-                case "ActivationLabels":
+                case "Activation Labels":
                     Browser.Click(Activationlabels);
                     break;
                 case "Inserts":
                     Browser.Click(Inserts);
                     break;
 
-                case "PackingSlips":
+                case "Packing Slips":
                     Browser.Click(PackingSlips);
                     break;
 

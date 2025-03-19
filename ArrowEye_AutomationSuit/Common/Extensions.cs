@@ -428,7 +428,30 @@ namespace ArrowEye_Automation_Framework.Common
 
         }
 
+        public static void Pagination(IWebElement Pagenationbtn,string selectrecordcountvalue, IWebElement elemntclick)
+        {
+            Browser.Click(Pagenationbtn);
+            if (selectrecordcountvalue == "10")
+            {
+                Browser.Click(elemntclick);
+            }
+            else if (selectrecordcountvalue == "25")
+            {
+                Browser.Click(elemntclick);
+            }
 
+            else if (selectrecordcountvalue == "50")
+            {
+                Browser.Click(elemntclick);
+            }
+            
+        }
+
+        public static void searchtext(IWebElement searchlocator, string input)
+        {
+            searchlocator.Clear();
+            searchlocator.SendKeys(input);
+        }
 
     }
 }

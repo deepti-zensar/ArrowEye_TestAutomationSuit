@@ -22,7 +22,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("18")]
         public void Create_New_BankIdNumbers(string CreateBankIdNumbersText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.CreateNewBankIdNumbers(CreateBankIdNumbersText + randomString);
@@ -35,7 +35,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [TestCase("12")]
         public void Edit_BankIdNumbers(string UpdateBankIdNumbersText)
         {
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.EditNewBankIdNumbers(UpdateBankIdNumbersText + randomString);
@@ -52,7 +52,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         public void View_Search_Export_BankIdNumbers(string Search_Export_BankIdNumbersText)
         {
 
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.View_export_NewBankIdNumbers(Search_Export_BankIdNumbersText + randomString);
@@ -67,7 +67,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         public void Negative_Validations_BankIdNumbers(string NegativeScenariosText)
         {
             string randomStrings = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 70);
-            CP_Pages.Login.LogIn("shaikhussainpasha", "Shaik@12345");
+            CP_Pages.Login.LogIn("portaltester", "Portal@1234");
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToClientSettingsSubMenu("Bank ID Numbers");
             CP_Pages.BankIdNumbersPage.ValidationsNewBankIdNumbers(NegativeScenariosText + randomStrings);

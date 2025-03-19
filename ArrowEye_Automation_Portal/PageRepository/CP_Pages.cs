@@ -86,6 +86,18 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_PackageComponents_ActivationLabels>(); }
         }
 
+        public static CP_PackageComponents_Inserts Inserts
+
+        {
+            get { return GetPage<CP_PackageComponents_Inserts>(); }
+        }
+
+        public static CP_PackageComponents_PackingSlips PackingSlips
+
+        {
+            get { return GetPage<CP_PackageComponents_PackingSlips>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

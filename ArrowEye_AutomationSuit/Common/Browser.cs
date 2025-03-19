@@ -13,6 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using static OpenQA.Selenium.BiDi.Modules.Script.RemoteValue;
 using System.IO;
 using OpenQA.Selenium.BiDi.Modules.BrowsingContext;
+using OpenQA.Selenium.Interactions;
 
 namespace ArrowEye_Automation_Framework.Common
 {
@@ -93,6 +94,13 @@ namespace ArrowEye_Automation_Framework.Common
              webDriver.Close();
             //webDriver.Quit();
         }
+        public static void Element_RightClick(IWebElement element)
+        {
+            Actions actions = new Actions(webDriver);
+            //element = webDriver.FindElement(By.XPath("ID"));
+            actions.ContextClick(element).Perform();
+        }
+       
 
         public static void ClickDynamicElement(string xpath, string text)
         {

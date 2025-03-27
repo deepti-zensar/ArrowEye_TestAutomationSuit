@@ -16,6 +16,7 @@ namespace ArrowEye_Automation_Framework
         public void TestSetup()
         {
             Browser.Initialize();
+            ExtentHTMLReports.GenerateExtentReports("");
         }
 
         [TearDown]

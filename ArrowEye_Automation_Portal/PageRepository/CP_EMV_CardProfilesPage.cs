@@ -123,6 +123,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(issuerFieldLabel.Text, Is.EqualTo("Issuer"));
             Assert.That(expirationDateLabel.Text, Is.EqualTo("Expiration Date"));
         }
+
         // To fill EMV Card Profiles details
         public void FillEMVCardProfilesDetails(string name, string issuer, string date)
         {
@@ -155,7 +156,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(1000);
         }
 
-        // To Search EMV Card Profiles 
+        // To Search EMV Card Profiles
         public void SearchEMVCardProfilesName(string name)
         {
             searchBox.SendKeys(Keys.Control + "a");
@@ -301,6 +302,5 @@ namespace ArrowEye_Automation_Portal.PageRepository
             bool fileStatus = Extensions.IsFileDownloaded(fileName);            
             Assert.That(fileStatus, Is.True);
         }
-
     }
 }

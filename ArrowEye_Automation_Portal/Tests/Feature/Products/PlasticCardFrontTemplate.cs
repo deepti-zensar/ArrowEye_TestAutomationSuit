@@ -148,6 +148,5 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
             CP_Pages.PlasticCardFrontTemplatePage.ActivatePlasticCardFrontTemplate(template, name + getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
-
     }
 }

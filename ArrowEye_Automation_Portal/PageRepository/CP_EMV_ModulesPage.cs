@@ -132,6 +132,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(newModuleDialogBoxText.Displayed, Is.True);
             Assert.That(newModuleDialogBoxText.Text, Is.EqualTo("New Module"));            
         }
+
         // To fill EMV Module details
         public void FillEMVModuleDetails(string name, string description, string travellerLabel, string cmiProgram, string groupId)
         {

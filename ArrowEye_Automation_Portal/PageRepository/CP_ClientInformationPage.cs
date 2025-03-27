@@ -113,7 +113,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@id='panel2-0bh-content']//label[text()='Country']/following-sibling::p")]
         public IWebElement countryData;
 
-
         public void ValidatePageTitle()
         {
             Browser.WaitForElement(clientInfoText, 10);

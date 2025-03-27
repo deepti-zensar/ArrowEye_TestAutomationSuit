@@ -100,13 +100,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-            // DriverUtilities.IsElementPresent(magTrackEncodingsText);
+            Browser.WaitForElement(magTrackEncodingsText, 10);
+            Assert.That(magTrackEncodingsText.Displayed, Is.True);
             Assert.That(magTrackEncodingsText.Text, Is.EqualTo("Mag Track Encodings"));
         }
 
         public void ValidateMagTrackEncodingsDialogBox()
         {
-            //  DriverUtilities.IsElementPresent(newMagTrackEncodingsDialogBoxText);
+            Assert.That(newMagTrackEncodingsDialogBoxText.Displayed, Is.True);
             Assert.That(newMagTrackEncodingsDialogBoxText.Text, Is.EqualTo("New Mag Track Encodings"));
         }
 
@@ -119,7 +120,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             ValidateMagTrackEncodingsDialogBox();
             Browser.Click(saveButton);
             Assert.That(nameRequiredText.Text, Is.EqualTo("Name is required."));
-
             //CHARACTER LIMITATIONS FOR different fields
             //create new record with longer data
             string nameString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 55);
@@ -129,15 +129,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
             descriptionField.SendKeys(descString);
             track1Field.SendKeys(trackString);
             track2Field.SendKeys(trackString);
-            track3Field.SendKeys(trackString);
-            
+            track3Field.SendKeys(trackString);            
             Assert.That(nameLimitText.Text, Is.EqualTo("50/50"));
             Assert.That(descriptionLimitText.Text, Is.EqualTo("200/200"));
             Assert.That(track1LimitText.Text, Is.EqualTo("500/500"));
             Assert.That(track2LimitText.Text, Is.EqualTo("500/500"));
             Assert.That(track3LimitText.Text, Is.EqualTo("500/500"));
-            //Browser.Click(saveButton);   
-
         }
 
         public void DeleteBINMagTrackEncodings(string name)
@@ -147,10 +144,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             searchBox.Clear();
             searchBox.SendKeys(name);
             Thread.Sleep(1000);
-            var ID = searchedID.Text;
-            
+            var ID = searchedID.Text;            
             Assert.That(searchedName.Text, Is.EqualTo(name));
-
             //Delete details 
             Browser.Click(deleteButton);
             Assert.That(deleteDialogBoxTitle.Text, Is.EqualTo("Delete"));
@@ -159,16 +154,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(deleteButton);
             Browser.Click(deleteBoxDeleteBtn);
             Thread.Sleep(2000);
-
             //validate delete popup message            
             Assert.That(deleteDialogBoxMessage, Is.EqualTo("Are you sure you want to delete the \"Mag Track Encoding " + ID + "\"?"));
-
             //validate Delete Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Does.Contain("Mag track encoding can not be deleted since it is linked to following BIN's: "));
-
         }
-
 
         //To validate Mag Track Encodings homepage table headers
         public void MagTrackEncodingsHomepageView(string[] listOfOptions)

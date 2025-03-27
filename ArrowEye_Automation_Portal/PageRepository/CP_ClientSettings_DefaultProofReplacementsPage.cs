@@ -109,6 +109,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(newProofReplacementDialogBoxText.Displayed, Is.True);
             Assert.That(newProofReplacementDialogBoxText.Text, Is.EqualTo("New Proof Replacement"));
         }
+
         //To select dropdown value
         public void SelectDropDownValue(IWebElement dropDownName, string value)
         {
@@ -127,6 +128,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 dropDownName.SendKeys(Keys.Down + Keys.Down + Keys.Enter);
             }
         }
+
         // To fill Proof Replacement details
         public void FillProofReplacementDetails(string replacementTag, string replacementValue)
         {
@@ -135,6 +137,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             replacementValueField.SendKeys(Keys.Control + "x");
             replacementValueField.SendKeys(replacementValue);            
         }
+
         // To Search EMV Issuer 
         public void SearchProofReplacement(string replacementValue)
         {
@@ -269,8 +272,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             ValidateNewProofReplacementDialogBox();
             Browser.Click(saveButton);
             Assert.That(replacementTagRequiredText.Text, Is.EqualTo("Replacement Tag is required."));
-            Assert.That(replacementValueRequiredText.Text, Is.EqualTo("Replacement Value is required."));
-            //TODO: USER ENTERS Duplicate record            
+            Assert.That(replacementValueRequiredText.Text, Is.EqualTo("Replacement Value is required."));                     
             //CHARACTER LIMITATIONS FOR Replacement Value
             //create new record with longer data
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 155);            

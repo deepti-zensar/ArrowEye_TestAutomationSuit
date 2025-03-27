@@ -202,6 +202,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
                     break;
             }
         }
+
         public void selectColorModeOption(string colorMode)
         {
             Assert.That(colorModeLabel.Displayed, Is.True);
@@ -412,7 +413,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(4000);
             //validate new category name
             Assert.That(categoryName.Text, Is.EqualTo(newCategoryName));
-
         }
     }
 }

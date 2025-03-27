@@ -10,7 +10,6 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
     {
         string userName = "portaltestuser";
         string password = "Admin123@";
-       
 
         [Test]
         [Description("Client_Information_Homepage")]

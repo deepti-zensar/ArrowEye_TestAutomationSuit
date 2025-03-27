@@ -183,7 +183,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//td[@data-testid='pagination']//select")]
         private IWebElement itemsPerPageDropdown;
 
-
         public void ValidatePageTitle()
         {            
             Assert.That(FOCHeader.Displayed, Is.True);
@@ -241,6 +240,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(noMatchFound.Text, Is.EqualTo("\"No Tempates under the selected PCL.\""));
             return toasterMessageID;
         }
+
         public string EditPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             ValidatePageTitle();
@@ -277,6 +277,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
             return createdID;
         }        
+
         public void ValidatePlasticCardFrontTemplate()
         {
             ValidatePageTitle();

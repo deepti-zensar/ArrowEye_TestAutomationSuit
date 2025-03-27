@@ -44,9 +44,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.WaitForElement(ordersOnHoldText, 10);
             Assert.That(ordersOnHoldText.Displayed, Is.True); ;
             Assert.That(ordersOnHoldText.Text, Is.EqualTo("Orders On Hold"));
-        }       
-
-        
+        }               
 
         //To validate homepage 
         public void OrdersOnHoldHomepageView(string[] listOfOptions)

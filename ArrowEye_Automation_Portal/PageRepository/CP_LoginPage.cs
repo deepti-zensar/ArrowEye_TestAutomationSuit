@@ -88,6 +88,5 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(passwordField.GetAttributeValue("type"), Is.EqualTo("text"));
             Assert.That(passwordField.GetAttributeValue("value"), Is.EqualTo(password));
         }
-
     }
 }

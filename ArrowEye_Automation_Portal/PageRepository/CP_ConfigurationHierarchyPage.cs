@@ -156,7 +156,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(3000);
         }
 
-
         public void EditConfigurationHierarchy(string attributeName, string newAttributeValue, string description)
         {
             ValidatePageTitle();
@@ -212,10 +211,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var editedDescription = searchedDescription.Text;
             //validate newly edited record in homepage
             Assert.That(editedAttributeValue, Is.EqualTo(newAttributeValue));
-            Assert.That(editedDescription, Is.EqualTo(description));        
-
+            Assert.That(editedDescription, Is.EqualTo(description));  
         }
-        //TODO: Get all the details of the delete record and delete popup
+        
         public void DeleteConfigurationHierarchy(string attributeLevel,string attributeName)
         {
             ValidatePageTitle();
@@ -258,7 +256,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 Thread.Sleep(3000);
                 Assert.That(noResultFound.Text, Is.EqualTo("No results found."));
             }
-
         }
 
         public void ValidateConfigurationHierarchy(string attributeName)
@@ -286,7 +283,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             editDescriptionField.SendKeys(longString);            
             Assert.That(descriptionLimitText.Text, Is.EqualTo("100/100"));            
         }
-
 
         //To validate Configuration Hierarchy homepage table headers
         public void ConfigurationHierarchyHomepageView(string[] listOfOptions)

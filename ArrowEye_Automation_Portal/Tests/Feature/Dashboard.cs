@@ -161,6 +161,5 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Home.ValidateHomepageDisclaimerBanner();
             DriverUtilities.TakeScreenshot(@"C:\");
         }
-
     }
 }

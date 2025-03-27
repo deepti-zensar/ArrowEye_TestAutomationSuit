@@ -7,6 +7,7 @@ using System.Threading;
 using OpenQA.Selenium.Interactions;
 using NLog;
 using System.IO;
+using NUnit.Framework;
 
 namespace ArrowEye_Automation_Framework.Common
 {
@@ -381,7 +382,26 @@ namespace ArrowEye_Automation_Framework.Common
             return false;
         }
 
-
+        //To compare two lists
+        public static void CompareActualExpectedLists(string[] listOfOptions, IList<IWebElement> actualList)
+        {
+            List<string> expectedListOfOptions = new List<string>(listOfOptions);
+            List<string> actualListOfOptions = new List<string>();
+            foreach (IWebElement actualOption in actualList)
+            {
+                actualListOfOptions.Add(actualOption.Text);
+            }
+            Console.WriteLine(string.Join(", ", actualListOfOptions));
+            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+        }
+        //To create file path for upload
+        public static string CreateFilePath(string fileName)
+        {
+            string relativePath = @"ArrowEye_Automation_Portal\FileUpload\" + fileName;
+            string filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\", relativePath));
+            Assert.That(System.IO.File.Exists(filePath), Is.True, "File not found: " + filePath);
+            return filePath;
+        }
 
     }
 }

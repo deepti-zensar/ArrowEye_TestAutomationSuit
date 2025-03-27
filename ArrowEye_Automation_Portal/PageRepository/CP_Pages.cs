@@ -101,6 +101,11 @@ namespace ArrowEye_Automation_Portal
             get { return GetPage<CP_Products_PlasticCardFrontTemplatePage>(); }
         }
 
+        public static CP_Products_PlasticCardBackTemplatePage PlasticCardBackTemplatePage
+        {
+            get { return GetPage<CP_Products_PlasticCardBackTemplatePage>(); }
+        }
+
         public static void TosterMessage_wait()
         {
 

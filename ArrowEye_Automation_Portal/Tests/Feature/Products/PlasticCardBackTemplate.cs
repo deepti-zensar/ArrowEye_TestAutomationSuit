@@ -15,7 +15,7 @@ using RandomString4Net;
 namespace ArrowEye_Automation_Portal.Tests.Feature.Products
 {
     [TestFixture]
-    public class PlasticCardFrontTemplate : TestBase
+    public class PlasticCardBackTemplate : TestBase
     {
         string userName = "portaltestuser";
         string password = "Admin123@";
@@ -25,127 +25,127 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Create")]
+        [Description("PlasticCardBackTemplate_Create")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_")]
-        public void Create_PlasticCardFrontTemplate(string template, string name, string desc)
+        public void Create_PlasticCardBackTemplate(string template, string name, string desc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");            
-            CP_Pages.PlasticCardFrontTemplatePage.AddNewPlasticCardFrontTemplate(template, name+ getRandomString(), desc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");            
+            CP_Pages.PlasticCardBackTemplatePage.AddNewPlasticCardBackTemplate(template, name+ getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Edit")]
+        [Description("PlasticCardBackTemplate_Edit")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_","AutomationEdit_", "Automation_Edit")]
-        public void Edit_PlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public void Edit_PlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.EditPlasticCardFrontTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.EditPlasticCardBackTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }        
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Validate")]
+        [Description("PlasticCardBackTemplate_Validate")]
         [Category("Smoke")]        
-        public void Validate_PlasticCardFrontTemplate()
+        public void Validate_PlasticCardBackTemplate()
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.ValidatePlasticCardFrontTemplate();
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.ValidatePlasticCardBackTemplate();
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Duplicate")]
+        [Description("PlasticCardBackTemplate_Duplicate")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_", "AutomationDuplicate_", "Automation_Duplicate")]
-        public void Duplicate_PlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public void Duplicate_PlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.DuplicatePlasticCardFrontTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.DuplicatePlasticCardBackTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Deactivate")]
+        [Description("PlasticCardBackTemplate_Deactivate")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_")]
-        public void Deactivate_PlasticCardFrontTemplate(string template, string name, string desc)
+        public void Deactivate_PlasticCardBackTemplate(string template, string name, string desc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.DeactivatePlasticCardFrontTemplate(template, name + getRandomString(), desc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.DeactivatePlasticCardBackTemplate(template, name + getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_ViewHistory")]
+        [Description("PlasticCardBackTemplate_ViewHistory")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_", "AutomationHistory_", "Automation_History")]
-        public void ViewHistory_PlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public void ViewHistory_PlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.ViewHistoryPlasticCardFrontTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.ViewHistoryPlasticCardBackTemplate(template, name + getRandomString(), desc, newName + getRandomString(), newDesc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_ViewSharedBy")]
+        [Description("PlasticCardBackTemplate_ViewSharedBy")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_")]
-        public void ViewSharedBy_PlasticCardFrontTemplate(string template, string name, string desc)
+        public void ViewSharedBy_PlasticCardBackTemplate(string template, string name, string desc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.ViewSharedByPlasticCardFrontTemplate(template, name + getRandomString(), desc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.ViewSharedByPlasticCardBackTemplate(template, name + getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Delete")]
+        [Description("PlasticCardBackTemplate_Delete")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_")]
-        public void Delete_PlasticCardFrontTemplate(string template, string name, string desc)
+        public void Delete_PlasticCardBackTemplate(string template, string name, string desc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.DeletePlasticCardFrontTemplate(template, name + getRandomString(), desc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.DeletePlasticCardBackTemplate(template, name + getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 
         [Test]
-        [Description("PlasticCardFrontTemplate_Activate")]
+        [Description("PlasticCardBackTemplate_Activate")]
         [Category("Smoke")]
         [TestCase("Mastercard Debit", "Automation_", "Automation_")]
-        public void Activate_PlasticCardFrontTemplate(string template, string name, string desc)
+        public void Activate_PlasticCardBackTemplate(string template, string name, string desc)
         {
             CP_Pages.Login.LogIn(userName, password);
             CP_Pages.Home.ValidateHomePageTitle();
             CP_Pages.Home.NavigateToMenu("Products");
-            CP_Pages.Home.NavigateToSubmenu("Plastic Card Front Templates");
-            CP_Pages.PlasticCardFrontTemplatePage.ActivatePlasticCardFrontTemplate(template, name + getRandomString(), desc);
+            CP_Pages.Home.NavigateToSubmenu("Plastic Card Back Templates");
+            CP_Pages.PlasticCardBackTemplatePage.ActivatePlasticCardBackTemplate(template, name + getRandomString(), desc);
             DriverUtilities.TakeScreenshot(@"C:\");
         }
 

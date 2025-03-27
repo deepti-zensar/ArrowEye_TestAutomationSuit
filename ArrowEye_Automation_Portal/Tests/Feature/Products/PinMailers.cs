@@ -89,6 +89,5 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Products
             CP_Pages.PinMailersPage.RenamePINMailersCategory(newCategoryName + getRandomString());
             DriverUtilities.TakeScreenshot(@"C:\");
         }
-
     }
 }

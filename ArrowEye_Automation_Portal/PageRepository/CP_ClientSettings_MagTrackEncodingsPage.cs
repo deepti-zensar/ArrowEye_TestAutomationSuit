@@ -90,7 +90,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public IWebElement deleteBoxCancelBtn;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitleContainerContent']/div)")]
-        public IList<IWebElement> tableHeaderProofReplacement { get; set; }
+        public IList<IWebElement> tableHeaderMagTrack { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//button[@aria-label='Export']")]
         public IWebElement proofReplacementExport;
@@ -173,13 +173,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         //To validate Mag Track Encodings homepage table headers
         public void MagTrackEncodingsHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderProofReplacement)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaderMagTrack);
         }
 
         //To export Mag Track Encodings data

@@ -22,7 +22,6 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Home.NavigateToMenu("Client Information");
             CP_Pages.ClientInformationPage.ValidateClientInformation_Homepage();
             DriverUtilities.TakeScreenshot(@"C:\");
-        }
-       
+        }       
     }
 }

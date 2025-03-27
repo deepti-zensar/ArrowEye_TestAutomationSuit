@@ -49,6 +49,5 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
             CP_Pages.Login.viewPasswordLogIn(userName, password);            
             DriverUtilities.TakeScreenshot(@"C:\");
         }
-
     }
 }

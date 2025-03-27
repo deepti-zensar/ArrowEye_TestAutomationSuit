@@ -60,7 +60,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Mag_Track_Encodings_Export")]
         [Category("Smoke")]
-        [TestCase("React App.csv")]
+        [TestCase("ASI Portal.csv")]
         public void Export_MagTrackEncodings(string fileName)
         {
             CP_Pages.Login.LogIn(userName, password);

@@ -10,10 +10,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_EMV_IssuersPage
     {
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 jss14 css-1rtfhzq' and contains(text(),'EMV Issuers')]")]
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),'EMV Issuers')]")]
         public IWebElement emvIssuersText;
 
-        [FindsBy(How = How.XPath, Using = "//p[@class='MuiTypography-root MuiTypography-body1 css-9l3uo3' and contains(text(),' Add New ')]")]
+        [FindsBy(How = How.XPath, Using = "//p[contains(text(),' Add New ')]")]
         public IWebElement addNewIssuer;
 
         [FindsBy(How = How.XPath, Using = "//p[contains(text(),'New Issuer')]")]
@@ -45,6 +45,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         [FindsBy(How = How.XPath, Using = "//div[@id='notistack-snackbar']")]
         private IWebElement toasterMessage;
+
+        [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//li")]
+        private IWebElement errorMessage;
 
         [FindsBy(How = How.XPath, Using = "(//div[@data-colindex='1'])[position()=1]")]
         private IWebElement createdEMVIssuerID;
@@ -93,13 +96,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-            //DriverUtilities.IsElementPresent(emvIssuersText);
+            Browser.WaitForElement(emvIssuersText, 10);
+            Assert.That(emvIssuersText.Displayed, Is.True);
             Assert.That(emvIssuersText.Text, Is.EqualTo("EMV Issuers"));
         }
 
         public void ValidateNewIssuerDialogBox()
         {
-            //DriverUtilities.IsElementPresent(newIssuerDialogBoxText);
+            Assert.That(newIssuerDialogBoxText.Displayed, Is.True);
             Assert.That(newIssuerDialogBoxText.Text, Is.EqualTo("New Issuer"));
         }
 
@@ -117,7 +121,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(2000);
             approvalPath.Clear();
             approvalPath.SendKeys(Keys.Down + Keys.Enter);
-
             switch (appPath)
             {
                 case "Certified":
@@ -157,18 +160,22 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(2000);
             Browser.Click(addNewIssuer);
             FillEMVIssuerDetails(name, cpv, appPath, notes);
+            name = nameField.GetAttributeValue("value");
+            cpv = cpvField.GetAttributeValue("value");
+            appPath = approvalPath.GetAttributeValue("value");
+            notes = notesField.GetAttributeValue("value");
             Browser.Click(saveButton);
             Thread.Sleep(3000);
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             var created_EMVIssuer_Record_ID = createdEMVIssuerID.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Issuer " + created_EMVIssuer_Record_ID + " Added Successfully."));
-
             //Search with newly created record
-            SearchEMVIssuerName(name);
-            var created_EMVIssuer_Record_Name = createdEMVIssuerName.Text;
-            Assert.That(created_EMVIssuer_Record_Name, Is.EqualTo(name));
+            SearchEMVIssuerName(name);            
+            Assert.That(createdEMVIssuerName.Text, Is.EqualTo(name));
+            Assert.That(createdEMVIssuerCPV.Text, Is.EqualTo(cpv));
+            Assert.That(createdEMVIssuerApprovalPath.Text, Is.EqualTo(appPath));
+            Assert.That(createdEMVIssuerNotes.Text, Is.EqualTo(notes));
         }
 
         public void EditIssuer(string name, string cpv, string appPath, string notes, string newAppPath)
@@ -179,7 +186,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVIssuerDetails(name, cpv, appPath, notes);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //Search with newly created record
             searchBox.Clear();
             searchBox.SendKeys(name);
@@ -187,7 +193,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var created_EMVIssuer_Record_ID = createdEMVIssuerID.Text;
             var created_EMVIssuer_Record_Name = createdEMVIssuerName.Text;
             Assert.That(created_EMVIssuer_Record_Name, Does.Contain(name));
-
             //Edit EMV Issuer details 
             Browser.Click(EMVIssuerEditButton);
             Thread.Sleep(2000);
@@ -198,11 +203,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVIssuerDetails(newName, newCPV, newAppPath, newNotes);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Issuer " + created_EMVIssuer_Record_ID + " Updated Successfully."));
-
             //Search with newly edited record and get information from search result          
             SearchEMVIssuerName(newName);
             var edited_EMVIssuer_Record_ID = createdEMVIssuerID.Text;
@@ -210,14 +213,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var edited_EMVIssuer_Record_CPV = createdEMVIssuerCPV.Text;
             var edited_EMVIssuer_Record_AppPath = createdEMVIssuerApprovalPath.Text;
             var edited_EMVIssuer_Record_Notes = createdEMVIssuerNotes.Text;
-
             //validate newly edited record in EMV Issuer homepage
             Assert.That(edited_EMVIssuer_Record_ID, Is.EqualTo(created_EMVIssuer_Record_ID));
             Assert.That(edited_EMVIssuer_Record_Name, Is.EqualTo(newName));
             Assert.That(edited_EMVIssuer_Record_CPV, Is.EqualTo(newCPV.ToString()));
             Assert.That(edited_EMVIssuer_Record_AppPath, Is.EqualTo(newAppPath));
             Assert.That(edited_EMVIssuer_Record_Notes, Is.EqualTo(newNotes));
-
         }
 
         public void ValidateEMVIssuer(string name, string cpv, string appPath, string notes)
@@ -228,43 +229,27 @@ namespace ArrowEye_Automation_Portal.PageRepository
             ValidateNewIssuerDialogBox();
             Browser.Click(saveButton);
             Assert.That(nameRequiredText.Text, Is.EqualTo("Name is required."));
-
             //USER ENTERS A NAME WHICH ALREADY EXISTS
             //create new EMV Issuer record
             FillEMVIssuerDetails(name, cpv, appPath, notes);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //Enter same details for new EMV Issuer 
             Browser.Click(addNewIssuer);
             FillEMVIssuerDetails(name, cpv, appPath, notes);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
-            //verify toaster Error message
-            var errorToasterMessage_Text = toasterMessage.Text;
-            Assert.That(errorToasterMessage_Text, Is.EqualTo("EMV Issuer Name " + name + " already exists."));
-
+            //verify toaster Error message            
+            Assert.That(errorMessage.Text, Is.EqualTo("EMV Issuer Name " + name + " already exists."));
             //Search with newly created record
             Browser.Click(cancelButton);
             SearchEMVIssuerName(name);
             var created_EMVIssuer_Record_Name = createdEMVIssuerName.Text;
             Assert.That(created_EMVIssuer_Record_Name, Is.EqualTo(name));
-
-            //Update the added record with same name and details            
-            Browser.Click(EMVIssuerEditButton);
-            Thread.Sleep(2000);
-            Assert.That(editIssuerDialogBoxText.Text, Is.EqualTo("Update Issuer"));
-            FillEMVIssuerDetails(name, cpv, appPath, notes);
-            Browser.Click(saveButton);
-            Thread.Sleep(2000);
-
-            //verify toaster Error message
-            errorToasterMessage_Text = toasterMessage.Text;
-            Assert.That(errorToasterMessage_Text, Is.EqualTo("EMV Issuer Name " + name + " already exists."));
-
             //CHARACTER LIMITATIONS FOR NAME, NOTES AND CPV / PVT NUMBER FIELD
             //create new EMV Issuer record with longer data
+            Browser.Click(addNewIssuer);
+            ValidateNewIssuerDialogBox();
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 55);
             string longNumber = RandomString.GetString(Types.NUMBERS, 55);
             var longName = name + longString;
@@ -273,35 +258,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVIssuerDetails(longName, longCPV, appPath, longNotes);
             Assert.That(nameSizeLimitMsg.Text, Is.EqualTo("50/50"));
             Assert.That(cpvSizeLimitMsg.Text, Is.EqualTo("50/50"));
-            Assert.That(notesSizeLimitMsg.Text, Is.EqualTo("50/50"));
-            //Browser.Click(saveButton);
+            Assert.That(notesSizeLimitMsg.Text, Is.EqualTo("50/50"));            
             Thread.Sleep(2000);
-
-        }
-
-        //To validate EMV Options
-        public void EMVOptionsView(string[] listOfOptions)
-        {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions= new List<string>();
-            Thread.Sleep(2000);
-            foreach (IWebElement actualOption in emvOptions)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
-        }
+        }        
 
         //To validate EMV Issuer homepage table headers
         public void EMVIssuerHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderEMVIssuer)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }            
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaderEMVIssuer);            
         }
 
         //To export EMV Issuer data

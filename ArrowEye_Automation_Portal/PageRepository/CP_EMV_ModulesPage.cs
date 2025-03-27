@@ -122,13 +122,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-            //DriverUtilities.IsElementPresent(emvModulesText);
+            Browser.WaitForElement(emvModulesText, 10);
+            Assert.That(emvModulesText.Displayed, Is.True);
             Assert.That(emvModulesText.Text, Is.EqualTo("EMV Module"));
         }
 
         public void ValidateNewModuleDialogBox()
         {
-            //DriverUtilities.IsElementPresent(newModuleDialogBoxText);
+            Assert.That(newModuleDialogBoxText.Displayed, Is.True);
             Assert.That(newModuleDialogBoxText.Text, Is.EqualTo("New Module"));            
         }
         // To fill EMV Module details
@@ -157,7 +158,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             groupIdField.SendKeys(groupId);
         }
 
-        // To Search EMV Module 
+        // To Search EMV Module
         public void SearchEMVModuleName(string name)
         {
             searchBox.SendKeys(Keys.Control + "a");
@@ -178,18 +179,19 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVModuleDetails(name, description, travellerLabel, cmiProgram, groupId);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //get Toaster message
             var toasterMessage_Text = toasterMessage.Text;
-
-            //Search with newly created record
+            //Search with newly created record and validate information from search result
             SearchEMVModuleName(name);
-            var created_EMVModule_Record_ID = createdEMVModuleID.Text;
-            var created_EMVModule_Record_Name = createdEMVModuleName.Text;
-            Assert.That(created_EMVModule_Record_Name, Is.EqualTo(name));
-
+            var created_EMVModule_Record_ID = createdEMVModuleID.Text;            
+            Assert.That(createdEMVModuleID.Text, Is.EqualTo(created_EMVModule_Record_ID));
+            Assert.That(createdEMVModuleName.Text, Is.EqualTo(name));
+            Assert.That(createdEMVModuleDesc.Text, Is.EqualTo(description));
+            Assert.That(createdEMVModuleTravelLabel.Text, Is.EqualTo(travellerLabel));
+            Assert.That(createdEMVModuleCMIProg.Text, Is.EqualTo(cmiProgram));
+            Assert.That(createdEMVModuleGroupId.Text, Is.EqualTo(groupId));
             //validate Toaster message
-            Assert.That(toasterMessage_Text, Is.EqualTo("EMV Module " + created_EMVModule_Record_ID + " Added Successfully."));
+            Assert.That(toasterMessage_Text, Is.EqualTo("EMV Module " + created_EMVModule_Record_ID + " Added Successfully."));            
         }
 
         public void EditModules(string name, string description, string travellerLabel, string cmiProgram, string groupId)
@@ -200,13 +202,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVModuleDetails(name, description, travellerLabel, cmiProgram, groupId);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //Search with newly created record
             SearchEMVModuleName(name);
             var created_EMVModule_Record_ID = createdEMVModuleID.Text;
             var created_EMVModule_Record_Name = createdEMVModuleName.Text;
             Assert.That(created_EMVModule_Record_Name, Is.EqualTo(name));
-
             //Edit EMV Module details 
             Browser.Click(emvModuleEditButton);
             Thread.Sleep(2000);
@@ -217,15 +217,12 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var newTravellerLabel = travellerLabel + "_Updated";
             var newCMIProgram = cmiProgram + "_Updated";
             var newGroupId =  (int.Parse(groupId) + 1).ToString();
-
             FillEMVModuleDetails(newName, newDescription, newTravellerLabel, newCMIProgram, newGroupId);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Module " + edited_EMVModule_Record_ID + " Updated Successfully."));
-
             //Search with newly edited record and get information from search result          
             SearchEMVModuleName(newName);
             var edited_EMVModules_Record_Name = createdEMVModuleName.Text;
@@ -233,7 +230,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var edited_EMVModules_Record_TravelLabel = createdEMVModuleTravelLabel.Text;
             var edited_EMVModules_Record_CMIProg = createdEMVModuleCMIProg.Text;
             var edited_EMVModules_Record_GroupId = createdEMVModuleGroupId.Text;
-
             //validate newly edited record in EMV Module homepage
             Assert.That(edited_EMVModule_Record_ID, Is.EqualTo(created_EMVModule_Record_ID));
             Assert.That(edited_EMVModules_Record_Name, Is.EqualTo(newName));
@@ -253,7 +249,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(nameRequiredText.Text, Is.EqualTo("The Name field is required."));
             Assert.That(descRequiredText.Text, Is.EqualTo("The Description field is required."));
             Assert.That(groupIdRequiredText.Text, Is.EqualTo("The Group ID field is required."));
-
             //Validate CHARACTER LIMITATIONS MESSAGES FOR FIELDS            
             string longString1 = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 55);
             string longString2 = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 105);
@@ -262,7 +257,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(descSizeLimitMsg.Text, Is.EqualTo("100/100"));
             Assert.That(travellerLabelSizeLimitMsg.Text, Is.EqualTo("100/100"));
             Assert.That(cmiSizeLimitMsg.Text, Is.EqualTo("100/100"));
-
             //Validate Group ID message
             Assert.That(groupIdErrorMsg.Text, Is.EqualTo("Only accepted values are numbers from 1 to 999."));                    
         }
@@ -270,13 +264,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         //To validate EMV Modules homepage table headers
         public void EMVModulesHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderEMVModules)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaderEMVModules);
         }
 
         //To validate EMV Modules Export
@@ -288,7 +277,5 @@ namespace ArrowEye_Automation_Portal.PageRepository
             bool fileStatus = Extensions.IsFileDownloaded(fileName);
             Assert.That(fileStatus, Is.True);
         }
-
-
     }
 }

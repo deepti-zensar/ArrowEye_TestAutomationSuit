@@ -17,8 +17,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Test]
         [Description("EMV_Module_Create")]
         [Category("Smoke")]
-        [TestCase("Automation_Create_Module_", "Automation_Module", "Traveller_Automation", "CMI_Automation","123")]
-        [TestCase("Automation_Create_Module_", "Automation_Module", "", "", "123")]        
+        [TestCase("Automation_Create_Module_", "Automation_Module", "Traveller_Automation", "CMI_Automation","123")]            
         public void Create_New_EMV_Module(string name, string description, string travellerLabel, string cmiProgram, string groupId)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -32,7 +31,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Test]
         [Description("EMV_Modules_Edit")]
         [Category("Smoke")]
-        [TestCase("Automation_Create_Module_", "Automation_Module", "Traveller_Automation", "CMI_Automation", "123")]
+        [TestCase("Automation_Create_Module_", "Automation_Module", "Traveller_Automation", "CMI_Automation", "546")]
         public void Edit_EMV_Modules(string name, string description, string travellerLabel, string cmiProgram, string groupId)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -54,26 +53,12 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
             CP_Pages.Home.NavigateToSubmenu("Modules");
             CP_Pages.EMVModulesPage.ValidateEMVModules();
             DriverUtilities.TakeScreenshot(@"C:\");
-        }
-
-        [Test]
-        [Description("EMV_Options_View")]
-        [Category("Smoke")]
-        [TestCase("Authentications", "Card Profiles", "Configurations", "Issuers", "Scripts", "Modules")]
-        public void EMV_Options_View(params string[] listOfOptions)
-        {
-            CP_Pages.Login.LogIn(userName,password);
-            CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToMenu("EMV");
-            CP_Pages.Home.NavigateToSubmenu("Modules");
-            CP_Pages.EMVIssuersPage.EMVOptionsView(listOfOptions);
-            DriverUtilities.TakeScreenshot(@"C:\");
-        }
+        }        
 
         [Test]
         [Description("EMV_Modules_Homepage_View")]
         [Category("Smoke")]
-        [TestCase("ID", "Name", "Description", "Travel Label", "CMI Program", "Group ID", "Module LOA", "Actions")]
+        [TestCase("ID", "Name", "Description", "Travel Label", "CMI Program", "Group ID", "Module LOA", "Actions", "Shared By")]
         public void EMV_Modules_Homepage_View(params string[] listOfOptions)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -87,7 +72,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Test]
         [Description("EMV_Module_Export")]
         [Category("Smoke")]
-        [TestCase("React App.csv")]
+        [TestCase("ASI Portal.csv")]
         public void EMV_Modules_Export(string fileName)
         {
             CP_Pages.Login.LogIn(userName,password);

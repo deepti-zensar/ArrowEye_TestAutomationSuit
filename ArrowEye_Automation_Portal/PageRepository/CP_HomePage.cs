@@ -174,8 +174,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//div[@data-testid='no data']/p")]
         public IWebElement disclaimerBannerText;
 
+        [FindsBy(How = How.XPath, Using = "//p[@data-testid='secondNested']")]
+        public IWebElement clientGalleryOption;
+
         [FindsBy(How = How.XPath, Using = "//ul[@role='menu']//li")]
         public IList<IWebElement> clientGalleryMenuOptions { get; set; }
+
+        [FindsBy(How = How.XPath, Using = "(//li[@id='subMenuItems']/p)")]
+        public IList<IWebElement> submenuOptions { get; set; }
 
         [FindsBy(How = How.XPath, Using = "//ul[contains(@class,'MuiList-root MuiList-padding')]//p")]
         public IList<IWebElement> leftNavigationBarOptions { get; set; }
@@ -337,7 +343,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             DriverUtilities.Click(SearchOrSelect);
             Browser.ClickDynamicElement(PclDynamic, pclID);
             Browser.ClickDynamicElement(clientGallery, "CLIENT GALLERY");
-            Browser.ClickDynamicElement(clientGalleryMenuItem, menu);            
+            Browser.ClickDynamicElement(clientGalleryMenuItem, menu); 
+            Thread.Sleep(2000);
         }
         public void NavigateToSubmenu(string subMenu)
         {
@@ -361,25 +368,17 @@ namespace ArrowEye_Automation_Portal.PageRepository
         
         public void ValidateClientGalleryOptions(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in clientGalleryMenuOptions)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            Extensions.CompareActualExpectedLists(listOfOptions,clientGalleryMenuOptions);            
+        }        
+
+        public void ValidateSubMenuOptions(string[] listOfOptions)
+        {
+            Extensions.CompareActualExpectedLists(listOfOptions, submenuOptions);
         }
 
         public void ValidateLeftNavigationBarOptions(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in leftNavigationBarOptions)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Console.WriteLine(string.Join(", ", actualListOfOptions));
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            Extensions.CompareActualExpectedLists(listOfOptions, leftNavigationBarOptions);
         }
 
         public void ValidateHomepageDisclaimerBanner()
@@ -387,6 +386,14 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.WaitForElement(disclaimerBannerText, 10);
             Assert.That(disclaimerBannerText.Text, Is.EqualTo("Please select a PCL ID to begin"));
             Assert.That(disclaimerBannerIcon.Displayed, Is.True);
+        }
+
+        public void ReNavigateToMenuSubmenu(string menu, string subMenu)
+        {
+            Browser.Click(clientGalleryOption);
+            Browser.ClickDynamicElement(clientGalleryMenuItem, menu);
+            Thread.Sleep(2000);        
+            Browser.ClickDynamicElement(clientGallerySubMenuItem, subMenu);
         }
     }
 }

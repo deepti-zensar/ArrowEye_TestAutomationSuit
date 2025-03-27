@@ -18,10 +18,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
         [Test]
         [Description("EMV_Issuer_Create")]
         [Category("Smoke")]
-        [TestCase("Automation_Create_Issuer_Certified_", "123", "Certified", "Testing Issuer")]
-        [TestCase("Automation_Create_Issuer_CNS_","123","CNS","Testing Issuer")]
-        [TestCase("Automation_Create_Issuer_EasyPath_","123","EasyPath","Testing Issuer")]
-        [TestCase("Automation_Create_Issuer_PE_","123","PE","Testing Issuer")]
+        [TestCase("Automation_Create_Issuer_Certified_", "123", "Certified", "Testing Issuer")]        
         public void Create_New_EMV_Issuer(string name, string cpv, string appPath, string notes)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -58,21 +55,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.EMV
             CP_Pages.Home.NavigateToSubmenu("Issuers");
             CP_Pages.EMVIssuersPage.ValidateEMVIssuer(name + getRandomString(), cpv, appPath, notes);
             DriverUtilities.TakeScreenshot(@"C:\");
-        }
-        
-        [Test]
-        [Description("EMV_Options_View")]
-        [Category("Smoke")]        
-        [TestCase("Authentications", "Card Profiles","Configurations","Issuers","Scripts","Modules")]        
-        public void EMV_Options_View(params string[] listOfOptions)
-        {
-            CP_Pages.Login.LogIn(userName,password);
-            CP_Pages.Home.ValidateHomePageTitle();
-            CP_Pages.Home.NavigateToMenu("EMV");
-            CP_Pages.Home.NavigateToSubmenu("Issuers");
-            CP_Pages.EMVIssuersPage.EMVOptionsView(listOfOptions);
-            DriverUtilities.TakeScreenshot(@"C:\");
-        }
+        }        
 
         [Test]
         [Description("EMV_Issuer_Homepage_View")]

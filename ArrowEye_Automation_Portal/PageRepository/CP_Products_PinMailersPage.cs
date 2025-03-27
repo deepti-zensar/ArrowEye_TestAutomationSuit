@@ -202,7 +202,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                     break;
             }
         }
-
         public void selectColorModeOption(string colorMode)
         {
             Assert.That(colorModeLabel.Displayed, Is.True);
@@ -217,7 +216,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
                     Browser.Click(colorRadio);
                     break;
             }
-        }
+        }  
 
         public string AddNewPINMailer(string carrierTitle, string desc, string partOf, string carrierStatus, string colorMode)
         {
@@ -232,8 +231,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //Validate upload PDF            
             Assert.That(uploadMsg.Displayed, Is.True);
             Assert.That(fileTypeMsg.Displayed, Is.True);
-            //Upload PDF
-            fileUpload.SendKeys(@"C:\Users\aa65658\Downloads\2272.pdf");
+            //Upload PDF            
+            fileUpload.SendKeys(Extensions.CreateFilePath("PinMailers.pdf"));            
             //Validate uploading status
             Browser.WaitForElement(uploadingStatus, 10);
             Assert.That(uploadingStatus.Displayed, Is.True);
@@ -241,7 +240,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.WaitForElement(removePDFButton, 20);
             Browser.Click(removePDFButton);
             Thread.Sleep(2000);
-            fileUpload.SendKeys(@"C:\Users\aa65658\Downloads\2272.pdf");
+            fileUpload.SendKeys(Extensions.CreateFilePath("PinMailers.pdf"));
             Browser.WaitForElement(removePDFButton, 20);
             //Validate and provide carrier details
             Assert.That(carrierDetailsLabel.Displayed, Is.True);
@@ -282,7 +281,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //Remove PDF and reupload
             Browser.Click(removePDFButton);
             Thread.Sleep(2000);
-            fileUpload.SendKeys(@"C:\Users\aa65658\Downloads\2272.pdf");
+            fileUpload.SendKeys(Extensions.CreateFilePath("PinMailers.pdf"));
             Browser.WaitForElement(removePDFButton, 20);
             //Validate and provide carrier details
             Assert.That(carrierDetailsLabel.Displayed, Is.True);

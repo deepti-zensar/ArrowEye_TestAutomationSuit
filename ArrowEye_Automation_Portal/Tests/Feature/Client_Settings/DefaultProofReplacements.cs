@@ -18,7 +18,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Default_Proof_Replacements_Create")]
         [Category("Smoke")]
-        [TestCase("FirstName", "Automation_")]
+        [TestCase("", "Automation_")]
         
         public void Create_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
@@ -33,7 +33,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Default_Proof_Replacements_Edit")]
         [Category("Smoke")]
-        [TestCase("FirstName", "Automation_")]
+        [TestCase("", "Automation_")]
         public void Edit_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -47,7 +47,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Default_Proof_Replacements_Delete")]
         [Category("Smoke")]
-        [TestCase("FirstName", "Automation_")]
+        [TestCase("", "Automation_")]
         public void Delete_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -61,7 +61,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Default_Proof_Replacements_Validate")]
         [Category("Smoke")]
-        [TestCase("FirstName", "Automation_")]
+        [TestCase("", "Automation_")]
         public void Validate_DefaultProofReplacements(string replacementTag, string replacementValue)
         {
             CP_Pages.Login.LogIn(userName,password);
@@ -89,7 +89,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature.Client_Settings
         [Test]
         [Description("Default_Proof_Replacements_Export")]
         [Category("Smoke")]
-        [TestCase("React App.csv")]
+        [TestCase("ASI Portal.csv")]
         public void Export_DefaultProofReplacements(string fileName)
         {
             CP_Pages.Login.LogIn(userName,password);

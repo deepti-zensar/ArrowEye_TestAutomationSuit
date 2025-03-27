@@ -5,21 +5,22 @@ using System.Threading;
 using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using RandomString4Net;
 using SeleniumExtras.PageObjects;
 
 namespace ArrowEye_Automation_Portal.PageRepository
 {
-    public class CP_Products_PlasticCardFrontTemplatePage
+    public class CP_Products_PlasticCardBackTemplatePage
     {
-        [FindsBy(How = How.XPath, Using = "//h5[text()='FOC Templates']")]
-        public IWebElement FOCHeader;
+        [FindsBy(How = How.XPath, Using = "//h5[text()='BOC Templates']")]
+        public IWebElement BOCHeader;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='AddButton']")]
-        public IWebElement addNewFOCTemplate;
+        public IWebElement addNewBOCTemplate;
 
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
-        public IWebElement newFOCLabel;
+        public IWebElement newBOCLabel;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='approval-path-autocomplete']")]
         public IWebElement selectTemplate;
@@ -94,16 +95,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
         private IWebElement editIcon;
 
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
-        public IWebElement editFOCLabel;
+        public IWebElement editBOCLabel;
 
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p[text()='ID: ']/div")]
-        public IWebElement editFOCID;
+        public IWebElement editBOCID;
 
         [FindsBy(How = How.XPath, Using = "//button[@aria-label='duplicate']")]
         private IWebElement duplicateIcon;
 
         [FindsBy(How = How.XPath, Using = "//div[@role='dialog']//p")]
-        public IWebElement duplicateFOCLabel;
+        public IWebElement duplicateBOCLabel;
 
         [FindsBy(How = How.XPath, Using = "//button[@data-testid='save']")]
         public IWebElement duplicateButton;
@@ -186,26 +187,26 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {            
-            Assert.That(FOCHeader.Displayed, Is.True);
-            Assert.That(FOCHeader.Text, Is.EqualTo("FOC Templates"));
-        }
+            Assert.That(BOCHeader.Displayed, Is.True);
+            Assert.That(BOCHeader.Text, Is.EqualTo("BOC Templates"));
+        }       
 
         public void VerifyPagination()
         {
             Browser.WaitForElement(itemsPerPageDropdown, 10);
             Assert.That(pagination.Displayed, Is.True);
             Assert.That(itemsPerPageLabel.Displayed, Is.True);
-            Assert.That(itemsPerPageDropdown.Displayed, Is.True);
-            Assert.That(Extensions.GetAllOptionsFromSelectTagDropDown(itemsPerPageDropdown), Is.EqualTo(new List<string> { "10", "25", "50" }));
+            Assert.That(itemsPerPageDropdown.Displayed, Is.True);            
+            Assert.That(Extensions.GetAllOptionsFromSelectTagDropDown(itemsPerPageDropdown), Is.EqualTo(new List<string> {"10", "25", "50"}));
         }
 
-        public string AddNewPlasticCardFrontTemplate(string template, string name, string desc)
+        public string AddNewPlasticCardBackTemplate(string template, string name, string desc)
         {
             ValidatePageTitle();
             VerifyPagination();
-            Browser.Click(addNewFOCTemplate);
-            Browser.WaitForElement(newFOCLabel, 10);            
-            //Fill Add new FOC details
+            Browser.Click(addNewBOCTemplate);
+            Browser.WaitForElement(newBOCLabel, 10);
+            //Fill Add new BOC details
             selectTemplate.SendKeys(template);
             selectTemplate.SendKeys(Keys.Down + Keys.Enter);
             Thread.Sleep(2000);
@@ -219,10 +220,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Console.WriteLine(toasterMessage_Text);
             var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
             //Get latest ID
-            Thread.Sleep(4000);            
+            Thread.Sleep(4000);
             var firstIDText = firstID.Text;
             //Validate Toaster message            
-            Assert.That(toasterMessage_Text, Is.EqualTo("FOC " + firstIDText + " Added Successfully."));
+            Assert.That(toasterMessage_Text, Is.EqualTo("BOC " + firstIDText + " Added Successfully."));
             //search and verify in Active status
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(toasterMessageID);
@@ -231,7 +232,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(firstName.Text, Is.EqualTo(name));
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
             //validate dashboard
-            Assert.That(idLabel.Displayed, Is.True);            
+            Assert.That(idLabel.Displayed, Is.True);
             Assert.That(nameLabel.Displayed, Is.True);
             Assert.That(sharedByLabel.Displayed, Is.True);
             //search and verify No match 
@@ -239,20 +240,20 @@ namespace ArrowEye_Automation_Portal.PageRepository
             searchBox.SendKeys(RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 5));
             Browser.WaitForElement(noMatchFound, 5);
             Assert.That(noMatchFound.Text, Is.EqualTo("\"No Tempates under the selected PCL.\""));
-            return toasterMessageID;
+            return toasterMessageID;            
         }
-        public string EditPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public string EditPlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             ValidatePageTitle();
-            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            string createdID = AddNewPlasticCardBackTemplate(template, name, desc);
             //Search and Edit
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
             Browser.WaitForElement(editIcon, 10);
             Browser.Click(editIcon);
-            Browser.WaitForElement(editFOCLabel, 10);
-            Assert.That(editFOCLabel.Text, Is.EqualTo("Edit FOC"));
-            Assert.That(editFOCID.Text, Is.EqualTo(createdID));
+            Browser.WaitForElement(editBOCLabel, 10);
+            Assert.That(editBOCLabel.Text, Is.EqualTo("Edit BOC"));
+            Assert.That(editBOCID.Text, Is.EqualTo(createdID));
             //Enter new details
             DriverUtilities.clearText(nameField);
             nameField.SendKeys(newName);
@@ -267,7 +268,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
             //Validate Toaster message
             Assert.That(createdID, Is.EqualTo(toasterMessageID));
-            Assert.That(toasterMessage_Text, Is.EqualTo("FOC " + createdID + " Updated Successfully."));
+            Assert.That(toasterMessage_Text, Is.EqualTo("BOC " + createdID + " Updated Successfully."));
             //search and verify in Active status
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(toasterMessageID);
@@ -277,15 +278,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
             return createdID;
         }        
-        public void ValidatePlasticCardFrontTemplate()
+        public void ValidatePlasticCardBackTemplate()
         {
             ValidatePageTitle();
             //Validate 
-            Browser.WaitForElement(addNewFOCTemplate, 10);
-            Browser.Click(addNewFOCTemplate);
-            Browser.WaitForElement(newFOCLabel, 10);
-            //validate Add New FOC Template pop up
-            Assert.That(newFOCLabel.Text, Is.EqualTo("New FOC"));
+            Browser.WaitForElement(addNewBOCTemplate, 10);
+            Browser.Click(addNewBOCTemplate);
+            Browser.WaitForElement(newBOCLabel, 10);
+            //validate Add New BOC Template pop up
+            Assert.That(newBOCLabel.Text, Is.EqualTo("New BOC"));
             Assert.That(selectTemplate.Displayed, Is.True);
             Assert.That(nameField.Displayed, Is.True);
             Assert.That(descField.Displayed, Is.True);
@@ -304,17 +305,17 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(descField.GetAttributeValue("value").Length, Is.EqualTo(200));
         }
 
-        public void DuplicatePlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public void DuplicatePlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             ValidatePageTitle();
-            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            string createdID = AddNewPlasticCardBackTemplate(template, name, desc);
             //Search and Duplicate
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
             Browser.WaitForElement(duplicateIcon, 10);
             Browser.Click(duplicateIcon);
-            Browser.WaitForElement(duplicateFOCLabel, 10);
-            Assert.That(duplicateFOCLabel.Text, Is.EqualTo("Duplicate FOC"));            
+            Browser.WaitForElement(duplicateBOCLabel, 10);
+            Assert.That(duplicateBOCLabel.Text, Is.EqualTo("Duplicate BOC"));            
             //Enter new details
             DriverUtilities.clearText(nameField);
             nameField.SendKeys(newName);
@@ -333,7 +334,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var firstIDText = firstID.Text;
             //Validate Toaster message
             Assert.That(firstIDText, Is.EqualTo(toasterMessageID));
-            Assert.That(toasterMessage_Text, Is.EqualTo("FOC " + firstIDText + " Added Successfully."));
+            Assert.That(toasterMessage_Text, Is.EqualTo("BOC " + firstIDText + " Added Successfully."));
             //search and verify in Active status
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(toasterMessageID);
@@ -343,17 +344,17 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(statusBox.GetAttributeValue("value"), Is.EqualTo("Active"));
         }
 
-        public string DeactivatePlasticCardFrontTemplate(string template, string name, string desc)
+        public string DeactivatePlasticCardBackTemplate(string template, string name, string desc)
         {
             ValidatePageTitle();
-            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            string createdID = AddNewPlasticCardBackTemplate(template, name, desc);
             //Search and Duplicate
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
             Browser.WaitForElement(deactivateIcon, 10);
             Browser.Click(deactivateIcon);
             Browser.WaitForElement(deactivateMsg, 10);
-            Assert.That(deactivateMsg.Text, Is.EqualTo("Are you sure you want to Deactivate Front Card Template ID \""+ createdID + "\" ?"));            
+            Assert.That(deactivateMsg.Text, Is.EqualTo("Are you sure you want to Deactivate Back Card Template ID \""+ createdID + "\" ?"));            
             //Deactivate
             Browser.Click(deactivateButton);
             //Get toaster message
@@ -378,10 +379,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             return createdID;
         }
 
-        public void ViewHistoryPlasticCardFrontTemplate(string template, string name, string desc, string newName, string newDesc)
+        public void ViewHistoryPlasticCardBackTemplate(string template, string name, string desc, string newName, string newDesc)
         {
             ValidatePageTitle();
-            string createdID = EditPlasticCardFrontTemplate(template, name, desc,newName,newDesc);
+            string createdID = EditPlasticCardBackTemplate(template, name, desc,newName,newDesc);
             //Search and View History
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
@@ -399,10 +400,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
             //ToDo: Export functionality as per US
         }
 
-        public void ViewSharedByPlasticCardFrontTemplate(string template, string name, string desc)
+        public void ViewSharedByPlasticCardBackTemplate(string template, string name, string desc)
         {
             ValidatePageTitle();
-            string createdID = AddNewPlasticCardFrontTemplate(template, name, desc);
+            string createdID = AddNewPlasticCardBackTemplate(template, name, desc);
             //Search and View History
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(createdID);
@@ -424,16 +425,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(fileStatus, Is.True);
         }
 
-        public void DeletePlasticCardFrontTemplate(string template, string name, string desc)
+        public void DeletePlasticCardBackTemplate(string template, string name, string desc)
         {
             ValidatePageTitle();
-            string createdID = DeactivatePlasticCardFrontTemplate(template, name, desc);
-            //Delete Plastic Card Front Template
+            string createdID = DeactivatePlasticCardBackTemplate(template, name, desc);
+            //Delete Plastic Card Back Template
             Browser.WaitForElement(deleteIcon, 10);
             Browser.Click(deleteIcon);
             Browser.WaitForElement(deleteBoxLabel, 10);
             Assert.That(deleteBoxLabel.Text, Is.EqualTo("Delete"));            
-            Assert.That(deleteBoxMsg.Text, Is.EqualTo("Are you sure you want to Delete the Front Card Template ID \"" + createdID + "\" ?"));
+            Assert.That(deleteBoxMsg.Text, Is.EqualTo("Are you sure you want to Delete the Back Card Template ID \"" + createdID + "\" ?"));
             //Delete
             Browser.Click(deleteBoxDeleteBtn);
             //Get toaster message
@@ -455,16 +456,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(noMatchFound.Text, Is.EqualTo("\"No Tempates under the selected PCL.\""));            
         }
 
-        public void ActivatePlasticCardFrontTemplate(string template, string name, string desc)
+        public void ActivatePlasticCardBackTemplate(string template, string name, string desc)
         {
             ValidatePageTitle();
-            string createdID = DeactivatePlasticCardFrontTemplate(template, name, desc);
-            //Activate Plastic Card Front Template
+            string createdID = DeactivatePlasticCardBackTemplate(template, name, desc);
+            //Activate Plastic Card Back Template
             Browser.WaitForElement(activateIcon, 10);
             Browser.Click(activateIcon);
             Browser.WaitForElement(activateBoxLabel, 10);
             Assert.That(activateBoxLabel.Text, Is.EqualTo("Activate"));
-            Assert.That(activateBoxMsg.Text, Is.EqualTo("Are you sure you want to Activate Front Card Template ID \"" + createdID + "\" ?"));
+            Assert.That(activateBoxMsg.Text, Is.EqualTo("Are you sure you want to Activate Back Card Template ID \"" + createdID + "\" ?"));
             //Activate
             Browser.Click(activateBoxActivateBtn);
             //Get toaster message

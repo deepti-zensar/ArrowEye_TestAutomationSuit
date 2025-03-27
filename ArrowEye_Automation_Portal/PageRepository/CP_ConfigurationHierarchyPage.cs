@@ -143,7 +143,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-           // DriverUtilities.IsElementPresent(defaultProofReplacementText);
+            Browser.WaitForElement(configurationHierarchyText, 10);
+            Assert.That(configurationHierarchyText.Displayed, Is.True);
             Assert.That(configurationHierarchyText.Text, Is.EqualTo("Configuration Hierarchy"));
         }       
 
@@ -161,11 +162,13 @@ namespace ArrowEye_Automation_Portal.PageRepository
             ValidatePageTitle();
             //Search with Attribute Name
             DriverUtilities.clearText(searchBox);
-            searchBox.SendKeys(attributeName);
+            if (!(attributeName == "" || attributeName == null))
+            {               
+                searchBox.SendKeys(attributeName);
+            }            
             Thread.Sleep(3000);
             var configurationHierarchyID = searchedID.Text;
-            var attributeID = searchedAttributeID.Text;
-            
+            var attributeID = searchedAttributeID.Text;            
             //Edit record details 
             Browser.Click(editButton);
             Thread.Sleep(2000);
@@ -192,25 +195,21 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 default:
                     editAttributeValueField.SendKeys("1");
                     break;
-            }
-             
+            }             
             DriverUtilities.clearText(editDescriptionField);
             editDescriptionField.SendKeys(description);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
             Assert.That(attributeID, Is.EqualTo(attributeIDFrmEdit));
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
-            Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + attributeID + " updated Successfully."));
-
+            Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + configurationHierarchyID + " updated Successfully."));
             //Search with newly edited record and get information from search result          
             DriverUtilities.clearText(searchBox);
             searchBox.SendKeys(newAttributeValue);
             Thread.Sleep(3000);
             var editedAttributeValue = searchedAttributeValue.Text;
             var editedDescription = searchedDescription.Text;
-
             //validate newly edited record in homepage
             Assert.That(editedAttributeValue, Is.EqualTo(newAttributeValue));
             Assert.That(editedDescription, Is.EqualTo(description));        
@@ -235,7 +234,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 Thread.Sleep(3000);
                 var attributeID = searchedAttributeID.Text;
                 var configurationHierarchyID = searchedID.Text;
-
                 //Delete details 
                 Browser.Click(deleteButton);
                 Assert.That(deleteDialogBoxTitle.Text, Is.EqualTo("Delete"));
@@ -250,13 +248,10 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 //validate delete popup message            
                 Assert.That(deleteDialogBoxMessage, Is.EqualTo("Are you sure you want to delete this Attribute " + attributeID + "?"));
                 Browser.Click(deleteBoxDeleteBtn);
-
-
                 //validate Delete Toaster message
                 Browser.WaitForElement(toasterMessage, 10);
                 var toasterMessage_Text = toasterMessage.Text;
                 Assert.That(toasterMessage_Text, Is.EqualTo("Configuration Hierarchy " + configurationHierarchyID + " deleted successfully."));
-
                 //Search with Deleted record        
                 DriverUtilities.clearText(searchBox);
                 searchBox.SendKeys(attributeName);
@@ -275,7 +270,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(3000);
             var configurationHierarchyID = searchedID.Text;
             var attributeID = searchedAttributeID.Text;
-
             //Validate attribute name error message
             Browser.Click(editButton);
             Thread.Sleep(2000);
@@ -285,28 +279,20 @@ namespace ArrowEye_Automation_Portal.PageRepository
             DriverUtilities.clearText(editDescriptionField);            
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-            Assert.That(attributeValueErrorMsg.Text, Is.EqualTo("The value for the Configuration Hierarchy '"+ attributeNameEdit + "' may not be null."));
-                        
+            Assert.That(attributeValueErrorMsg.Text, Is.EqualTo("The value for the Configuration Hierarchy '"+ attributeNameEdit + "' may not be null."));                        
             //CHARACTER LIMITATIONS FOR Description
             //create new record with longer data
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 105);
             editDescriptionField.SendKeys(longString);            
-            Assert.That(descriptionLimitText.Text, Is.EqualTo("100/100"));
-            //Browser.Click(saveButton);   
-
+            Assert.That(descriptionLimitText.Text, Is.EqualTo("100/100"));            
         }
 
 
         //To validate Configuration Hierarchy homepage table headers
         public void ConfigurationHierarchyHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeader)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeader);
         }
 
         //To export Configuration Hierarchy data

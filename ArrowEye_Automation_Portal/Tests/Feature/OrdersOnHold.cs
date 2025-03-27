@@ -31,7 +31,7 @@ namespace ArrowEye_Automation_Portal.Tests.Feature
         [Test]
         [Description("OrdersOnHold_Export")]
         [Category("Smoke")]
-        [TestCase("React App.csv")]
+        [TestCase("ASI Portal.csv")]
         public void Export_OrdersOnHold(string fileName)
         {
             CP_Pages.Login.LogIn(userName, password);

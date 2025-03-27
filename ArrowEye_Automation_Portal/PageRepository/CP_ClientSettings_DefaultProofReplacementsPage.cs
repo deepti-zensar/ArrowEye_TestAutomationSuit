@@ -10,7 +10,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 {
     public class CP_ClientSettings_DefaultProofReplacementsPage
     {
-        [FindsBy(How = How.XPath, Using = "//div[@data-testid='DataTable']//p[text()='Default Proof Replacement']")]
+        [FindsBy(How = How.XPath, Using = "//div[@data-testid='DataTable']//p[text()='Default Proof Replacements']")]
         public IWebElement defaultProofReplacementText;
 
         [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Add New')]")]
@@ -85,7 +85,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
         [FindsBy(How = How.XPath, Using = "//p[contains(text(),'Replacement Value is required.')]")]
         public IWebElement replacementValueRequiredText;
 
-        [FindsBy(How = How.XPath, Using = "(//p[contains(@id,'helper-text')])[1]")]
+        [FindsBy(How = How.XPath, Using = "//input[@data-testid='replace_Value']/parent::div/following-sibling::p")]
         public IWebElement replacementValueLimitText;
 
         [FindsBy(How = How.XPath, Using = "(//div[@class='MuiDataGrid-columnHeaderTitleContainerContent']/div)")]
@@ -99,17 +99,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-           // DriverUtilities.IsElementPresent(defaultProofReplacementText);
-            Assert.That(defaultProofReplacementText.Text, Is.EqualTo("Default Proof Replacement"));
+            Browser.WaitForElement(defaultProofReplacementText, 10);
+            Assert.That(defaultProofReplacementText.Displayed, Is.True);
+            Assert.That(defaultProofReplacementText.Text, Is.EqualTo("Default Proof Replacements"));
         }
 
         public void ValidateNewProofReplacementDialogBox()
         {
-          //  DriverUtilities.IsElementPresent(newProofReplacementDialogBoxText);
+            Assert.That(newProofReplacementDialogBoxText.Displayed, Is.True);
             Assert.That(newProofReplacementDialogBoxText.Text, Is.EqualTo("New Proof Replacement"));
         }
-
-
         //To select dropdown value
         public void SelectDropDownValue(IWebElement dropDownName, string value)
         {
@@ -128,7 +127,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
                 dropDownName.SendKeys(Keys.Down + Keys.Down + Keys.Enter);
             }
         }
-
         // To fill Proof Replacement details
         public void FillProofReplacementDetails(string replacementTag, string replacementValue)
         {
@@ -137,7 +135,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             replacementValueField.SendKeys(Keys.Control + "x");
             replacementValueField.SendKeys(replacementValue);            
         }
-
         // To Search EMV Issuer 
         public void SearchProofReplacement(string replacementValue)
         {
@@ -146,7 +143,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             searchBox.SendKeys(replacementValue);
             Thread.Sleep(3000);
         }
-
         public void AddNewProofReplacement(string replacementTag, string replacementValue)
         {
             ValidatePageTitle();
@@ -158,14 +154,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(addNewProofReplacement);
             FillProofReplacementDetails(replacementTag, replacementValue);
             var newReplacementTag = replacementTagField.GetAttributeValue("value");
-            var newReplacementValue = replacementValueField.GetAttributeValue("value");
-            
+            var newReplacementValue = replacementValueField.GetAttributeValue("value");            
             Browser.Click(saveButton);
             Thread.Sleep(3000);
-
             //Toaster message
-            var toasterMessage_Text = toasterMessage.Text;               
-
+            var toasterMessage_Text = toasterMessage.Text;
             //Search and Validate with newly created record
             SearchProofReplacement(replacementValue);
             var created_ID = createdID.Text;
@@ -173,8 +166,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var created_ReplacementValue = createdReplacementValue.Text;
             //Validate newly created record
             Assert.That(created_ReplacementTag, Is.EqualTo(newReplacementTag));            
-            Assert.That(created_ReplacementValue, Is.EqualTo(newReplacementValue));            
-
+            Assert.That(created_ReplacementValue, Is.EqualTo(newReplacementValue));  
             //validate Toaster message
             Assert.That(toasterMessage_Text, Is.EqualTo("Proof Replacement " + created_ID + " Added Successfully."));
         }
@@ -193,7 +185,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var newReplacementValue = replacementValueField.GetAttributeValue("value");            
             Browser.Click(saveButton);
             Thread.Sleep(3000);
-
             //Search with newly created record
             searchBox.Clear();
             searchBox.SendKeys(replacementValue);
@@ -202,7 +193,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var created_ProofReplacement_tag = createdReplacementTag.Text;
             var created_ProofReplacement_Value = createdReplacementValue.Text;
             Assert.That(created_ProofReplacement_Value, Is.EqualTo(replacementValue));
-
             //Edit EMV Issuer details 
             Browser.Click(editButton);
             Thread.Sleep(2000);
@@ -214,11 +204,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             replacementValueField.SendKeys(newreplacementValue);            
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("Proof Replacement " + editDialogBox_ID + " Updated Successfully."));
-
             //Search with newly edited record and get information from search result          
             searchBox.Clear();
             searchBox.SendKeys(newreplacementValue);
@@ -226,14 +214,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var edited_ProofReplacement_ID = createdID.Text;
             var edited_ProofReplacement_Tag = createdReplacementTag.Text;
             var edited_ProofReplacement_Value = createdReplacementValue.Text;
-
             //validate newly edited record in EMV Issuer homepage
             Assert.That(editDialogBox_ID, Is.EqualTo(created_ProofReplacement_ID));
             Assert.That(edited_ProofReplacement_Tag, Is.EqualTo(created_ProofReplacement_tag));
             Assert.That(edited_ProofReplacement_Value, Is.EqualTo(newreplacementValue));  
-
         }
-
         public void DeleteProofReplacement(string replacementTag, string replacementValue)
         {
             ValidatePageTitle();
@@ -248,7 +233,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var newReplacementValue = replacementValueField.GetAttributeValue("value");
             Browser.Click(saveButton);
             Thread.Sleep(3000);
-
             //Search with newly created record
             searchBox.Clear();
             searchBox.SendKeys(replacementValue);
@@ -257,7 +241,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var created_ProofReplacement_tag = createdReplacementTag.Text;
             var created_ProofReplacement_Value = createdReplacementValue.Text;
             Assert.That(created_ProofReplacement_Value, Is.EqualTo(replacementValue));
-
             //Delete details 
             Browser.Click(deleteButton);            
             Assert.That(deleteDialogBoxTitle.Text, Is.EqualTo("Delete"));
@@ -266,20 +249,16 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(deleteButton);
             Browser.Click(deleteBoxDeleteBtn);
             Thread.Sleep(2000);
-
             //validate delete popup message            
             Assert.That(deleteDialogBoxMessage, Is.EqualTo("Are you sure you want to delete the \"Proof Replacement "+ created_ProofReplacement_ID + "\"?"));
-            
             //validate Delete Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("Proof Replacement " + created_ProofReplacement_ID + " Deleted Successfully."));
-
             //Search with newly Deleted record        
             searchBox.Clear();
             searchBox.SendKeys(replacementValue);
             Thread.Sleep(3000);            
-            Assert.That(noResultFound.Text, Is.EqualTo("No results found."));    
-
+            Assert.That(noResultFound.Text, Is.EqualTo("No results found."));   
         }
 
         public void ValidateProofReplacement(string replacementTag, string replacementValue)
@@ -291,30 +270,19 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Browser.Click(saveButton);
             Assert.That(replacementTagRequiredText.Text, Is.EqualTo("Replacement Tag is required."));
             Assert.That(replacementValueRequiredText.Text, Is.EqualTo("Replacement Value is required."));
-
-            //TODO: USER ENTERS Duplicate record
-            
+            //TODO: USER ENTERS Duplicate record            
             //CHARACTER LIMITATIONS FOR Replacement Value
             //create new record with longer data
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 155);            
             var longReplacementValue = replacementValue + longString;
             FillProofReplacementDetails(replacementTag, longReplacementValue);
-            Assert.That(replacementValueLimitText.Text, Is.EqualTo("150/150"));            
-            //Browser.Click(saveButton);   
-
+            Assert.That(replacementValueLimitText.Text, Is.EqualTo("150/150"));                 
         }
-
-
         //To validate Proof Replacement homepage table headers
         public void ProofReplacementHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderProofReplacement)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaderProofReplacement);
         }
 
         //To export Proof Replacement data

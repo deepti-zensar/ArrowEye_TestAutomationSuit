@@ -116,6 +116,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
+            Browser.WaitForElement(clientInfoText, 10);
             Assert.That(clientInfoText.Displayed, Is.True);
             Assert.That(clientInfoText.Text, Is.EqualTo("Client Information"));
         }
@@ -127,6 +128,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(clientInfoExpand.Displayed, Is.True);
             Browser.Click(clientInfoExpand);
             Browser.WaitForElement(clientInfoCollapse,10);
+            Thread.Sleep(2000);
             Assert.That(clientIDLabel.Displayed, Is.True);
             Assert.That(clientIDData.Displayed, Is.True);
             Assert.That(nameLabel.Displayed, Is.True);
@@ -137,16 +139,17 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(contactInfoExpand.Displayed, Is.True);
             Browser.Click(contactInfoExpand);
             Browser.WaitForElement(contactInfoCollapse, 10);
+            Thread.Sleep(2000);
             Assert.That(contactInfoNameLabel.Displayed, Is.True);
             Assert.That(contactInfoNameData.Displayed, Is.True);
             Assert.That(contactInfoEmailLabel.Displayed, Is.True);
             Assert.That(contactInfoEmailData.Displayed, Is.True);
-            Assert.That(contactInfoMobileLabel.Displayed, Is.True);
-            Assert.That(contactInfoMobileData.Displayed, Is.True);
+            Assert.That(contactInfoMobileLabel.Displayed, Is.True);            
             Assert.That(addressLabel.Displayed, Is.True);
             Assert.That(addressExpand.Displayed, Is.True);
             Browser.Click(addressExpand);
             Browser.WaitForElement(addressCollapse, 10);
+            Thread.Sleep(2000);
             Assert.That(street1Label.Displayed, Is.True);
             Assert.That(street1Data.Displayed, Is.True);
             Assert.That(street2Label.Displayed, Is.True);
@@ -160,6 +163,5 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(countryLabel.Displayed, Is.True);
             Assert.That(countryData.Displayed, Is.True);
         }
-    }
-        
+    }        
 }

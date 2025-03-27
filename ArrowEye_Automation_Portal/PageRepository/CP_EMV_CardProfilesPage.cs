@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading;
 using ArrowEye_Automation_Framework.Common;
 using NUnit.Framework;
@@ -109,13 +110,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-            //DriverUtilities.IsElementPresent(emvCardProfilesText);
+            Browser.WaitForElement(emvCardProfilesText, 10);
+            Assert.That(emvCardProfilesText.Displayed, Is.True);
             Assert.That(emvCardProfilesText.Text, Is.EqualTo("EMV Card Profiles"));
         }
 
         public void ValidateNewCardProfileDialogBox()
         {
-            //DriverUtilities.IsElementPresent(newCardProfileDialogBoxText);
+            Browser.WaitForElement(newCardProfileDialogBoxText, 10);
+            Assert.That(newCardProfileDialogBoxText.Displayed, Is.True);
             Assert.That(newCardProfileDialogBoxText.Text, Is.EqualTo("New Card Profile"));            
             Assert.That(issuerFieldLabel.Text, Is.EqualTo("Issuer"));
             Assert.That(expirationDateLabel.Text, Is.EqualTo("Expiration Date"));
@@ -171,18 +174,21 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(2000);
             Browser.Click(addNewCardProfile);
             FillEMVCardProfilesDetails(name,issuer, date);
+            var newName = nameField.GetAttributeValue("value");
+            var newIssuer = issuerFieldDropdown.GetAttributeValue("value");
+            var newDate = expirationDateField.GetAttributeValue("value");            
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //get Toaster message
             var toasterMessage_Text = toasterMessage.Text;
-
+            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;
             //Search with newly created record
             SearchEMVCardProfilesName(name);
-            var created_EMVCardProfile_Record_ID = createdEMVCardProfileID.Text;
-            var created_EMVCardProfile_Record_Name = createdEMVCardProfileName.Text;
-            Assert.That(created_EMVCardProfile_Record_Name, Is.EqualTo(name));
-
+            var created_EMVCardProfile_Record_ID = createdEMVCardProfileID.Text;            
+            Assert.That(createdEMVCardProfileID.Text, Is.EqualTo(toasterMessageID));
+            Assert.That(createdEMVCardProfileName.Text, Is.EqualTo(name));
+            Assert.That(createdEMVCardProfileIssuer.Text, Is.EqualTo(newIssuer));
+            Assert.That(createdEMVCardProfileExpDate.Text, Is.EqualTo(newDate).Or.EqualTo(date));
             //validate Toaster message
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Card Profile " + created_EMVCardProfile_Record_ID + " added Successfully."));
         }
@@ -210,15 +216,23 @@ namespace ArrowEye_Automation_Portal.PageRepository
             // Add new Card Profiles and fill EMV Card Profiles details            
             Browser.Click(addNewCardProfile);
             FillEMVCardProfilesDetails(name, issuer, date);
+            name = nameField.GetAttributeValue("value");
+            issuer = issuerFieldDropdown.GetAttributeValue("value");
+            date = expirationDateField.GetAttributeValue("value");
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
+            //get Toaster message
+            var toasterMessage_Text = toasterMessage.Text;
+            var toasterMessageID = Regex.Match(toasterMessage_Text, @"\d+").Value;            
             //Search with newly created record
             SearchEMVCardProfilesName(name);
-            var created_EMVCardProfile_Record_ID = createdEMVCardProfileID.Text;
-            var created_EMVCardProfile_Record_Name = createdEMVCardProfileName.Text;
-            Assert.That(created_EMVCardProfile_Record_Name, Is.EqualTo(name));
-
+            var created_EMVCardProfile_Record_ID = createdEMVCardProfileID.Text;            
+            Assert.That(createdEMVCardProfileID.Text, Is.EqualTo(toasterMessageID));
+            Assert.That(createdEMVCardProfileName.Text, Is.EqualTo(name));
+            Assert.That(createdEMVCardProfileIssuer.Text, Is.EqualTo(issuer));
+            Assert.That(createdEMVCardProfileExpDate.Text, Is.EqualTo(date));
+            //validate Toaster message
+            Assert.That(toasterMessage_Text, Is.EqualTo("EMV Card Profile " + created_EMVCardProfile_Record_ID + " added Successfully."));
             //Edit EMV Card Profiles details 
             Browser.Click(emvCardProfileEditButton);
             Thread.Sleep(2000);
@@ -227,19 +241,19 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var newName = name + "_Updated";            
             var newDate = DateTime.Now.AddDays(10).ToString("yyyy-MM-dd");
             FillEMVCardProfilesDetails(newName, newIssuer, newDate);
+            newName = nameField.GetAttributeValue("value");
+            newIssuer = issuerFieldDropdown.GetAttributeValue("value");
+            newDate = expirationDateField.GetAttributeValue("value");
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //validate Toaster message
-            var toasterMessage_Text = toasterMessage.Text;
+            toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Card Profile " + created_EMVCardProfile_Record_ID + " updated Successfully."));
-
             //Search with newly edited record and get information from search result          
             SearchEMVCardProfilesName(newName);            
             var edited_EMVCardProfiles_Record_Name = createdEMVCardProfileName.Text;
             var edited_EMVCardProfiles_Record_Issuer = createdEMVCardProfileIssuer.Text;
-            var edited_EMVCardProfiles_Record_ExpDate = createdEMVCardProfileExpDate.Text;            
-
+            var edited_EMVCardProfiles_Record_ExpDate = createdEMVCardProfileExpDate.Text;   
             //validate newly edited record in EMV Issuer homepage
             Assert.That(edited_EMVCardProfiles_Record_ID, Is.EqualTo(created_EMVCardProfile_Record_ID));
             Assert.That(edited_EMVCardProfiles_Record_Name, Is.EqualTo(newName));
@@ -255,8 +269,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             ValidateNewCardProfileDialogBox();
             Browser.Click(saveButton);
             Assert.That(nameRequiredText.Text, Is.EqualTo("Name Field is required"));
-            Assert.That(issuerRequiredText.Text, Is.EqualTo("Issuer Field is required"));            
-
+            Assert.That(issuerRequiredText.Text, Is.EqualTo("Issuer Field is required"));  
             //CHARACTER LIMITATIONS FOR Fields            
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 55);
             nameField.SendKeys(Keys.Control + "a");
@@ -264,7 +277,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             nameField.SendKeys(longString);
             Thread.Sleep(1000);
             Assert.That(nameSizeLimitMsg.Text, Is.EqualTo("50/50"));
-
             //Expiration date can't be past date
             var date = "1111-11-01";
             expirationDateField.Click();
@@ -276,13 +288,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         //To validate EMV Card Profiles homepage table headers
         public void EMVCardProfilesHomepageView(string[] listOfOptions)
         {
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaderEMVCardProfiles)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            ValidatePageTitle();
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaderEMVCardProfiles);
         }
 
         //To validate EMV Card Profiles Export 

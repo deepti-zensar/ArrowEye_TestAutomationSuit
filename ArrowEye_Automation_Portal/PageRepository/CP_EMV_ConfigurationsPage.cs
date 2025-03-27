@@ -155,13 +155,15 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
-           // DriverUtilities.IsElementPresent(emvConfigurationsText);
+            Browser.WaitForElement(emvConfigurationsText, 10);
+            Assert.That(emvConfigurationsText.Displayed, Is.True);
             Assert.That(emvConfigurationsText.Text, Is.EqualTo("EMV Configurations"));
         }
 
         public void ValidateNewConfigurationsDialogBox()
         {
-            // DriverUtilities.IsElementPresent(newConfigurationsDialogBoxText);
+            Browser.WaitForElement(newConfigurationsDialogBoxText, 10);
+            Assert.That(newConfigurationsDialogBoxText.Displayed, Is.True);
             Assert.That(newConfigurationsDialogBoxText.Text, Is.EqualTo("New EMV Configurations"));            
         }
 
@@ -238,18 +240,26 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Thread.Sleep(2000);
             Browser.Click(addNewConfigurations);  
             FillEMVConfigurationsDetails(name, issuer, cardProfile, personalizationScript, module, authentication, isInTest);
+            name = nameField.GetAttributeValue("value");
+            issuer = issuerDropDown.GetAttributeValue("value");
+            cardProfile = cardProfileDropDown.GetAttributeValue("value");
+            personalizationScript = personalizationScriptDropDown.GetAttributeValue("value");
+            authentication = authenticationDropDown.GetAttributeValue("value");
+            module = moduleDropDown.GetAttributeValue("value");             
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //get Toaster message
             var toasterMessage_Text = toasterMessage.Text;
-
-            //Search with newly created record
+            //Search with newly created record and get information from search result and validate
             SearchEMVConfigurationsName(name);
-            var created_EMVConfigurations_Record_ID = emvConfigurations_ID.Text;
-            var created_EMVConfigurations_Record_Name = emvConfigurations_Name.Text;
-            Assert.That(created_EMVConfigurations_Record_Name, Is.EqualTo(name));
-
+            var created_EMVConfigurations_Record_ID = emvConfigurations_ID.Text;            
+            Assert.That(emvConfigurations_Name.Text, Is.EqualTo(name));
+            Assert.That(emvConfigurations_IssuerName.Text, Is.EqualTo(issuer));
+            Assert.That(emvConfigurations_CardProfileName.Text, Is.EqualTo(cardProfile));
+            Assert.That(emvConfigurations_PersonalizationName.Text, Is.EqualTo(personalizationScript));
+            Assert.That(emvConfigurations_ModuleName.Text, Is.EqualTo(module));
+            //Browser.Click(emvConfigurations_ModuleName);
+            //Assert.That(emvConfigurations_AuthName.Text, Is.EqualTo(authentication));
             //validate Toaster message
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Configuration " + created_EMVConfigurations_Record_ID + " Added Successfully."));
         }
@@ -262,13 +272,11 @@ namespace ArrowEye_Automation_Portal.PageRepository
             FillEMVConfigurationsDetails(name, issuer, cardProfile, personalizationScript, module, authentication, isInTest);
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //Search with newly created record
             SearchEMVConfigurationsName(name);
             var created_EMVConfigurations_Record_ID = emvConfigurations_ID.Text;
             var created_EMVConfigurations_Record_Name = emvConfigurations_Name.Text;
             Assert.That(created_EMVConfigurations_Record_Name, Is.EqualTo(name));
-
             //Edit EMV Configurations details 
             Browser.Click(emvConfigurationsEditButton);
             Thread.Sleep(2000);
@@ -283,11 +291,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var newEMVConfigurationsAuthentication = authenticationDropDown.GetAttributeValue("value");
             Browser.Click(saveButton);
             Thread.Sleep(2000);
-
             //validate Toaster message
             var toasterMessage_Text = toasterMessage.Text;
             Assert.That(toasterMessage_Text, Is.EqualTo("EMV Configuration " + edited_EMVConfigurations_Record_ID + " Updated Successfully."));
-
             //Search with newly edited record and get information from search result          
             SearchEMVConfigurationsName(newName);
             var edited_EMVConfigurationss_Record_Name = emvConfigurations_Name.Text;
@@ -295,7 +301,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             var edited_EMVConfigurationss_Record_CardProfile = emvConfigurations_CardProfileName.Text;
             var edited_EMVConfigurationss_Record_PersonalizationScript = emvConfigurations_PersonalizationName.Text;
             var edited_EMVConfigurationss_Record_Module = emvConfigurations_ModuleName.Text;
-
             //validate newly edited record in EMV Configurations homepage
             Assert.That(edited_EMVConfigurations_Record_ID, Is.EqualTo(created_EMVConfigurations_Record_ID));
             Assert.That(edited_EMVConfigurationss_Record_Name, Is.EqualTo(newName));
@@ -308,14 +313,9 @@ namespace ArrowEye_Automation_Portal.PageRepository
         //To validate EMV Configurations homepage table headers
         public void EMVConfigurationsHomepageView(string[] listOfOptions)
         {
-            columnsButton.Click();
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in columnList)
-            {               
-                actualListOfOptions.Add(actualOption.Text);               
-            }            
-            Assert.That(actualListOfOptions, Is.EqualTo(expectedListOfOptions));
+            ValidatePageTitle();
+            columnsButton.Click();            
+            Extensions.CompareActualExpectedLists(listOfOptions, columnList);
         }
 
         //To validate EMV Configurations Export
@@ -342,7 +342,6 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(personalizationScriptRequiredText.Text, Is.EqualTo("Personalization Script is required"));
             Assert.That(moduleRequiredText.Text, Is.EqualTo("Module is required"));
             Assert.That(authenticationRequiredText.Text, Is.EqualTo("Authentication is required"));
-
             //Validate CHARACTER LIMITATIONS MESSAGES FOR FIELDS            
             string longString = RandomString.GetString(Types.ALPHANUMERIC_LOWERCASE, 155);
             nameField.SendKeys(Keys.Control + "a");

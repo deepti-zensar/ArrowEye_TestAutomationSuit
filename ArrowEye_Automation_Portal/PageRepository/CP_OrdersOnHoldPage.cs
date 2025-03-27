@@ -41,6 +41,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
 
         public void ValidatePageTitle()
         {
+            Browser.WaitForElement(ordersOnHoldText, 10);
             Assert.That(ordersOnHoldText.Displayed, Is.True); ;
             Assert.That(ordersOnHoldText.Text, Is.EqualTo("Orders On Hold"));
         }       
@@ -51,14 +52,8 @@ namespace ArrowEye_Automation_Portal.PageRepository
         public void OrdersOnHoldHomepageView(string[] listOfOptions)
         {
             ValidatePageTitle();
-            //To validate homepage table headers
-            List<string> expectedListOfOptions = new List<string>(listOfOptions);
-            List<string> actualListOfOptions = new List<string>();
-            foreach (IWebElement actualOption in tableHeaders)
-            {
-                actualListOfOptions.Add(actualOption.Text);
-            }
-            Assert.That(actualListOfOptions, Is.EquivalentTo(expectedListOfOptions));
+            //To validate homepage table headers            
+            Extensions.CompareActualExpectedLists(listOfOptions, tableHeaders); ;
             //To validate Release and Cancel Button
             Assert.That(releaseButton.Displayed, Is.True);
             Assert.That(releaseButton.Enabled, Is.False);
@@ -66,8 +61,7 @@ namespace ArrowEye_Automation_Portal.PageRepository
             Assert.That(cancelButton.Enabled, Is.False);
             if (Browser.WaitForElement(recordCheckBox,2))
             {
-                Browser.Click(recordCheckBox);
-                //recordCheckBox.Click();
+                Browser.Click(recordCheckBox);                
                 Thread.Sleep(2000);
                 Assert.That(releaseButton.Enabled, Is.True);               
                 Assert.That(cancelButton.Enabled, Is.True);
